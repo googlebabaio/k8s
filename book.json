@@ -1,6 +1,48 @@
 {
-    "plugins": [
-        "highlight",
-        "sequence"
-    ]
+    "title": "K8s小百科",
+    "description": "K8s小百科",
+    "language": "zh-hans",
+    "author": "suredandan",
+        "plugins": [
+        "prism", "prism-themes", "-highlight",
+        "codesnippet",
+        "splitter",
+        "simple-page-toc",
+        "page-toc-button",
+        "back-to-top-button",
+        "-lunr", "-search", "search-plus",
+        "favicon@^0.0.2",
+		"tbfed-pagefooter@^0.0.1",
+        "theme-default",
+        "sitemap-general"        
+    ],
+    "pluginsConfig": {
+        "theme-default": {
+            "showLevel": true
+        },
+        "prism": {
+            "css": [
+				"prismjs/themes/prism-solarizedlight.css"
+            ]
+        },
+        "simple-page-toc": {
+            "maxDepth": 3,
+            "skipFirstH1": true
+        },
+        "image-captions": {
+            "caption": "_CAPTION_"
+        },
+        "sitemap-general": {
+            "prefix": "http://www.googlebaba.io/k8s/"
+        },
+        "tbfed-pagefooter": {
+            "copyright": "Copyright © suredandan 2018",
+            "modify_label": "UpdateTime: ",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "favicon": {
+            "shortcut": "favicon.ico",
+            "bookmark": "favicon.ico"
+        }
+    }
 }
