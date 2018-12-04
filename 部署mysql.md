@@ -1,0 +1,2 @@
+参考：
+[在kubernetes集群中部署mysql主从](http://blog.51cto.com/ylw6006/2071864)

@@ -1,0 +1,2 @@
+参考：
+[在kubernetes集群中部署efk](http://blog.51cto.com/ylw6006/2071943)
