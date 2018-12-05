@@ -4,6 +4,7 @@
     * [3.docker网络](3.docker-network.md)
     * [docker-tip](docker-tip.md)
     * [dockerfile的使用](dockerfile的使用.md)
+    * [dockerfile的制作](dockerfile的制作.md)
 * [创建上下文](创建上下文.md)
 * [使用kubeconfig代替token登录dashboard](使用kubeconfig代替token登录dashboard.md)
 * [k8s-架构](k8s-架构.md)
