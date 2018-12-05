@@ -69,3 +69,4 @@
 * [k8s-部署应用](k8s-部署应用.md)
     * [部署mysql](部署mysql.md)
 * [k8s-监控](k8s-监控.md)
+* [k8s实现CICD](k8s实现CICD.md)
