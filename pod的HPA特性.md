@@ -1,4 +1,4 @@
-[TOC]
+<!-- toc --> 
 ## 一、压测工具ab介绍及安装
 ### 1.介绍
 ab(apache benchmark) —— apache自带的一个测试工具，一般把apache压力测试称为AB测试。

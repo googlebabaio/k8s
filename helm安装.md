@@ -1,4 +1,4 @@
-[TOC]
+<!-- toc --> 
 *****
 ## 一、helm介绍
 ![](images/screenshot_1539936296530.png)

@@ -1,4 +1,4 @@
-[TOC]
+<!-- toc --> 
 ## 一、harbor的安装
 安装harbor的步骤：
 1. 下载安装docker-compose
