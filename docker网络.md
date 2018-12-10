@@ -1,4 +1,4 @@
-https://www.kubernetes.org.cn/4105.html
+参考:https://www.kubernetes.org.cn/4105.html
 
 ![](images/screenshot_1537258068748.png)
 * bridge：这是Docker默认的网络驱动，此模式会为每一个容器分配Network Namespace和设置IP等，并将容器连接到一个虚拟网桥上。如果未指定网络驱动，这默认使用此驱动。

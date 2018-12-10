@@ -1,3 +1,4 @@
+<!-- toc -->
 ## 什么是 Helm Charts
 Helm Charts是 Kubernetes 项目中的一个子项目（https://github.com/kubernetes/helm）目的是提供 Kubernetes 的包管理平台。Helm 能够帮你管理 Kubernetes 的应用集合。Helm Charts 能够帮你定义，安装，升级最复杂的 Kubernetes 应用集合。Helm Charts 很容易创建，做版本化，共享和发布，最新版本的 Helm 由 CNCF 进行维护，目前在业界已经有大量的公司在使用 Helm，其中包括谷歌，微软，Bitnami 等大型企业。
 Helm 由两部分组成：
