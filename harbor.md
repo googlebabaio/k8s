@@ -1,4 +1,4 @@
-<!-- toc --> 
+<!-- toc -->
 ## 一、harbor的安装
 安装harbor的步骤：
 1. 下载安装docker-compose
@@ -13,7 +13,7 @@
 ```
 pip install docker-compose
 wget https://github.com/docker/compose/releases/download/1.23.0-rc2/docker-compose-Linux-x86_64
-chmod a+x docker-compose-Linux-x86_64 
+chmod a+x docker-compose-Linux-x86_64
 mv docker-compose-Linux-x86_64 /etc/kubernetes/bin/docker-compose
 ```
 ### 2. 生成harbor的pem相关文件
@@ -62,7 +62,7 @@ cfssl gencert -ca=/etc/kubernetes/ssl/ca.pem \
 如果如下目录不存在，请创建，如果有域名请按此格式依次创建
 mkdir -p /etc/docker/certs.d/192.168.3.6
 # mkdir -p /etc/docker/certs.d/[IP2]
-# mkdir -p /etc/docker/certs.d/[example1.com] 
+# mkdir -p /etc/docker/certs.d/[example1.com]
 
 如果端口为443，则不需要指定。如果为自定义端口，请指定端口
 # /etc/docker/certs.d/yourdomain.com:port
@@ -95,8 +95,9 @@ drwxr-xr-x 3 root root       156 May  2 23:34 ha
 2. docker-compose.yml 对应的ports
 prepare
 ### 5.执行`install.sh`进行安装
+
 ```
-[root@k8s-master harbor]# ./install.sh 
+[root@k8s-master harbor]# ./install.sh
 
 [Step 0]: checking installation environment ...
 
@@ -124,16 +125,17 @@ Creating nginx              ... done
 
 ✔ ----Harbor has been installed and started successfully.----
 
-Now you should be able to visit the admin portal at http://192.168.3.6 . 
+Now you should be able to visit the admin portal at http://192.168.3.6 .
 For more details, please visit https://github.com/vmware/harbor .
 ```
+
 ### 6. 进行验证
 首先进行login登录验证
 发现有报错，如下：
 ```
 [root@k8s-master mysql]# docker login 192.168.3.6
 Username: admin
-Password: 
+Password:
 Error response from daemon: Get https://192.168.3.6/v2/: dial tcp 192.168.3
 .6:443: connect: connection refused
 ```
@@ -168,7 +170,7 @@ Creating harbor-jobservice  ... done
 ```
 [root@k8s-master /]# docker login 192.168.3.6
 Username: admin
-Password: 
+Password:
 WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
 Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
@@ -179,6 +181,8 @@ Login Succeeded
 
 > 注意：
 > 登录成功后，认证信息自动保存到 ~/.docker/config.json 文件
+
+
 ```
 [root@k8s-master 192.168.3.6]# cat ~/.docker/config.json
 {
@@ -199,7 +203,7 @@ Login Succeeded
 Authenticating with existing credentials...
 Login did not succeed, error: Error response from daemon: Get https://192.168.3.6/v2/: x509: certificate signed by unknown authority
 Username (admin): admin
-Password: 
+Password:
 Error response from daemon: Get https://192.168.3.6/v2/: x509: certificate signed by unknown authority
 ```
 这个应该是CA证书的问题，网上找了找方法没有解决到。
@@ -209,7 +213,7 @@ Error response from daemon: Get https://192.168.3.6/v2/: x509: certificate signe
 [root@k8s-node3~]#  vim /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://re0o947o.mirror.aliyuncs.com"],
-  "insecure-registries":["192.168.3.6"] 
+  "insecure-registries":["192.168.3.6"]
 }
 ```
 使用ssl的方式留在后面来研究。。。。。。。。。。。。。。。。
@@ -243,6 +247,7 @@ curl -k --cert /etc/kubernetes/ssl/harbor.pem --key /etc/kubernetes/ssl/harbor-k
 
 ### 3.harbor的生命周期管理
 可以使用docker-compose来管理Harbor的生命周期。在harbor的安装目录下，执行相关命令。
+
 ```
 docker-compose ps  查看
 docker-compose stop  停止
@@ -321,6 +326,7 @@ Events:
   Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Failed to pull image "192.168.3.6/k8sprivate/nginx": rpc error: code = Unknown desc = Error response from daemon: pull access de
 nied for 192.168.3.6/k8sprivate/nginx, repository does not exist or may require 'docker login'  Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Error: ErrImagePull
 ```
+
 ### 3.私有仓库镜的拉取
 所以私有仓库镜像正确的拉取方式是：
 #### 3.1 首先获取用户名和密码信息，并以base64的方式进行转码
@@ -341,7 +347,7 @@ type: kubernetes.io/dockerconfigjson
 ```
 #### 3.3 在拉取的时候加上`imagePullSecrets`
 ```
-[root@k8s-master doc]# cat deploy-secret.yaml 
+[root@k8s-master doc]# cat deploy-secret.yaml
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
