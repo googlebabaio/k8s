@@ -220,13 +220,7 @@ Error response from daemon: Get https://192.168.3.6/v2/: x509: certificate signe
 
 通过web端进行登录：
 ![](images/screenshot_1539666623851.png)
-访问：
-![](images/screenshot_1532576425809.png)
 
-
-![](images/screenshot_1532577182832.png)
-
-![](images/screenshot_1532577210853.png)
 ## 二、harbor使用
 ![](images/screenshot_1540173607715.png)
 ### 1.harbor的业务架构
@@ -235,12 +229,12 @@ harbor的业务架构：用户->仓库，其中仓库又分为公共仓库和私
 * 公共仓库直接可以进行访问
 
 ### 2.api访问的方式
-http：
+#### http：
 ```
 curl -u "admin:Star*2014" -X GET -H "Content-Type: application/json" "http://192.168.3.6/api/projects/k8spublic"
 ```
 
-https：
+#### https：
 ```
 curl -k --cert /etc/kubernetes/ssl/harbor.pem --key /etc/kubernetes/ssl/harbor-key.pem -X GET -H "Content-Type: application/json" "https://192.168.3.6/api/projects/k8spublic"
 ```
@@ -256,6 +250,13 @@ docker-compose down  删除，利用./install.sh可以重新安装
 ```
 
 ## 三、harbor与k8s结合
+在docker环境下直接使用,分为三步:
+```
+docker login
+docker tag
+docker push
+```
+
 在k8s中使用harbor分为两种，一种是使用公共仓库的镜像，一种是使用私有仓库的镜像。
 ### 1.镜像创建的步骤
 1. 创建用户
@@ -323,12 +324,12 @@ Events:
   Normal   BackOff    12s (x2 over 13s)  kubelet, k8s-node3  Back-off pulling image "192.168.3.6/k8sprivate/nginx"
   Warning  Failed     12s (x2 over 13s)  kubelet, k8s-node3  Error: ImagePullBackOff
   Normal   Pulling    1s (x2 over 15s)   kubelet, k8s-node3  pulling image "192.168.3.6/k8sprivate/nginx"
-  Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Failed to pull image "192.168.3.6/k8sprivate/nginx": rpc error: code = Unknown desc = Error response from daemon: pull access de
-nied for 192.168.3.6/k8sprivate/nginx, repository does not exist or may require 'docker login'  Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Error: ErrImagePull
+  Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Failed to pull image "192.168.3.6/k8sprivate/nginx": rpc error: code = Unknown desc = Error response from daemon: pull access denied for 192.168.3.6/k8sprivate/nginx, repository does not exist or may require 'docker login'  Warning  Failed     1s (x2 over 15s)   kubelet, k8s-node3  Error: ErrImagePull
 ```
+会有提示报错: `pull access denied for 192.168.3.6/k8sprivate/nginx, repository does not exist or may require 'docker login'  Warning  Failed`,这个说明需要先login
 
 ### 3.私有仓库镜的拉取
-所以私有仓库镜像正确的拉取方式是：
+所以私有仓库镜像在k8s中的正确的拉取方式是：
 #### 3.1 首先获取用户名和密码信息，并以base64的方式进行转码
     ```
     [root@k8s-master doc]# cat /root/.docker/config.json | base64 -w 0
