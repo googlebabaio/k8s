@@ -1,3 +1,5 @@
+<!-- toc -->
+## pod概述
 Pods是短暂的，那么重启时IP地址可能会改变，怎么才能从前端容器正确可靠地指向后台容器呢？
 
 Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Service通过Label找到Pod组。因为Service是抽象的，所以在图表里通常看不到它们的存在，这也就让这一概念更难以理解。
@@ -10,13 +12,13 @@ Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Serv
 ![](images/service.gif)
 
 
-## 几个port：nodePort、port、targetPort
+## 几个port易混淆的概念：nodePort、port、targetPort
 
 ### 1.nodePort
 
 外部流量访问k8s集群中service入口的一种方式（另一种方式是LoadBalancer），即nodeIP:nodePort是提供给外部流量访问k8s集群中service的入口。
 
-比如外部用户要访问k8s集群中的一个Web应用，那么我们可以配置对应service的type=NodePort，nodePort=30001。其他用户就可以通过浏览器http://node:30001访问到该web服务。 
+比如外部用户要访问k8s集群中的一个Web应用，那么我们可以配置对应service的type=NodePort，nodePort=30001。其他用户就可以通过浏览器http://node:30001访问到该web服务。
 
 而数据库等服务可能不需要被外界访问，只需被内部服务访问即可，那么我们就不必设置service的NodePort。
 

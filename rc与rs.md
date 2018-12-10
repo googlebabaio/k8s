@@ -1,3 +1,4 @@
+<!-- toc -->
 ## Replication Controller
 ![](images/rc.gif)
 是否手动创建Pod，如果想要创建同一个容器的多份拷贝，需要一个个分别创建出来么，能否将Pods划到逻辑组里？

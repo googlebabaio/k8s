@@ -1,9 +1,10 @@
+<!-- toc -->
 ## 要保证有rr模块
 ```
-[root@node1 flannel]#  lsmod | grep ip_vs 
-ip_vs_sh               12688  0 
-ip_vs_wrr              12697  0 
-ip_vs_rr               12600  13 
+[root@node1 flannel]#  lsmod | grep ip_vs
+ip_vs_sh               12688  0
+ip_vs_wrr              12697  0
+ip_vs_rr               12600  13
 ip_vs                 141092  19 ip_vs_rr,ip_vs_sh,ip_vs_wrr
 nf_conntrack          133387  7 ip_vs,nf_nat,nf_nat_ipv4,xt_conntrack,nf_nat_masquerade_ipv4,nf_conntrack_netlink,nf_conntrack_ipv4
 libcrc32c              12644  3 ip_vs,nf_nat,nf_conntrack
@@ -26,9 +27,9 @@ modprobe -- nf_conntrack_ipv4
     ```
     yum install ipvsadm -y
     ipvsadm -L -n
-    ```  
+    ```
 
-重点说一下 –masquerade-all 选项: 
+重点说一下 –masquerade-all 选项:
 kube-proxy ipvs 是基于 NAT 实现的，当创建一个 service 后，kubernetes 会在每个节点上创建一个网卡，同时帮你将 Service IP(VIP) 绑定上，此时相当于每个 Node 都是一个 ds，而其他任何 Node 上的 Pod，甚至是宿主机服务(比如 kube-apiserver 的 6443)都可能成为 rs；
 按照正常的 lvs nat 模型，所有 rs 应该将 ds 设置成为默认网关，以便数据包在返回时能被 ds 正确修改；
 在 kubernetes 将 vip 设置到每个 Node 后，默认路由显然不可行，所以要设置 –masquerade-all 选项，以便反向数据包能通过。
