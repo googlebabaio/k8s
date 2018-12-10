@@ -1,3 +1,4 @@
+<!-- toc -->
 ## Configmap介绍
 镜像使用的过程中，经常需要利用配置文件、启动脚本等方式来影响容器的运行方式，如果仅有少量配置，我们可以使用环境变量的方式来进行配置。然而对于一些较为复杂的配置，k8s提供了configmap解决方案。　
 ConfigMap API资源存储键/值对配置数据，这些数据可以在pods里使用。
@@ -19,7 +20,7 @@ ConfigMap的API概念上来说是很简单的。从数据角度来看，ConfigMa
 kubectl create configmap test-config1 --from-literal=db.host=10.5.10.116 --from-listeral=db.port='3306'
 ```
 ### 指定文件创建
-配置文件app.properties的内容： 
+配置文件app.properties的内容：
 ![](images/screenshot_1540455278824.png)
 创建命令（可以有多个--from-file）：
 
@@ -37,7 +38,7 @@ kubectl create configmap game-config-3 --from-file=<my-key-name>=<path-to-file>
 
 
 ### 指定目录创建
-configs 目录下的config-1和config-2内容如下所示： 
+configs 目录下的config-1和config-2内容如下所示：
 ![](images/screenshot_1540455411245.png)
 创建命令：
 ```
@@ -47,7 +48,7 @@ kubectl create configmap test-config3 --from-file=./configs
 可以看到指定目录创建时configmap内容中的各个文件会创建一个key/value对，key是文件名，value是文件内容。
 
 
-那假如目录中还包含子目录呢？继续做实验： 
+那假如目录中还包含子目录呢？继续做实验：
 在上一步的configs目录下创建子目录subconfigs，并在subconfigs下面创建两个配置文件，指定目录configs创建名为test-config4的configmap:
 ```
 kubectl create configmap test-config4 --from-file=./configs
@@ -66,7 +67,7 @@ kubectl create configmap test-config4 --from-file=./configs
 ## 使用ConfigMap
 使用ConfigMap有三种方式:
 
-* 第一种是通过环境变量的方式，直接传递给pod 
+* 第一种是通过环境变量的方式，直接传递给pod
     * 使用configmap中指定的key
     * 使用configmap中所有的key
 * 第二种是通过在pod的命令行下运行的方式(启动命令中)
@@ -161,7 +162,7 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
-        volumeMounts:     
+        volumeMounts:
         - name: config-volume4
           mountPath: /tmp/config4
       volumes:
@@ -212,16 +213,16 @@ pod起来后再通过kubectl edit configmap …修改configmap，过一会pod内
 
 ![](images/screenshot_1540455753081.png)
 
-注意在容器中的形式与（2）中的不同，（2）中是个链接，链到..data/<key-name>。 
+注意在容器中的形式与（2）中的不同，（2）中是个链接，链到..data/<key-name>。
 备注：
 
 删除configmap后原pod不受影响；然后再删除pod后，重启的pod的events会报找不到cofigmap的volume。
 pod起来后再通过kubectl edit configmap …修改configmap，pod内部的配置也会自动刷新。
 在容器内部修改挂进去的配置文件后，内容可以持久保存，除非杀掉再重启pod才会刷回原始configmap的内容。
 subPath必须要与configmap中的key同名。
-mountPath如/tmp/prefix： 
-<1>当/tmp/prefix不存在时(备注：此时/tmp/prefix和/tmp/prefix/无异)，会自动创建prefix文件并把value写进去； 
-<2>当/tmp/prefix存在且是个文件时，里面内容会被configmap覆盖； 
+mountPath如/tmp/prefix：
+<1>当/tmp/prefix不存在时(备注：此时/tmp/prefix和/tmp/prefix/无异)，会自动创建prefix文件并把value写进去；
+<2>当/tmp/prefix存在且是个文件时，里面内容会被configmap覆盖；
 <3>当/tmp/prefix存在且是文件夹时，无论写/tmp/prefix还是/tmp/prefix/都会报错。
 
 ### Configmap的热更新研究
@@ -236,8 +237,7 @@ ENV 是在容器启动的时候注入的，启动之后 kubernetes 就不会再�
 
 
 参考：
-1.https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/ 
-2.https://www.cnblogs.com/breezey/p/6582082.html 
-3.https://kubernetes.io/docs/concepts/storage/volumes/ 
+1.https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
+2.https://www.cnblogs.com/breezey/p/6582082.html
+3.https://kubernetes.io/docs/concepts/storage/volumes/
 4.https://www.kubernetes.org.cn/3138.html
-

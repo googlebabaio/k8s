@@ -1,3 +1,5 @@
+<!-- toc -->
+
 serviceaccount/admin-user created
 serviceaccount/kubernetes-dashboard created
 

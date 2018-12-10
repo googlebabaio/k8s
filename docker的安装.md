@@ -1,12 +1,25 @@
-## 有
+<!-- toc -->
+## 有网络的条件下安装
+>说明:环境为centos7.4
+
+### 获取repo源(这个地方选用阿里的)
 ```
 cd /etc/yum.repos.d/
 wget  https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+### 用yum进行安装
+```
 yum install docker-ce -y
 ```
 
+### 安装完成后启动
 ```
 [root@nazeebodan yum.repos.d]# systemctl start docker
+```
+
+### 查看docker的一些基本信息
+```
 [root@nazeebodan yum.repos.d]# docker info
 Containers: 0
  Running: 0
@@ -53,24 +66,27 @@ Insecure Registries:
 Live Restore Enabled: false
 ```
 
+### 将docker作为服务启动
 ```
 [root@nazeebodan yum.repos.d]# systemctl enable docker
 Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
-[root@nazeebodan yum.repos.d]# 
 ```
 
+## docker官方镜像仓库
+docker官方镜像仓库地址为:  https://hub.docker.com/
 
-docker官方镜像仓库
-https://hub.docker.com/
-
-
+我们可以通过search命令进行进行的搜索
+```
 docker search centos
+```
 
-docker中的centos --这种是没有内核的。有些时候可以用内核的特性是因为依赖于宿主机的内核的原因
+>注意:
+docker中的centos --这种是没有内核的。
+有些时候可以用内核的特性是因为依赖于宿主机的内核的原因
 
 
 
-配置镜像加速
+## 配置镜像加速
 注册阿里云
 https://dev.aliyun.com/search.html
 点击“创建我的容器镜像”，创建完成后再镜像加速器就有相关的操作提示了。
