@@ -19,24 +19,24 @@ Helm 由两部分组成：
 
 ## 如何使用 Helm Charts？
 ### 部署一个应用
-![](images/screenshot_1538029763268.png)
-![](images/screenshot_1538029775146.png)
+![](../images/screenshot_1538029763268.png)
+![](../images/screenshot_1538029775146.png)
 helm install . 会使用./templates 目录下的Kubernetes manifests 去创建一个部署(deployment)和服务(service):
-![](images/screenshot_1538029807425.png)
+![](../images/screenshot_1538029807425.png)
 
 ### 删除一个 Release
 Helm delete RELEASE_NAME
-![](images/screenshot_1538029925463.png)
+![](../images/screenshot_1538029925463.png)
 
 ### 回滚一个 Release
 使用 helm rollback RELEASE_NAME REVISION_NUMBER 可以恢复一个被删除的 Release
-![](images/screenshot_1538029977440.png)
+![](../images/screenshot_1538029977440.png)
 
 ### 使用模版管理Release
 如果管理 Release？每次发布 Release，你不可能手动的去修改 yaml 文件去发布，Helm Chart提供了 模版的方式去实现。Helm Charts 的模版由 Go模版语言实现，并提供了数十种公共模版供用户使用。模版的值是从 value.yaml文件读取，例如：
-![](images/screenshot_1538030049260.png)
+![](../images/screenshot_1538030049260.png)
 一个模版文件写出来会是下面的样子，deployment.yaml:
-![](images/screenshot_1538030058533.png)
+![](../images/screenshot_1538030058533.png)
 其中模版中的变量是从 value.yaml 文件中读取。你也可以使用helm install —set image.tag=’latest’命令去覆盖 value.yaml 文件中的值。
 
 > 参考：

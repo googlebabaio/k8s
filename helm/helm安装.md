@@ -1,7 +1,7 @@
-<!-- toc --> 
+<!-- toc -->
 *****
 ## 一、helm介绍
-![](images/screenshot_1539936296530.png)
+![](../images/screenshot_1539936296530.png)
 ### 1.什么是 Helm Charts
 Helm Charts是 Kubernetes 项目中的一个子项目（https://github.com/kubernetes/helm） 目的是提供 Kubernetes 的包管理平台。Helm 能够帮你管理 Kubernetes 的应用集合。Helm Charts 能够帮你定义，安装，升级最复杂的 Kubernetes 应用集合。Helm Charts 很容易创建，做版本化，共享和发布，最新版本的 Helm 由 CNCF 进行维护，目前在业界已经有大量的公司在使用 Helm，其中包括谷歌，微软，Bitnami 等大型企业。
 Helm 由两部分组成：
@@ -26,7 +26,7 @@ Helm 由两部分组成：
 我在这儿选择了最新的版本`helm-v2.11.0`
 ```
 [root@master src]# wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
-[==================================================>] 19,149,273  6.58MB/s   in 2.8s   
+[==================================================>] 19,149,273  6.58MB/s   in 2.8s
 2018-10-19 15:27:50 (6.58 MB/s) - ‘helm-v2.11.0-linux-amd64.tar.gz’ saved [19149273/19149273]
 ```
 

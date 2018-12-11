@@ -20,8 +20,8 @@ modprobe -- nf_conntrack_ipv4
 ```
 
 ## 启用 ipvs 后与 1.7 版本的配置差异如下：
-* 增加 –feature-gates=SupportIPVSProxyMode=true 选项，用于告诉 kube-proxy 开启 ipvs 支持，目前 ipvs 默认未开启
-* 增加 ipvs-min-sync-period、–ipvs-sync-period、–ipvs-scheduler 三个参数用于调整 ipvs，具体参数值请自行查阅 ipvs 文档
+* 增加 `–feature-gates=SupportIPVSProxyMode=true` 选项，用于告诉 kube-proxy 开启 ipvs 支持，目前 ipvs 默认未开启
+* 增加 `ipvs-min-sync-period`、`–ipvs-sync-period`、`–ipvs-scheduler` 三个参数用于调整 ipvs，具体参数值请自行查阅 ipvs 文档
 * 增加 –masquerade-all 选项，以确保反向流量通过
 * 打开 ipvs 需要安装 ipvsadm 软件， 在 node 中安装
     ```
@@ -34,4 +34,4 @@ kube-proxy ipvs 是基于 NAT 实现的，当创建一个 service 后，kubernet
 按照正常的 lvs nat 模型，所有 rs 应该将 ds 设置成为默认网关，以便数据包在返回时能被 ds 正确修改；
 在 kubernetes 将 vip 设置到每个 Node 后，默认路由显然不可行，所以要设置 –masquerade-all 选项，以便反向数据包能通过。
 
-注意：--masquerade-all 选项与 Calico 安全策略控制不兼容,请酌情使用
+注意：`--masquerade-all` 选项与 Calico 安全策略控制不兼容,请酌情使用
