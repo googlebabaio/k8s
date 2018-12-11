@@ -1,4 +1,8 @@
 <!-- toc -->
+
+>harbor的地址: https://github.com/vmware/harbor/releases
+
+
 ## 一、harbor的安装
 安装harbor的步骤：
 1. 下载安装docker-compose
@@ -383,4 +387,4 @@ spec:
       imagePullSecrets:
       - name: harborsecret
 ```
-注意最后的`imagePullSecrets:      - name: harborsecret`
+注意最后的`imagePullSecrets: - name: harborsecret`

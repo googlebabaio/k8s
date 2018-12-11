@@ -113,7 +113,7 @@ users:
 
 
 ========================================
-![](images/screenshot_1532850467585.png)
+![](../images/screenshot_1532850467585.png)
 登录dashboard的时候，会有2个选项
 
 ```

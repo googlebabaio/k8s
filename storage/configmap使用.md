@@ -21,14 +21,14 @@ kubectl create configmap test-config1 --from-literal=db.host=10.5.10.116 --from-
 ```
 ### 指定文件创建
 配置文件app.properties的内容：
-![](images/screenshot_1540455278824.png)
+![](../images/screenshot_1540455278824.png)
 创建命令（可以有多个--from-file）：
 
 ```
 kubectl create configmap test-config2 --from-file=./app.properties
 ```
 
-![](images/screenshot_1540455299211.png)
+![](../images/screenshot_1540455299211.png)
 可以看到指定文件创建时configmap会创建一个key/value对，key是文件名，value是文件内容。
 
 假如不想configmap中的key为默认的文件名，还可以在创建时指定key名字：
@@ -39,12 +39,12 @@ kubectl create configmap game-config-3 --from-file=<my-key-name>=<path-to-file>
 
 ### 指定目录创建
 configs 目录下的config-1和config-2内容如下所示：
-![](images/screenshot_1540455411245.png)
+![](../images/screenshot_1540455411245.png)
 创建命令：
 ```
 kubectl create configmap test-config3 --from-file=./configs
 ```
-![](images/screenshot_1540455445586.png)
+![](../images/screenshot_1540455445586.png)
 可以看到指定目录创建时configmap内容中的各个文件会创建一个key/value对，key是文件名，value是文件内容。
 
 
@@ -54,13 +54,13 @@ kubectl create configmap test-config3 --from-file=./configs
 kubectl create configmap test-config4 --from-file=./configs
 ```
 
-![](images/screenshot_1540455471227.png)
+![](../images/screenshot_1540455471227.png)
 
 结果说明指定目录时只会识别其中的文件，忽略子目录
 
 ### 通过事先写好configmap的标准yaml文件创建
-![](images/screenshot_1540455506471.png)
-![](images/screenshot_1540455509780.png)
+![](../images/screenshot_1540455506471.png)
+![](../images/screenshot_1540455509780.png)
 注意其中一个key的value有多行内容时的写法
 
 
@@ -170,7 +170,7 @@ spec:
         configMap:
           name: test-config4
 ```
-![](images/screenshot_1540455682734.png)
+![](../images/screenshot_1540455682734.png)
 (2)假如不想以key名作为配置文件名可以引入items 字段，在其中逐个指定要用相对路径path替换的key：
 ```
 volumes:
@@ -183,7 +183,7 @@ volumes:
           - key: cache_host
             path: cache-host
 ```
-![](images/screenshot_1540455712647.png)
+![](../images/screenshot_1540455712647.png)
 备注：
 
 删除configmap后原pod不受影响；然后再删除pod后，重启的pod的events会报找不到cofigmap的volume；
@@ -211,7 +211,7 @@ pod起来后再通过kubectl edit configmap …修改configmap，过一会pod内
           name: test-config4
 ```
 
-![](images/screenshot_1540455753081.png)
+![](../images/screenshot_1540455753081.png)
 
 注意在容器中的形式与（2）中的不同，（2）中是个链接，链到..data/<key-name>。
 备注：

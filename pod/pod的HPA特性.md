@@ -1,4 +1,4 @@
-<!-- toc --> 
+<!-- toc -->
 ## 一、压测工具ab介绍及安装
 ### 1.介绍
 ab(apache benchmark) —— apache自带的一个测试工具，一般把apache压力测试称为AB测试。
@@ -128,7 +128,7 @@ Percentage of the requests served within a certain time (ms)
     * Kubernetes 1.7引入了聚合层，允许第三方应用程序通过注册为API附加组件来扩展Kubernetes API。自定义指标API以及聚合层使得像Prometheus这样的监控系统可以向HPA控制器公开特定于应用程序的指标。
 
 HPA原理如下图：
-![](images/screenshot_1539163356790.png)
+![](../images/screenshot_1539163356790.png)
 ## 三、基础测试环境配置
 
 ### 1.首先在k8s中安装heapster
@@ -223,7 +223,7 @@ esource metrics API: the server could not find the requested resource (get pods.
 
 再次查询hpa，显示正常了：
 ```
-[root@k8s-master ~]# kubectl get hpa 
+[root@k8s-master ~]# kubectl get hpa
 NAME      REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 nginx     Deployment/nginx   0%/10%    1         10        1          6h
 ```

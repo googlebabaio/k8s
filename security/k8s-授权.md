@@ -24,7 +24,7 @@ ABAC（Attribute Based Access Control）本来是不错的概念，但是在 Kub
 而 RBAC 的授权策略可以利用 kubectl 或者 Kubernetes API 直接进行配置。RBAC 可以授权给用户，让用户有权进行授权管理，这样就可以无需接触节点，直接进行授权管理。RBAC 在 Kubernetes 中被映射为 API 资源和操作。
 
 ## 原理图
-![](images/screenshot_1538118779863.png)
+![](../images/screenshot_1538118779863.png)
 在 RBAC 中定义了两个对象，用于描述在用户和资源之间的连接权限。
 
 * 角色
@@ -33,5 +33,5 @@ ABAC（Attribute Based Access Control）本来是不错的概念，但是在 Kub
 * 角色绑定
 RoleBinding 把角色映射到用户，从而让这些用户继承角色在 namespace 中的权限。ClusterRoleBinding 让用户继承 ClusterRole 在整个集群中的权限。
 
-![](images/screenshot_1538118815063.png)
+![](../images/screenshot_1538118815063.png)
 可参考： [关于 RoleBinding 和 ClusterRoleBinding ]( https://kubernetes.io/docs/admin/authorization/rbac/#rolebinding-and-clusterrolebinding)

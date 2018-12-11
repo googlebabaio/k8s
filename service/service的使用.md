@@ -9,7 +9,7 @@ Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Serv
 现在前端已经得到了后台服务的IP地址，但是它应该访问2个后台Pod的哪一个呢？Service在这2个后台Pod之间提供透明的负载均衡，会将请求分发给其中的任意一个（如下面的动画所示）。通过每个Node上运行的代理（kube-proxy）完成。这里有更多技术细节。
 
 下述动画展示了Service的功能。注意该图作了很多简化。如果不进入网络配置，那么达到透明的负载均衡目标所涉及的底层网络和路由相对先进。
-![](images/service.gif)
+![](../images/service.gif)
 
 
 ## 几个port易混淆的概念：nodePort、port、targetPort
