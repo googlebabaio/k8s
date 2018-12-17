@@ -317,13 +317,11 @@ HPA的变化：
 ```
 [root@k8s-master ~]# kubectl get hpa --watch
 NAME      REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
-nginx     Deployment/nginx   0%/10%    1         10        1          6h
+nginx     Deployment/nginx   0%/10%    1         10        1         6h
 nginx     Deployment/nginx   30%/10%   1         10        1         6h
 nginx     Deployment/nginx   30%/10%   1         10        3         6h
 nginx     Deployment/nginx   70%/10%   1         10        3         6h
 nginx     Deployment/nginx   70%/10%   1         10        3         6h
-nginx     Deployment/nginx   40%/10%   1         10        3         6h
-nginx     Deployment/nginx   40%/10%   1         10        3         6h
 nginx     Deployment/nginx   40%/10%   1         10        3         6h
 nginx     Deployment/nginx   40%/10%   1         10        3         6h
 nginx     Deployment/nginx   40%/10%   1         10        3         6h
@@ -333,15 +331,9 @@ nginx     Deployment/nginx   32%/10%   1         10        6         6h
 nginx     Deployment/nginx   22%/10%   1         10        6         6h
 nginx     Deployment/nginx   22%/10%   1         10        6         6h
 nginx     Deployment/nginx   22%/10%   1         10        6         6h
-nginx     Deployment/nginx   22%/10%   1         10        6         6h
-nginx     Deployment/nginx   22%/10%   1         10        6         6h
 nginx     Deployment/nginx   22%/10%   1         10        10        6h
 nginx     Deployment/nginx   19%/10%   1         10        10        6h
 nginx     Deployment/nginx   19%/10%   1         10        10        6h
-nginx     Deployment/nginx   14%/10%   1         10        10        6h
-nginx     Deployment/nginx   14%/10%   1         10        10        6h
-nginx     Deployment/nginx   14%/10%   1         10        10        6h
-nginx     Deployment/nginx   14%/10%   1         10        10        6h
 nginx     Deployment/nginx   14%/10%   1         10        10        6h
 nginx     Deployment/nginx   14%/10%   1         10        10        6h
 nginx     Deployment/nginx   14%/10%   1         10        10        6h
@@ -356,9 +348,6 @@ nginx     Deployment/nginx   0%/10%    1         10        7         6h
 nginx     Deployment/nginx   0%/10%    1         10        7         6h
 nginx     Deployment/nginx   0%/10%    1         10        7         6h
 nginx     Deployment/nginx   0%/10%    1         10        7         6h
-nginx     Deployment/nginx   0%/10%    1         10        7         6h
-nginx     Deployment/nginx   0%/10%    1         10        7         6h
 nginx     Deployment/nginx   0%/10%    1         10        1         6h
 nginx     Deployment/nginx   0%/10%    1         10        1         6h
-
 ```

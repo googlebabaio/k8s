@@ -30,6 +30,7 @@
     * [harbor](addons/harbor.md)
 * [kubernetes常用资源介绍](kubernetes常用资源介绍.md)
 * [深入理解k8s的核--pod](pod/深入理解k8s的核--pod.md)
+    * [pod概述](pod/pod概述.md)
     * [静态pod](pod/静态pod.md)
     * [init pod](pod/initpod.md)
     * [pod的启动顺序](pod/pod的启动顺序.md)
