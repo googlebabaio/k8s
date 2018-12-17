@@ -5,15 +5,12 @@ https://kubernetes.io/docs/reference/access-authn-authz/authorization/
 
 
 
-## 鉴权模式
+## 授权模式
 
-* Node - A special-purpose authorizer that grants permissions to kubelets based on the pods they are scheduled to run. To learn more about using the Node authorization mode, see Node Authorization.
-* ABAC - Attribute-based access control (ABAC) defines an access control paradigm whereby access rights are granted to users through the use of policies which combine attributes together. The policies can use any type of attributes (user attributes, resource attributes, object, environment attributes, etc). To learn more about using the ABAC mode, see ABAC Mode.
-* RBAC - Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within an enterprise. In this context, access is the ability of an individual user to perform a specific task, such as view, create, or modify a file. To learn more about using the RBAC mode, see RBAC Mode
-    * When specified RBAC (Role-Based Access Control) uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing admins to dynamically configure permission policies through the Kubernetes API.
-    * To enable RBAC, start the apiserver with `--authorization-mode=RBAC`.
-* Webhook - A WebHook is an HTTP callback: an HTTP POST that occurs when something happens; a simple event-notification via HTTP POST. A web application implementing WebHooks will POST a message to a URL when certain things happen. To learn more about using the Webhook mode, see Webhook Mode.
-Checking API Access
+- webhook: 它与集群外的 HTTP(S) 服务交互。
+- ABAC: 它执行静态文件中定义的策略。
+- RBAC: 它使用 rbac.authorization.k8s.io API Group实现授权决策，允许管理员通过 Kubernetes API 动态配置策略。
+- Node: 它确保 Kubelet 只能访问自己节点上的资源。
 
 
 ## 鉴权的作用
