@@ -14,7 +14,7 @@ Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Serv
 
 ## 几个port易混淆的概念：nodePort、port、targetPort
 
-### 1.nodePort
+### nodePort
 
 外部流量访问k8s集群中service入口的一种方式（另一种方式是LoadBalancer），即nodeIP:nodePort是提供给外部流量访问k8s集群中service的入口。
 
@@ -24,7 +24,7 @@ Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Serv
 
 
 
-### 2.port
+### port
 k8s集群内部服务之间访问service的入口。即clusterIP:port是service暴露在clusterIP上的端口。
 
 mysql容器暴露了3306端口（参考DockerFile），集群内其他容器通过33306端口访问mysql服务，但是外部流量不能访问mysql服务，因为mysql服务没有配置NodePort。对应的service.yaml如下：
@@ -41,7 +41,7 @@ spec:
   name: mysql-pod
 ```
 
-### 3.targetPort
+### targetPort
 
 容器的端口（最终的流量端口）。targetPort是pod上的端口，从port和nodePort上来的流量，经过kube-proxy流入到后端pod的targetPort上，最后进入容器。
 
@@ -60,6 +60,3 @@ spec:
  selector:
   name: nginx-pod
 ```
-
-## 参考
-https://jimmysong.io/kubernetes-handbook/concepts/service.html
