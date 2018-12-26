@@ -44,3 +44,40 @@ daemonset.extensions "cattle-node-agent" created
 
 
 ![](images/markdown-img-paste-20181226091943946.png)
+
+
+在这儿发现有个etcd的报错
+去查询etcd的状态
+```
+[root@master ~]#  etcdctl --endpoints=https://192.168.3.27:2379,https://192.168.3.28:2379,https://192.168.3.3:2379 \
+>   --ca-file=/opt/kubernetes/ssl/ca.pem \
+>   --cert-file=/opt/kubernetes/ssl/etcd.pem \
+>   --key-file=/opt/kubernetes/ssl/etcd-key.pem cluster-health
+member 2df8ed452a15b52f is healthy: got healthy result from https://192.168.3.28:2379
+failed to check the health of member c569b5ea1d5fd6b2 on https://192.168.3.3:2379: Get https://192.168.3.3:2379/health: dial tcp 192.168.3.3:2379: getsockopt: connection refused
+member c569b5ea1d5fd6b2 is unreachable: [https://192.168.3.3:2379] are all unreachable
+member d4a4a6a1a95915b1 is healthy: got healthy result from https://192.168.3.27:2379
+cluster is degraded
+```
+
+发现192.168.3.3上的etcd的状态不对
+去.3上发现etcd没有启动起来,重启etcd
+```
+[root@node2 ~]# ps -ef | grep etcd
+root     18233 18163  0 11:48 pts/2    00:00:00 grep --color=auto etcd
+root     19228     1  0 Dec24 ?        00:00:33 /opt/kubernetes/bin/flanneld -etcd-endpoints=https://192.168.3.27:2379,https://192.168.3.28:2379,https://192.168.3.3:2379 -etcd-prefix=/coreos.com/network --etcd-cafile=/opt/kubernetes/ssl/ca.pem --etcd certfile=/opt/kubernetes/ssl/flanneld.pem --etcd-keyfile=/opt/kubernetes/ssl/flanneld-key.pem
+[root@node2 ~]# systemctl start etcd
+```
+
+,再次检查状态,就OK了.
+```
+[root@master ~]#  etcdctl --endpoints=https://192.168.3.27:2379,https://192.168.3.28:2379,https://192.168.3.3:2379   --ca-file=/opt/kubernetes/ssl/ca.pem   --cert-file=/opt/kubernetes/ssl/e
+tcd.pem   --key-file=/opt/kubernetes/ssl/etcd-key.pem cluster-healthmember 2df8ed452a15b52f is healthy: got healthy result from https://192.168.3.28:2379
+member c569b5ea1d5fd6b2 is healthy: got healthy result from https://192.168.3.3:2379
+member d4a4a6a1a95915b1 is healthy: got healthy result from https://192.168.3.27:2379
+```
+
+
+
+
+![](images/markdown-img-paste-20181226114903216.png)
