@@ -220,13 +220,14 @@ Error response from daemon: Get https://192.168.3.6/v2/: x509: certificate signe
   "insecure-registries":["192.168.3.6"]
 }
 ```
+
 使用ssl的方式留在后面来研究。。。。。。。。。。。。。。。。
 
 通过web端进行登录：
-![](images/screenshot_1539666623851.png)
+![](../images/screenshot_1539666623851.png)
 
 ## 二、harbor使用
-![](images/screenshot_1540173607715.png)
+![](../images/screenshot_1540173607715.png)
 ### 1.harbor的业务架构
 harbor的业务架构：用户->仓库，其中仓库又分为公共仓库和私有仓库
 * 私有仓库需要登录才能有访问的权限
@@ -335,10 +336,11 @@ Events:
 ### 3.私有仓库镜的拉取
 所以私有仓库镜像在k8s中的正确的拉取方式是：
 #### 3.1 首先获取用户名和密码信息，并以base64的方式进行转码
-    ```
-    [root@k8s-master doc]# cat /root/.docker/config.json | base64 -w 0
-    ewoJImF1dGhzIjogewoJCSIxOTIuMTY4LjMuNiI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZVM1JoY2lveU1ERTAiCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE4LjA2LjEtY2UgKGxpbnV4KSIKCX0KfQ==
-    ```
+
+```
+[root@k8s-master doc]# cat /root/.docker/config.json | base64 -w 0
+ewoJImF1dGhzIjogewoJCSIxOTIuMTY4LjMuNiI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZVM1JoY2lveU1ERTAiCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE4LjA2LjEtY2UgKGxpbnV4KSIKCX0KfQ==
+```
 #### 3.2 然后将harbor的用户名和密码以secret的方式创建
 ```
 apiVersion: v1
@@ -346,8 +348,7 @@ kind: Secret
 metadata:
   name: harborsecret
 data:
-  .dockerconfigjson:   ewoJImF1dGhzIjogewoJCSIxOTIuMTY4LjMuNiI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZVM1JoY2lveU1ERTAiCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50Lz
-E4LjA2LjEtY2UgKGxpbnV4KSIKCX0KfQ==
+  .dockerconfigjson:   ewoJImF1dGhzIjogewoJCSIxOTIuMTY4LjMuNiI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZVM1JoY2lveU1ERTAiCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE4LjA2LjEtY2UgKGxpbnV4KSIKCX0KfQ==
 type: kubernetes.io/dockerconfigjson
 ```
 #### 3.3 在拉取的时候加上`imagePullSecrets`
@@ -388,3 +389,9 @@ spec:
       - name: harborsecret
 ```
 注意最后的`imagePullSecrets: - name: harborsecret`
+特别注意,如果harbor配置的是http模式,那么所有节点的/etc/docker/daemon.json配置中都要把harbor的地址加上去。在docker1.13后，默认的模式https!
+否则会报类似的错误:
+```
+Failed to pull image "192.168.3.6:8888/private/nfs-client-provisioner:latest": rpc error: code = Unknown desc = Error response f
+rom daemon: Get https://192.168.3.6:8888/v2/: http: server gave HTTP response to HTTPS client
+```
