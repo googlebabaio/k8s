@@ -109,6 +109,9 @@ Export list for k8s-master:
 
 ## 配置StorageClass
 参考:https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
+配置StorageClass需要配置三个地方:
+rbac：创建一个sa,专门用于nfs的,所以权限那一块要给够
+deployment：部署有关nfs的storageclass的一个pod，要注意上一步的ServiceAccount和
 
 ### rbac
 rbac.yaml
@@ -165,12 +168,33 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: nfs-client-provisioner
-    # replace with namespace where provisioner is deployed
     namespace: default
 roleRef:
   kind: Role
   name: leader-locking-nfs-client-provisioner
   apiGroup: rbac.authorization.k8s.io
+```
+
+当然也可以偷懒给一个最大的cluster-admin的权限，如：
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: scpvcsa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-nfs
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: scpvcsa
+  namespace: default
 ```
 
 ### storageclass
@@ -223,3 +247,119 @@ spec:
             server: 192.168.3.6
             path: /nfsdisk
 ```
+
+### 创建及测试
+#### 创建
+```
+[root@k8s-master softdb]# ls sc_config/
+deployment.yaml  rbac.yaml  sc.yaml
+[root@k8s-master softdb]# kubectl create -f sc_config/
+deployment.extensions/nfs-client-provisioner created
+serviceaccount/nfs-client-provisioner created
+clusterrole.rbac.authorization.k8s.io/nfs-client-provisioner-runner created
+clusterrolebinding.rbac.authorization.k8s.io/run-nfs-client-provisioner created
+role.rbac.authorization.k8s.io/leader-locking-nfs-client-provisioner created
+rolebinding.rbac.authorization.k8s.io/leader-locking-nfs-client-provisioner created
+storageclass.storage.k8s.io/managed-nfs-storage created
+```
+
+```
+[root@k8s-master softdb]# kubectl get pod |grep nfs
+nfs-client-provisioner-6594988b5b-297b8   1/1       Running            0          44m
+[root@k8s-master softdb]# kubectl describe pod nfs-client-provisioner-6594988b5b-297b8
+Name:           nfs-client-provisioner-6594988b5b-297b8
+Namespace:      default
+Node:           k8s-node1/192.168.3.25
+Start Time:     Thu, 27 Dec 2018 16:13:02 +0800
+Labels:         app=nfs-client-provisioner
+                pod-template-hash=2150544616
+Annotations:    <none>
+Status:         Running
+IP:             10.2.19.6
+Controlled By:  ReplicaSet/nfs-client-provisioner-6594988b5b
+Containers:
+  nfs-client-provisioner:
+    Container ID:   docker://994664692a1cc69519c988bbcbda658dfe9bf3c3325d3fce446902f34d5f7528
+    Image:          192.168.3.6:8888/private/nfs-client-provisioner:latest
+    Image ID:       docker-pullable://192.168.3.6:8888/private/nfs-client-provisioner@sha256:4c16495be5b893efea1c810e8451c71e1c58f076494676cae2ecab3a382b6ed0
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Thu, 27 Dec 2018 16:19:27 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      PROVISIONER_NAME:  fuseim.pri/ifs
+      NFS_SERVER:        192.168.3.6
+      NFS_PATH:          /nfsdisk
+    Mounts:
+      /persistentvolumes from nfs-client-root (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from nfs-client-provisioner-token-cn4kl (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  nfs-client-root:
+    Type:      NFS (an NFS mount that lasts the lifetime of a pod)
+    Server:    192.168.3.6
+    Path:      /nfsdisk
+    ReadOnly:  false
+  nfs-client-provisioner-token-cn4kl:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  nfs-client-provisioner-token-cn4kl
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type     Reason          Age                 From                Message
+  ----     ------          ----                ----                -------
+  Normal   Scheduled       44m                 default-scheduler   Successfully assigned default/nfs-client-provisioner-6594988b5b-297b8 to k8s-node1
+  Normal   Pulling         43m (x4 over 44m)   kubelet, k8s-node1  pulling image "192.168.3.6:8888/private/nfs-client-provisioner:latest"
+  Warning  Failed          43m (x4 over 44m)   kubelet, k8s-node1  Failed to pull image "192.168.3.6:8888/private/nfs-client-provisioner:latest": rpc error: code = Unknown desc = Error resp
+onse from daemon: Get https://192.168.3.6:8888/v2/: http: server gave HTTP response to HTTPS client  Warning  Failed          43m (x4 over 44m)   kubelet, k8s-node1  Error: ErrImagePull
+  Warning  Failed          42m (x7 over 44m)   kubelet, k8s-node1  Error: ImagePullBackOff
+  Normal   BackOff         39m (x20 over 44m)  kubelet, k8s-node1  Back-off pulling image "192.168.3.6:8888/private/nfs-client-provisioner:latest"
+  Normal   SandboxChanged  39m                 kubelet, k8s-node1  Pod sandbox changed, it will be killed and re-created.
+  Normal   Pulling         38m                 kubelet, k8s-node1  pulling image "192.168.3.6:8888/private/nfs-client-provisioner:latest"
+  Normal   Pulled          38m                 kubelet, k8s-node1  Successfully pulled image "192.168.3.6:8888/private/nfs-client-provisioner:latest"
+  Normal   Created         38m                 kubelet, k8s-node1  Created container
+  Normal   Started         38m                 kubelet, k8s-node1  Started container
+
+```
+#### 测试
+创建一个PVC，查看是否能动态的创建PV
+test-pvc.yaml
+```
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+```
+
+```
+[root@k8s-master softdb]# kubectl create -f test-pvc.yaml
+persistentvolumeclaim/test-claim created
+[root@k8s-master softdb]# kubectl get sc,pvc,pv
+NAME                                              PROVISIONER      AGE
+storageclass.storage.k8s.io/managed-nfs-storage   fuseim.pri/ifs   14m
+
+NAME                               STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS          AGE
+persistentvolumeclaim/test-claim   Bound     pvc-b51ca970-09b0-11e9-ada0-525400f9dfac   1Mi        RWX            managed-nfs-storage   32s
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS    CLAIM                STORAGECLASS          REASON    AGE
+persistentvolume/pvc-b51ca970-09b0-11e9-ada0-525400f9dfac   1Mi        RWX            Delete           Bound     default/test-claim   managed-nfs-storage             31s
+```
+
+可以看到在创建了名为`test-claim`的PVC后，动态的创建出了名为`pvc-b51ca970-09b0-11e9-ada0-525400f9dfac `的PV,它使用的storageclass正是之前创建的scstorageclass`managed-nfs-storage`
