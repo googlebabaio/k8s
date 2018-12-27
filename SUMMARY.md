@@ -84,7 +84,7 @@
     * [helm介绍](helm/helm介绍.md)
     * [helm的使用](helm/helm的使用.md)
     * [helm安装](helm/helm安装.md)
-* [rancher的使用](rancher的使用.md)
+* [rancher的使用](3rdui/rancher的使用.md)
 * [k8s-使用技巧](tips/k8s-tips.md)
   * [k8s上下文介绍](tips/k8s上下文介绍.md)
   * [kubectl使用技巧](tips/kubectl-tips.md)

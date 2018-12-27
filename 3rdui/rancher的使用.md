@@ -1,9 +1,9 @@
 
 ## 导入已有的集群
-![](images/markdown-img-paste-20181226091256344.png)
+![](../images/markdown-img-paste-20181226091256344.png)
 
 
-![](images/markdown-img-paste-20181226091331580.png)
+![](../images/markdown-img-paste-20181226091331580.png)
 
 ### 创建角色
 ```
@@ -25,25 +25,25 @@ daemonset.extensions "cattle-node-agent" created
 
 ### 正确导入后的状态
 执行完成后，就是`pengding`的状态，过一会儿后就是`active`的状态了,说明已经正确导入了.
-![](images/markdown-img-paste-20181226091157841.png)
+![](../images/markdown-img-paste-20181226091157841.png)
 
 
-![](images/markdown-img-paste-20181226091221154.png)
+![](../images/markdown-img-paste-20181226091221154.png)
 
 
 
-![](images/markdown-img-paste-20181226091804288.png)
+![](../images/markdown-img-paste-20181226091804288.png)
 
 
 ## 进去到某个集群中
 
 
-![](images/markdown-img-paste-20181226091908614.png)
+![](../images/markdown-img-paste-20181226091908614.png)
 
 
 
 
-![](images/markdown-img-paste-20181226091943946.png)
+![](../images/markdown-img-paste-20181226091943946.png)
 
 
 在这儿发现有个etcd的报错
@@ -80,4 +80,4 @@ member d4a4a6a1a95915b1 is healthy: got healthy result from https://192.168.3.27
 
 
 
-![](images/markdown-img-paste-20181226114903216.png)
+![](../images/markdown-img-paste-20181226114903216.png)
