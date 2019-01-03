@@ -4,8 +4,8 @@
 
 # nfs-storageclass的配置过程
 
-## 配置nfs
-### 查看hosts配置
+## 一、配置nfs
+### 1.查看hosts配置
 ```
 [root@k8s-master ~]# cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
@@ -16,7 +16,7 @@
 ```
 从上面可以看到我的master节点的名字叫做 `k8s-master` ，在这儿我也准备将nfs的server部署到这个节点上。
 
-### 配置一块盘用作nfs
+### 2.配置一块盘用作nfs
 我用的是lvm进行管理的，在这个地方挂载了一个目录为`/nfsdisk`,大小为50G的目录作为nfs磁盘
 ```
 [root@k8s-master ~]# df -h
@@ -31,22 +31,22 @@ tmpfs                                         1.6G   16K  1.6G   1% /run/user/42
 /dev/mapper/dockerlocal_vg-nfsdisk             50G   53M   47G   1% /nfsdisk
 ```
 
-### 服务端配置
+### 3.服务端配置
 
 
-#### 进行nfs的相关配置
+#### 3.1 进行nfs的相关配置
 ```
 # vim /etc/exports
 # cat /etc/exports
 /nfsdisk 192.168.3.0/24(rw,no_root_squash,no_all_squash,sync)
 ```
 
-#### 安装相关包
+#### 3.2 安装相关包
 ```
 yum install -y nfs-utils
 ```
 
-#### 开始相关服务自启动
+#### 3.3 开始相关服务自启动
 ```
 systemctl enable rpcbind.service
 systemctl enable nfs-server.service
@@ -54,7 +54,7 @@ systemctl start rpcbind.service
 systemctl start nfs-server.service
 ```
 
-#### 检查
+#### 3.4 检查
 ```
 [root@k8s-master ~]# rpcinfo -p
    program vers proto   port  service
@@ -90,28 +90,29 @@ systemctl start nfs-server.service
 
 
 
-### 客户端配置(每个节点都要配置)
+### 4. 客户端配置(每个节点都要配置)
 在相应的3个节点进行配置
 
-#### 安装相关包并开启服务
+#### 4.1 安装相关包并开启服务
 ```
 yum install -y nfs-utils
 systemctl enable rpcbind.service
 systemctl start rpcbind.service
 ```
 
-#### 查看挂载的情况
+#### 4.2 查看挂载的情况
 ```
 [root@k8s-node2 ]# showmount -e k8s-master
 Export list for k8s-master:
 /nfsdisk 192.168.3.0/24
 ```
 
-## 配置StorageClass
+## 二、配置StorageClass
 参考:https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
 配置StorageClass需要配置三个地方:
-rbac：创建一个sa,专门用于nfs的,所以权限那一块要给够
-deployment：部署有关nfs的storageclass的一个pod，要注意上一步的ServiceAccount和
+- rbac：创建一个sa,专门用于nfs的,所以权限那一块要给够
+- deployment：部署有关nfs的storageclass的一个pod，要注意上一步的ServiceAccount和PVC的写法
+- storageclass： 声明sc的相关信息
 
 ### rbac
 rbac.yaml
