@@ -48,7 +48,7 @@ WORKDIR /home/jenkins
 推送到私有镜像仓库中:
 `docker build -t 192.168.3.27:8888/ops/os2 .`
 
-### 基于这个基础镜像`os2`制作jenkins的slave镜像
+## 基于这个基础镜像`os2`制作jenkins的slave镜像
 
 ```
 FROM 192.168.3.27:8888/ops/os2
