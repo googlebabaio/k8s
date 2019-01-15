@@ -3,6 +3,9 @@
 * * * * *
 
 # nfs-storageclass的配置过程
+配置过程分为两步：
+1. 配置nfs
+2. 配置storageclass
 
 ## 一、配置nfs
 ### 1.查看hosts配置
@@ -114,7 +117,7 @@ Export list for k8s-master:
 - deployment：部署有关nfs的storageclass的一个pod，要注意上一步的ServiceAccount和PVC的写法
 - storageclass： 声明sc的相关信息
 
-### rbac
+### 1.rbac的配置
 rbac.yaml
 ```
 kind: ServiceAccount
@@ -198,7 +201,7 @@ subjects:
   namespace: default
 ```
 
-### storageclass
+### 2.storageclass的配置
 sc.yaml
 ```
 apiVersion: storage.k8s.io/v1
@@ -210,7 +213,7 @@ parameters:
   archiveOnDelete: "false"
 ```
 
-### deployment
+### 3.deployment的配置
 ```
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -249,8 +252,8 @@ spec:
             path: /nfsdisk
 ```
 
-### 创建及测试
-#### 创建
+### 4.创建及测试
+#### 4.1创建
 ```
 [root@k8s-master softdb]# ls sc_config/
 deployment.yaml  rbac.yaml  sc.yaml
@@ -331,7 +334,7 @@ onse from daemon: Get https://192.168.3.6:8888/v2/: http: server gave HTTP respo
   Normal   Started         38m                 kubelet, k8s-node1  Started container
 
 ```
-#### 测试
+#### 4.2测试
 创建一个PVC，查看是否能动态的创建PV
 test-pvc.yaml
 ```
@@ -363,4 +366,4 @@ NAME                                                        CAPACITY   ACCESS MO
 persistentvolume/pvc-b51ca970-09b0-11e9-ada0-525400f9dfac   1Mi        RWX            Delete           Bound     default/test-claim   managed-nfs-storage             31s
 ```
 
-可以看到在创建了名为`test-claim`的PVC后，动态的创建出了名为`pvc-b51ca970-09b0-11e9-ada0-525400f9dfac `的PV,它使用的storageclass正是之前创建的scstorageclass`managed-nfs-storage`
+可以看到在创建了名为`test-claim`的PVC后，动态的创建出了名为`pvc-b51ca970-09b0-11e9-ada0-525400f9dfac `的PV,它使用的storageclass正是之前创建的storageclass`managed-nfs-storage`

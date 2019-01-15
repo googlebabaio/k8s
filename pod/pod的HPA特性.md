@@ -219,7 +219,7 @@ esource metrics API: the server could not find the requested resource (get pods.
  could not find the requested resource (get pods.metrics.k8s.io)
 ```
 参考：https://github.com/kubernetes/kubernetes/issues/57673
-这个是因为apiserver没有加上`--horizontal-pod-autoscaler-use-rest-clients=false`导致的，给kube-apiserver.service加上这一个选项后，冲洗aoiserver
+这个是因为controller没有加上`--horizontal-pod-autoscaler-use-rest-clients=false`导致的，给kube-controller-manager.service加上这一个选项后，重启启动apiserver
 
 再次查询hpa，显示正常了：
 ```
