@@ -3,6 +3,7 @@
 
 对于已经解决网络问题的用户：
 
+
 ## 访问Dashboard
 ```
 # kubectl cluster-info
