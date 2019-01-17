@@ -1,5 +1,7 @@
 <!-- toc -->
-*****
+
+# helm的安装
+
 ## 一、helm介绍
 ![](../images/screenshot_1539936296530.png)
 ### 1.什么是 Helm Charts
@@ -61,7 +63,7 @@ Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a
 Error: could not find a ready tiller pod
 ```
 提示：
-> 所谓client端其实就是那个helm二进制包
+> 所谓client端其实就是那个helm二进制包，用来执行一些列的 `helm xxx` 命令的
 > 所谓server端其实就是那个pod（helm tiller）
 > 另外，需要在每个node节点需要安装socat
         ```
@@ -70,3 +72,41 @@ Error: could not find a ready tiller pod
         unable to do port forwarding: socat not found.
         Error: cannot connect to Tiller
         ```
+## 使用helm部署一个应用
+### 创建服务账号
+```
+[root@master ~]# kubectl create serviceaccount --namespace kube-system tiller
+serviceaccount "tiller" created
+```
+
+### 创建集群的角色绑定
+```
+[root@master ~]# kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+clusterrolebinding.rbac.authorization.k8s.io "tiller-cluster-rule" created
+```
+
+### 为应用程序设置serviceAccount
+```
+[root@master ~]# kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+deployment.extensions "tiller-deploy" patched
+```
+
+### 搜索Helm应用
+```
+[root@master ~]# helm search jenkins
+NAME          	CHART VERSION	APP VERSION	DESCRIPTION
+stable/jenkins	0.13.5       	2.73       	Open source continuous integration server. It s...
+
+[root@master ~]# helm repo list
+NAME  	URL
+stable	https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+local 	http://127.0.0.1:8879/charts
+```
+
+### 安装应用
+```
+[root@master ~]# helm install stable/jenkins
+```
+
+## 四、参考
+官方文档 https://docs.helm.sh/using_helm

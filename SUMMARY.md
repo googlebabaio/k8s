@@ -41,7 +41,7 @@
     * [使用rc与rs](controller/rc与rs.md)
     * [使用deployment](controller/使用deployment.md)
     * [使用job](controller/使用job.md)
-    * [使用crontab](controller/使用crontab.md)
+    * [使用crontab](controller/使用cronjob.md)
 * [服务介绍](service/服务发现.md)
     * [集群内部服务发现](service/集群内部服务发现.md)
     * [service的使用](service/service的使用.md)

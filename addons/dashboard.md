@@ -3,8 +3,25 @@
 
 对于已经解决网络问题的用户：
 
-访问 Dashboard
+## 访问Dashboard
+```
+# kubectl cluster-info
+Kubernetes master is running at https://192.168.3.27:6443
+CoreDNS is running at https://192.168.3.27:6443/api/v1/namespaces/kube-system/services/coredns:dns/proxy
+kubernetes-dashboard is running at https://192.168.3.27:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+monitoring-grafana is running at https://192.168.3.27:6443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy
 
-使用dashboard
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+```
+看这一行:
+kubernetes-dashboard is running at https://192.168.3.27:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 
-总结
+
+用户名:admin  密码：admin 选择Token令牌模式登录。
+
+
+
+## 获取Token
+```
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
