@@ -12,11 +12,7 @@
         "search-plus",
         "tbfed-pagefooter"
     ],
-	"prism": {
-            "css": [
-				"prismjs/themes/prism-solarizedlight.css"
-            ]
-    },
+	
     "pdf": {
         "toc": true,
         "pageNumbers": true,
@@ -33,6 +29,11 @@
             "modify_label": "UpdateTime: ",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
+		"prism": {
+            "css": [
+				"prismjs/themes/prism-solarizedlight.css"
+            ]
+		}
     },
     "generator": "site"
 }
