@@ -72,6 +72,7 @@
     * [监控概述](monitor/监控概述.md)
     * [efk与filebeat+elk](monitor/efk与filebeat+elk.md)
     * [prometheus](monitor/prometheus.md)
+* [service mesh]()
 * [在k8s集群上玩转CI/CD](devops/在k8s集群上玩转CICD.md)
   * [1.部署jenkins-master](devops/1.部署jenkins-master.md)
   * [2.配置jenkins-master](devops/2.配置jenkins-master.md)
