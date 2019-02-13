@@ -26,3 +26,23 @@ kubernetes-dashboard is running at https://192.168.3.27:6443/api/v1/namespaces/k
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
+
+登录后进入,可以看到:
+概况:
+![](../images/markdown-img-paste-20190213155944487.png)
+
+
+集群:
+![](../images/markdown-img-paste-20190213160006663.png)
+
+workload:
+![](../images/markdown-img-paste-20190213160102476.png)
+
+服务发现与负载均衡:
+![](../images/markdown-img-paste-20190213160118497.png)
+
+配置与存储:
+![](../images/markdown-img-paste-20190213160148554.png)
+
+
+>PS:如果要换成英文显示,只需要设置浏览器的默认语言为英文即可
