@@ -83,6 +83,7 @@
   * [7.优化改进](devops/7.优化改进.md)
 * [helm](helm/helm.md)
     * [helm安装及简单使用](helm/helm安装.md)
+    * [helm安装FAQ](helm/helm-FAQ.md)
 * [rancher的使用](3rdui/rancher的使用.md)
 * [k8s-使用技巧](tips/k8s-tips.md)
   * [k8s上下文介绍](tips/k8s上下文介绍.md)
