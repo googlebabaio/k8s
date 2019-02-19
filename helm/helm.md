@@ -5,3 +5,6 @@
 - [Helm简介](https://blog.csdn.net/chenleiking/article/details/79539012)
 - [K8S集群中使用Helm管理应用分发](http://blog.51cto.com/ylw6006/2136075)
 - [helm-安装与使用](https://blog.csdn.net/kozazyh/article/details/79537996)
+- http://blog.51cto.com/13995002/2287546
+- [Kubernetes上如何使用Helm](http://blog.51cto.com/ygqygq2/2170054)
+- [使用Helm部署Prometheus和Grafana监控Kubernetes](http://blog.51cto.com/ygqygq2/2174311)

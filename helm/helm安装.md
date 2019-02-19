@@ -72,6 +72,7 @@ Error: could not find a ready tiller pod
         unable to do port forwarding: socat not found.
         Error: cannot connect to Tiller
         ```
+
 ## 使用helm部署一个应用
 ### 创建服务账号
 ```
