@@ -46,3 +46,25 @@ workload:
 
 
 >PS:如果要换成英文显示,只需要设置浏览器的默认语言为英文即可
+
+
+## 解决网络问题遇到的访问错误
+通过浏览器进行dashboard的访问，跳转的时候报错：
+
+```
+Error: 'dial tcp 10.2.16.52:8443: getsockopt: connection timed out'
+```
+
+检查集群的相关信息：`depoloyment`,`service`,`pod`,`endpoint`都是正常的,如下：
+```
+[root@master ~]# kubectl get deploy,pod,svc,ep -n kube-system  -o wide | grep dash
+deployment.extensions/kubernetes-dashboard   1         1         1            1           46d       kubernetes-dashboard   mirrorgooglecontainers/kubernetes-dashboard-amd64
+:v1.8.3             k8s-app=kubernetes-dashboard
+pod/kubernetes-dashboard-66c9d98865-wwst6   1/1       Running   0          46d       10.2.16.52     192.168.3.3
+
+service/kubernetes-dashboard   NodePort    10.1.232.248   <none>        443:34939/TCP   46d       k8s-app=kubernetes-dashboard
+
+endpoints/kubernetes-dashboard      10.2.16.52:8443                                         46d
+```
+
+接着检查关键的几个进程，最后发现是因为master节点的flannel没有启动起来，当启动起来后就可以正常进行访问了。同时，`kubectl top node` 这个命令也可以正常的执行了。
