@@ -49,6 +49,7 @@
 * [存储介绍](storage/存储介绍.md)
     * [volumn](storage/volumn.md)
     * [pv、pvc、sc](storage/pv、pvc、sc使用.md)
+    * [再说说 pv、pvc和storageclass](storage/pvpvcsc进一步说明.md)
     * [基于nfs的storageclass的配置](storage/nfs-storageclass使用.md)
     * [基于ceph的storageclass的配置](storage/ceph-storageclass使用.md)
     * [configmap使用](storage/configmap使用.md)
