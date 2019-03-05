@@ -68,3 +68,11 @@ endpoints/kubernetes-dashboard      10.2.16.52:8443                             
 ```
 
 接着检查关键的几个进程，最后发现是因为master节点的flannel没有启动起来，当启动起来后就可以正常进行访问了。同时，`kubectl top node` 这个命令也可以正常的执行了。
+
+
+## 总结dashboard不能访问的排查步骤
+
+- 1.需要检查apiserver的地址设置的是否正确（重启apiserver和kubenets）,然后就是flannel是否配置启动
+- 2.配置Kubernetes网络，在master和nodes上都需要安装flannel 检查master和node上配置文件是否一致
+- 3.检查iptables -L -n ，检查node节点上的FORWARD 查看转发是否是drop，如果是drop，则开启
+- 4.如果是更高版本的网络，会用ipvs来代替iptables，那么就应该去查看ipvsadm的信息

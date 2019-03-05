@@ -282,7 +282,7 @@ cni配置格式为
 - 无法和 802.11(wireless) 网络一起工作
 - 主机接口（也就是master interface）不能同时作为ipvlan和macvlan的master接口
 
-## [Flannel](../flannel/index.md)
+## [Flannel](../network/flannel.md)
 
 [Flannel](https://github.com/coreos/flannel)通过给每台宿主机分配一个子网的方式为容器提供虚拟网络，它基于Linux TUN/TAP，使用UDP封装IP包来创建overlay网络，并借助etcd维护网络的分配情况。
 
