@@ -54,7 +54,7 @@
     * [基于nfs的storageclass的配置](storage/nfs-storageclass使用.md)
     * [基于ceph的storageclass的配置](storage/ceph-storageclass使用.md)
     * [configmap使用](storage/configmap使用.md)
-    * [secret使用](storage/secret使用.md)
+    * [secret使用](storage/secret的使用.md)
 * [常用控制器与资源对象-sts](常用控制器介绍-sts.md)
 * [容器的调度](容器的调度.md)
     * [节点亲和性](节点亲和性.md)
@@ -108,6 +108,7 @@
   * [k8s-1.11版本更新日志](release/1.11.md)
   * [k8s-1.12版本更新日志](release/1.12.md)
   * [k8s-1.13版本更新日志](release/1.13.md)
+<!--
 * [论文](lunwen/lunwen.md)
   - [1.docker](lunwen/docker.md)
   - [2.k8s介绍](lunwen/k8s-intro.md)
@@ -115,3 +116,4 @@
   - [4.研究基于kubernetes的基础组件构建方式及使用](lunwen/研究基于kubernetes的基础组件构建方式及使用.md)
   - [5.基准测试](lunwen/基准测试.md)
   - [6.配额限制](lunwen/配额限制.md)
+-->
