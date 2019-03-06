@@ -100,6 +100,7 @@
   * [k8s上下文介绍](tips/k8s上下文介绍.md)
   * [kubectl使用技巧](tips/kubectl-tips.md)
   * [k8s查漏补缺](tips/k8s查漏补缺.md)
+  * [参考资料汇总](tips/参考资料汇总.md)
 * [k8s版本更新说明](release/changelog.md)
   * [k8s-1.7版本更新日志](release/1.7.md)
   * [k8s-1.8版本更新日志](release/1.8.md)
