@@ -34,7 +34,7 @@
     * [静态pod](pod/静态pod.md)
     * [init pod](pod/initpod.md)
     * [pod的启动顺序](pod/pod的启动顺序.md)
-    * [容器的资源使用限制](pod/容器的资源使用限制.md)
+    * [容器的资源请求与限制](pod/容器的资源使用限制.md)
     * [pod的健康检查](pod/pod的健康检查.md)
     * [pod的HPA特性](pod/pod的HPA特性.md)
     * [容器安全](pod/容器安全.md)
