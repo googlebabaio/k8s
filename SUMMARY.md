@@ -52,7 +52,7 @@
     * [pv、pvc、sc](storage/pv、pvc、sc使用.md)
     * [再说说 pv、pvc和storageclass](storage/pvpvcsc进一步说明.md)
     * [基于nfs的storageclass的配置](storage/nfs-storageclass使用.md)
-    * [基于ceph的storageclass的配置](storage/ceph-storageclass使用.md)
+    * [在k8s中使用ceph rbd](storage/在k8s中使用rbd.md)
     * [configmap使用](storage/configmap使用.md)
     * [secret使用](storage/secret的使用.md)
 * [常用控制器与资源对象-sts](常用控制器介绍-sts.md)
