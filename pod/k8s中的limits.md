@@ -1,4 +1,4 @@
-# k8s中的limits
+# k8s中的 LimitRange
 
 LimitRange(简称limits)基于namespace的资源管理，包括pod和container的最小、最大和default、defaultrequests等。
 
