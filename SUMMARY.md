@@ -46,7 +46,7 @@
     * [使用job](controller/使用job.md)
     * [使用crontab](controller/使用cronjob.md)
 * [服务介绍](service/服务暴露发现.md)
-    * [集群内部服务发现](service/集群内部服务发现.md)
+    * [集群内部服务发现](service/内部服务发现.md)
     * [service的使用](service/service的使用.md)
     * [集群外部服务发现](service/集群外部服务发现.md)
 * [存储介绍](storage/存储介绍.md)
