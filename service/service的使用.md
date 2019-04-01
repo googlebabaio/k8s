@@ -3,9 +3,12 @@
 
 ## service概述
 ![](assets/markdown-img-paste-20190305165809876.png)
-虽然每个Pod都会被分配一个单独的IP地址，但这个IP地址会随着Pod的销毁而消失。引出的一个问题是：如果有一组Pod组成一个应用集群来提供服务，那么该如何访问它们呢？
 
-Service就是用来解决这个问题的，一个Service可以看作一组提供相同服务的Pod的对外接口，Service是通过`LabelSelector`选择一组Pod作用后端服务提供者。
+在k8s集群中，每个Pod都会被分配一个单独的IP地址，但这个IP地址会随着Pod的销毁而消失。这就引出的一个问题是：如果有一组Pod组成一个应用集群来提供服务，那么该如何访问它们呢？
+
+Service就是用来解决这个问题的。它定义了一组Pod的逻辑集合和一个用于访问它们的策略，其实这个概念和微服务非常类似。，一个Service可以看作一组提供相同服务的Pod的对外接口，一个Serivce下面包含的Pod集合一般是由Label Selector来决定的。
+
+
 
 举个例子：redis运行了2个副本，这两个Pod对于前端程序来说没有区别，所以前端程序并不关心是哪个后端副本在提供服务。并且后端Pod在发生变化时，前端也无须跟踪这些变化。Service就是用来实现这种解耦的抽象概念。
 
@@ -14,11 +17,17 @@ Service就是用来解决这个问题的，一个Service可以看作一组提供
 
 但是也可以选择基于客户端IP的sessionaffinity，可以通过设置service.spec.sessionAffinity=ClientIP(默认值为“None”)来选择该方式。与用户空间的代理一样，客户端不知道Kubernetes或Service或Pod，任何对于Service的IP:Port的访问都会被代理到后端。但是iptables的代理比用户空间代理是更快、 更可靠。
 
-## pod的IP 与 service的IP
-- Pod的IP地址是由Docker Daemon根据docker0网桥的IP地址段进行分配的
-- 但Service的Cluster IP地址是Kubernetes系统中的虚拟IP地址，由系统动态分配。
+## k8s集群中的三种IP
 
-Service的Cluster IP相对于Pod的IP地址来说相对稳定，Service被创建时即被分配一个IP地址，在销毁该Service之前，这个IP地址都不会再变化了。而Pod在Kubernetes集群中生命周期较短，可能被Replication Controller销毁、再次创建，新创建的Pod就会被分配一个新的IP地址。
+k8s集群中有3种IP：
+- Node IP：Node节点的IP地址
+- Pod IP: Pod的IP地址
+  - Pod的IP地址是由Docker Daemon根据docker0网桥的IP地址段进行分配的
+- Cluster IP: Service的IP地址
+  - IP地址是Kubernetes系统中的虚拟IP地址，由系统动态分配。
+
+
+Service的IP地址相对于Pod的IP地址来说是稳定的，Service被创建时即被分配一个IP地址，在销毁该Service之前，这个IP地址都不会再变化了。而Pod在Kubernetes集群中生命周期较短，可能被Replication Controller销毁、再次创建，新创建的Pod就会被分配一个新的IP地址。
 Pods是短暂的，那么重启时IP地址可能会改变，怎么才能从前端容器正确可靠地指向后台容器呢？
 
 Service是定义一系列Pod以及访问这些Pod的策略的一层抽象。Service通过Label找到Pod组。因为Service是抽象的，所以在图表里通常看不到它们的存在，这也就让这一概念更难以理解。
@@ -52,10 +61,10 @@ REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
 ```
 通过环境变量来创建Service会带来一个不好的结果，即任何被某个Pod所访问的Service，必须先于该Pod创建，否则和这个后创建的Service相关的环境变量，将不会被加入该Pod的容器中。
 
-### DNS
+### DNS(CoreDNS/kubedns)
 DNS服务器通过Kubernetes API Server监控与Service相关的活动。当监控到添加Service的时，DNS服务器为每个Service创建一系列DNS记录。
 
-例如：有个叫做”my-service“的service，它对应的kubernetes namespace为”my-ns“，那么会有它对应的dns记录，叫做”my-service.my-ns“。那么在my-ns的namespace中的pod都可以对my-service做name解析来轻松找到这个service。在其它namespace中的pod解析”my-service.my-ns“来找到它。解析出来的结果是这个service对应的cluster ip。
+例如：有个叫做”my-service“的service，它对应的kubernetes namespace为“my-ns”，那么会有它对应的dns记录，叫做“my-service.my-ns”。那么在my-ns的namespace中的pod都可以对my-service做name解析来轻松找到这个service。在其它namespace中的pod解析“my-service.my-ns”来找到它。解析出来的结果是这个service对应的cluster ip。
 
 Service的ClusterIP地址只能在集群内部访问，如果集群外部的用户希望Service能够提供一个供集群外用户访问的IP地址。Kubernetes通过两种方式来实现上述需求，一个是“NodePort”，另一个是“LoadBalancer”。
 
@@ -75,8 +84,6 @@ Service的ClusterIP地址只能在集群内部访问，如果集群外部的用�
 比如外部用户要访问k8s集群中的一个Web应用，那么我们可以配置对应service的type=NodePort，nodePort=30001。其它用户就可以通过浏览器http://node:30001访问到该web服务。
 
 而数据库等服务可能不需要被外界访问，只需被内部服务访问即可，那么我们就不必设置service的NodePort。
-
-
 
 ### port
 k8s集群内部服务之间访问service的入口。即clusterIP:port是service暴露在clusterIP上的端口。
@@ -114,3 +121,45 @@ spec:
  selector:
   name: nginx-pod
 ```
+
+另外,targetport其实也可以是一个字符串
+如:在deployment中定义container的port的时候，加上了一个name叫做`ports`
+```
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  namespace: test
+  labels:
+    app: nginx-demo
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: nginxweb
+```
+所以就可以在service的targetPort中直接用上这个名字的字符串，而非端口号了。
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-deploy-service
+spec:
+  type: NodePort
+  ports:
+  - name: mynginx-http
+    protocol: TCP
+    port: 80
+    targetPort: nginxweb
+```
+
+
+另外Service 支持 TCP 和 UDP 协议，默认是 TCP 协议。
