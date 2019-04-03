@@ -32,6 +32,7 @@
 * [深入理解k8s的核--pod](pod/深入理解k8s的核--pod.md)
     * [pod概述](pod/pod概述.md)
     * [静态pod](pod/静态pod.md)
+    * [pod中的钩子](pod/pod-hook.md)
     * [init pod](pod/initpod.md)
     * [pod的启动顺序](pod/pod的启动顺序.md)
     * [k8s中的LimitRange](pod/k8s中的limits.md)
