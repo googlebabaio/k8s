@@ -47,7 +47,7 @@ spec:
 - max：表示pod中所有容器资源的Limit值和的上限，也就是整个pod资源的最大Limit，如果pod定义中的Limit值大于LimitRange中的值，则pod无法成功创建。
 - min：表示pod中所有容器资源请求总和的下限，也就是所有容器request的资源总和不能小于min中的值，否则pod无法成功创建。
 - maxLimitRequestRatio：表示pod中所有容器资源请求的Limit值和request值比值的上限，例如该pod中cpu的Limit值为3，而request为0.5，此时比值为6，创建pod将会失败。
--
+
 ### container可以有的参数
 - 在container的部分，max、min和maxLimitRequestRatio的含义和pod中的类似，只不过是针对单个的容器而言。下面说明几个情况：
 ```
@@ -83,7 +83,7 @@ spec:
 ```
 
 ## 使用建议
-- 1、只使用limits的pod或者container中的一种，尽量不使用同时使用，特别在pod中有多容器需求的情况下。
-- 2、尽量使用max，尽量不同时使用max和min
-- 3、由于limits会针对该namespace下的所有新建的pods，所以在该namespace下应该运行哪些资源需求相同的业务
-- 4、在复杂的limits配置下，不要在创建资源时使用自定义配置。
+- 只使用limits的pod或者container中的一种，尽量不使用同时使用，特别在pod中有多容器需求的情况下。
+- 尽量使用max，尽量不同时使用max和min
+- 由于limits会针对该namespace下的所有新建的pods，所以在该namespace下应该运行哪些资源需求相同的业务
+- 在复杂的limits配置下，不要在创建资源时使用自定义配置。
