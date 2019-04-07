@@ -6,7 +6,17 @@ RBAC使用“rbac.authorization.k8s.io”API组来驱动授权决策，允许管
 
 从1.8开始，RBAC模式处于稳定版本，并由`rbac.authorization.k8s.io/v1` API提供支持。
 
-要启用RBAC，请使用`--authorization-mode=RBAC`启动apiserver。
+要启用RBAC，需要在 apiserver 中添加参数--authorization-mode=RBAC，如果使用的kubeadm安装的集群，1.6 版本以上的都默认开启了RBAC，可以通过查看 Master 节点上 apiserver 的静态Pod定义文件：
+```
+# cat /etc/kubernetes/manifests/kube-apiserver.yaml
+...
+    - --authorization-mode=Node,RBAC
+...
+```
+
+如果是二进制的方式搭建的集群，添加这个参数过后，需要重启 apiserver 服务。
+
+
 
 ## Role and ClusterRole
 - Role：在namespace内
