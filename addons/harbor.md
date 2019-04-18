@@ -16,7 +16,7 @@
 ### 1. 下载安装docker-compose
 ```
 pip install docker-compose
-wget https://github.com/docker/compose/releases/download/1.23.0-rc2/docker-compose-Linux-x86_64
+wget https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64
 chmod a+x docker-compose-Linux-x86_64
 mv docker-compose-Linux-x86_64 /etc/kubernetes/bin/docker-compose
 ```
