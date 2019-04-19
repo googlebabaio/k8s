@@ -13,8 +13,8 @@ mkdir src pkg bin
 
 下载解压
 ```
-wget https://dl.google.com/go/go1.12.3.linux-amd64.tar.gz
-tar -C /usr/local -zxvf go1.12.3.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz
+tar -C /usr/local -zxvf go1.12.4.linux-amd64.tar.gz
 ```
 
 编辑环境变量
@@ -49,4 +49,9 @@ go_project     // go_project为GOPATH目录
         -- controllers
         -- others
         -- main.go
+```
+
+## git kubeedge的代码
+```
+git clone https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
 ```
