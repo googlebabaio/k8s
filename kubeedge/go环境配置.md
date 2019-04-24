@@ -1,3 +1,5 @@
+<!-- toc -->
+
 # golang环境配置
 goroot
 ```
@@ -51,7 +53,7 @@ go_project     // go_project为GOPATH目录
         -- main.go
 ```
 
-## git kubeedge的代码
+## git clone kubeedge的代码
 ```
 git clone https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
 ```
