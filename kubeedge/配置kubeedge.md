@@ -1,6 +1,91 @@
+<!-- toc -->
 # 配置kubeedge
+![](assets/markdown-img-paste-20190424233749805.png)
 
-## 部署 cloud 端到 k8s 集群
+kubeedge分为云端(cloud)和边缘端(edge)
+
+## 获取代码
+
+```
+git clone https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+```
+
+## 代码层级
+```
+[root@k8s-master kubeedge]# tree -L 1
+.
+├── build
+├── cloud
+├── common
+├── CONTRIBUTING.md
+├── docs
+├── edge
+├── external-dependency.md
+├── Gopkg.lock
+├── Gopkg.toml
+├── LICENSE
+├── MAINTAINERS
+├── Makefile
+├── README.md
+├── README_zh.md
+├── tests
+└── vendor
+```
+
+主要看3个：`cloud`、`edge`、`build`
+
+
+
+## 编译二进制文件
+
+### 编译cloud和edge二进制文件
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+make
+```
+
+### 编译cloud二进制文件
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+make all WHAT=cloud
+```
+等同于:
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge/cloud/edgecontroller
+make
+```
+
+### 编译edge二进制文件
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+make all WHAT=edge
+```
+等同于:
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge/edge
+make
+```
+
+
+
+
+## 部署云端(cloud)
+云端是k8s的扩展，使用了CRD对k8s进行扩展，本文将以二进制的方式进行云端的部署
+
+因为cloud是k8s的扩展,所以需要与k8s的master进行通信，我们一般都做了双向tls，所以为了简便，可以先暴露非安全的IP和端口用来测试
+```
+vi /etc/kubernetes/manifests/kube-apiserver.yaml
+# Add the following flags in spec: containers: -command section
+- --insecure-port=8080
+- --insecure-bind-address=0.0.0.0
+```
+
+当然，生产中，我们不建议这么用，我们还是老老实实的在control.yaml中配置kubeconfig的路径即可.
+
+`github.com/kubeedge/kubeedge/build/cloud`
+
+## 部署边缘端(edge)
 
 此方式将部署 cloud 端到 k8s 集群，所以需要登录到 k8s 的 master 节点上（或者其他可以用 `kubectl` 操作集群的机器）。
 
