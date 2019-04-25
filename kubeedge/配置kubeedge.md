@@ -83,7 +83,52 @@ vi /etc/kubernetes/manifests/kube-apiserver.yaml
 
 当然，生产中，我们不建议这么用，我们还是老老实实的在control.yaml中配置kubeconfig的路径即可.
 
-`github.com/kubeedge/kubeedge/build/cloud`
+进入
+```
+[root@k8s-master cloud]# tree -L 3
+.
+├── edgecontroller
+│   ├── cmd
+│   │   └── edgecontroller.go
+│   ├── conf
+│   │   ├── controller.yaml
+│   │   ├── edgecontroller.tar
+│   │   ├── logging.yaml
+│   │   └── modules.yaml
+│   ├── edgecontroller
+│   ├── edgecontroller.bak
+│   ├── edgecontroller.log
+│   ├── Makefile
+│   └── pkg
+│       ├── cloudhub
+│       └── controller
+└── README.md
+```
+
+进入到`$GOPATH/src/github.com/kubeedge/kubeedge/cloud/edgecontroller/conf`
+修改`controller.yaml`的相关内容
+```
+[root@k8s-master conf]# cat controller.yaml
+controller:
+  kube:
+    master: https://192.168.3.6:443 #配置了这个就不需要再使用非安全端口和非安全ip了
+    namespace: ""
+    content_type: "application/vnd.kubernetes.protobuf"
+    qps: 5
+    burst: 10
+    node_update_frequency: 10
+    kubeconfig: "/root/.kube/config"   #这个地方就写kubeconfig的地址
+cloudhub:
+  address: 0.0.0.0
+  port: 10000
+  ca: /sure/cert/rootCA.crt  # 可以通过脚本生成,只需要注意路径即可
+  cert: /sure/cert/edge.crt  # 可以通过脚本生成,只需要注意路径即可
+  key: /sure/cert/edge.key   # 可以通过脚本生成,只需要注意路径即可
+  keepalive-interval: 20
+  write-timeout: 20
+  node-limit: 10
+```
+
 
 ## 部署边缘端(edge)
 
