@@ -1,4 +1,4 @@
-
+<!-- toc -->
 # kubeadm安装k8s集群
 
 每个节点都要安装kubelet kubeadm
