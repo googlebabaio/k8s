@@ -1,4 +1,4 @@
-查看etcd的相关信息
+## 查看etcd的相关信息
 
 ```
 # etcdctl --endpoints=https://192.168.3.6:2379,https://192.168.3.25:2379,https://192.168.3.26:2379,https://192.168.3.22:2379 \
@@ -12,7 +12,7 @@ c942a25792249cfa: name=etcd-node3 peerURLs=https://192.168.3.22:2380 clientURLs=
 dd3bdd7be2775880: name=etcd-node2 peerURLs=https://192.168.3.26:2380 clientURLs=https://192.168.3.26:2379 isLeader=false
 ```
 
-etcd备份
+## etcd备份
 ```
 ETCDCTL_API=3 etcdctl --endpoints=https://192.168.3.6:2379,https://192.168.3.25:2379,https://192.168.3.26:2379,https://192.168.3.22:2379 \
   --cacert=/etc/kubernetes/ssl/ca.pem \
@@ -20,7 +20,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://192.168.3.6:2379,https://192.168.3.25:
   --key=/etc/kubernetes/ssl/etcd-key.pem snapshot save snapshotdb
 ```
 
-查看etcd的备份信息
+## 查看etcd的备份信息
 ```
 # ETCDCTL_API=3 etcdctl --endpoints=https://192.168.3.6:2379,https://192.168.3.25:2379,https://192.168.3.26:2379,https://192.168.3.22:2379 \
 >   --cacert=/etc/kubernetes/ssl/ca.pem \
