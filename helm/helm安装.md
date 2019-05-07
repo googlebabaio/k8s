@@ -47,12 +47,12 @@ Helm 由两部分组成：
 上面的命令实质就是在k8s上部署了一个deployment，这个deployment的名字 tiller，它其实就是helm的服务端。
 查看一下这个pod
 ```
-[root@master ~]# kubectl get pod -n kube-system |grep till
+# kubectl get pod -n kube-system |grep till
 tiller-deploy-cd5cf5bb6-xbjfl           1/1       Running   0          2m
 ```
 服务端和客户端安装好之后，看看版本:
 ```
-[root@master ~]# helm version
+# helm version
 Client: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
 Server: &version.Version{SemVer:"v2.11.0", GitCommit:"2e55dbe1fdb5fdb96b75ff144a339489417b146b", GitTreeState:"clean"}
 ```
@@ -76,29 +76,29 @@ Error: could not find a ready tiller pod
 ## 使用helm部署一个应用
 ### 创建服务账号
 ```
-[root@master ~]# kubectl create serviceaccount --namespace kube-system tiller
+# kubectl create serviceaccount --namespace kube-system tiller
 serviceaccount "tiller" created
 ```
 
 ### 创建集群的角色绑定
 ```
-[root@master ~]# kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+# kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 clusterrolebinding.rbac.authorization.k8s.io "tiller-cluster-rule" created
 ```
 
 ### 为应用程序设置serviceAccount
 ```
-[root@master ~]# kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+# kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 deployment.extensions "tiller-deploy" patched
 ```
 
 ### 搜索Helm应用
 ```
-[root@master ~]# helm search jenkins
+# helm search jenkins
 NAME          	CHART VERSION	APP VERSION	DESCRIPTION
 stable/jenkins	0.13.5       	2.73       	Open source continuous integration server. It s...
 
-[root@master ~]# helm repo list
+# helm repo list
 NAME  	URL
 stable	https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 local 	http://127.0.0.1:8879/charts
@@ -106,7 +106,16 @@ local 	http://127.0.0.1:8879/charts
 
 ### 安装应用
 ```
-[root@master ~]# helm install stable/jenkins
+# helm install stable/jenkins
+```
+
+### 使用fetch进行安装
+有时候需要修改一些参数,所以可以先把安装包fetch下来,修改后再进行安装
+```
+helm fetch stable/redis
+
+cd 对应的目录中
+helm install -n redis-sure -f values.yaml  .
 ```
 
 ## 四、参考
