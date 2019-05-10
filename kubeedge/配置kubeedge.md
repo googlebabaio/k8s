@@ -157,5 +157,5 @@ cd build/cloud
 for resource in $(ls *.yaml); do kubectl create -f $resource; done
 ```
 
-最后，基于`08-service.yaml.example`，创建一个适用于你集群环境的 service，
+最后，基于`08-service.yaml.example`，创建一个适用于集群环境的 service，
 将 cloud hub 暴露到集群外，让 edge core 能够连到。
