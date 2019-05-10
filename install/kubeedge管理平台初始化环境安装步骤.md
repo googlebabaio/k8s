@@ -136,6 +136,7 @@ kube-system   kube-scheduler-host-192-168-3-94            1/1     Running   0   
 
 
 ## 3.修改apiserver的配置
+
 ```
 cd /etc/kubernetes/manifests
 vim kube-apiserver.yaml
@@ -182,6 +183,38 @@ kube-proxy                2         2         2       2            2           k
 ```
 
 查看`NODE SELECTOR`这一列是否已经有了加上的nodeselector
+
+## 5.添加用户admin/admin可以访问k8s的权限的配置
+
+### 5.1添加basic-auth.csv到`/etc/kubernetes/pki/`下
+```
+[root@host-192-168-3-94 src]# cat /etc/kubernetes/pki/basic-auth.csv
+admin,admin,1
+```
+
+### 5.2 在kube-apiserver中加入如下配置
+```
+- --basic-auth-file=/etc/kubernetes/pki/basic-auth.csv
+```
+
+### 5.3 创建clusterrole与user的绑定
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+-
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
+### 5.4 java代码中要注意的地方:
+![](assets/markdown-img-paste-20190510171757736.png)
 
 # 四、部署其他组件
 
