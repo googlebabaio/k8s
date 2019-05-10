@@ -62,7 +62,7 @@ cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
-EOF 
+EOF
 sysctl -p /etc/sysctl.d/k8s.conf
 ```
 
@@ -115,9 +115,52 @@ docker info
 
 3.部署harbor
 
+
 4.准备镜像
+```
+docker tag k8s.gcr.io/google_containers/kube-proxy:v1.14.1                k8s.gcr.io/kube-proxy:v1.14.1
+docker tag k8s.gcr.io/google_containers/kube-apiserver:v1.14.1            k8s.gcr.io/kube-apiserver:v1.14.1
+docker tag k8s.gcr.io/google_containers/kube-controller-manager:v1.14.1   k8s.gcr.io/kube-controller-manager:v1.14.1
+docker tag k8s.gcr.io/google_containers/kube-scheduler:v1.14.1            k8s.gcr.io/kube-scheduler:v1.14.1
+docker tag quay.io/coreos/flannel:v0.11.0-amd64 quay.io/coreos/flannel:v0.11.0-amd64
+docker tag k8s.gcr.io/google_containers/coredns:1.3.1 k8s.gcr.io/coredns:1.3.1
+docker tag k8s.gcr.io/google_containers/etcd:3.3.10 k8s.gcr.io/etcd:3.3.10
+docker tag k8s.gcr.io/google_containers/pause:3.1 k8s.gcr.io/pause:3.1
+
+
+
+docker save  k8s.gcr.io/kube-proxy:v1.14.1  > kube-proxy.tar
+docker save  k8s.gcr.io/kube-apiserver:v1.14.1 > kube-apiserver.tar
+docker save  k8s.gcr.io/kube-controller-manager:v1.14.1 > kube-controller-manager.tar
+docker save  k8s.gcr.io/kube-scheduler:v1.14.1 >  kube-scheduler.tar
+docker save  quay.io/coreos/flannel:v0.11.0-amd64 > flannel.tar
+docker save  k8s.gcr.io/coredns:1.3.1 > coredns.tar
+docker save  k8s.gcr.io/etcd:3.3.10 > etcd.tar
+docker save  k8s.gcr.io/pause:3.1 > pause.tar
+
+
+
+docker rmi k8s.gcr.io/google_containers/kube-proxy:v1.14.1
+docker rmi k8s.gcr.io/google_containers/kube-apiserver:v1.14.1
+docker rmi k8s.gcr.io/google_containers/kube-controller-manager:v1.14.1
+docker rmi k8s.gcr.io/google_containers/kube-scheduler:v1.14.1
+docker rmi k8s.gcr.io/google_containers/coredns:1.3.1
+docker rmi k8s.gcr.io/google_containers/etcd:3.3.10
+docker rmi k8s.gcr.io/google_containers/pause:3.1
+```
 
 5.部署master
+
+
+
+![](assets/markdown-img-paste-20190508190150606.png)
+
+注意修改/etc/hosts 和 kubeedge.ini对应的apiserver的地址
+```
+cd /etc/kubernetes/manifests/
+vi kube-apiserver.yaml
+```
+添加:`--service-node-port-range=10000-32767`
 
 6.部署node
 
