@@ -108,6 +108,7 @@
   - [kubeedge介绍](kubeedge/kubeedge介绍.md)
   - [go环境配置](kubeedge/go环境配置.md)
   - [配置kubeedge](kubeedge/配置kubeedge.md)
+  - [kubeedge套装安装](install/kubeedge管理平台初始化环境安装步骤.md)
 * [k8s-使用技巧](tips/k8s-tips.md)
   * [k8s上下文介绍](tips/k8s上下文介绍.md)
   * [kubectl使用技巧](tips/kubectl-tips.md)
