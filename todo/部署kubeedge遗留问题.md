@@ -61,3 +61,8 @@ https://www.cnblogs.com/zihunqingxin/p/8638514.html
 11.研究下docker 2375,以及如何使用安全的方式访问
 参考:
 https://blog.csdn.net/ghostcloud2016/article/details/51539837
+
+这个已经算解决了, 配置docker 启动的时候 -H TCP://0.0.0.0:2375 其他client就可以访问了,所以就反而需要把2375给限制点
+
+12.HostAliases
+https://ieevee.com/tech/2018/04/29/k8s-hostaliases.html
