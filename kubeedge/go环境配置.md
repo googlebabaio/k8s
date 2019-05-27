@@ -57,3 +57,8 @@ go_project     // go_project为GOPATH目录
 ```
 git clone https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
 ```
+
+指定版本`v0.3.0-beta.0` 克隆
+```
+git clone  --branch v0.3.0-beta.0 https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
+```
