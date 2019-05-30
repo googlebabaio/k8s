@@ -1,3 +1,14 @@
+## 安装rancher server
+```
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest
+```
+
+PS:
+docker run xxx
+-p 外部访问端口:容器内部暴露的端口
+-P 是暴露所有的端口
+
+可以用暴露所有端口的方式来检查为啥自己设置的不对
 
 ## 导入已有的集群
 ![](../images/markdown-img-paste-20181226091256344.png)
@@ -10,6 +21,26 @@
 # kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user [USER_ACCOUNT]
 Error from server (AlreadyExists): clusterrolebindings.rbac.authorization.k8s.io "cluster-admin-binding" already exists
 ```
+
+```
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user admin
+```
+这一句其实就是做的下面这个操作
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+-
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+```
+
 
 ### 在每个node节点上执行
 ```
