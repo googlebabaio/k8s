@@ -1,0 +1,2640 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>pod的HPA特性 · K8s小百科</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="suredandan">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-solarizedlight.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="容器安全.html" />
+    
+    
+    <link rel="prev" href="容器的资源使用限制.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../docker/docker介绍.html">
+            
+                <a href="../docker/docker介绍.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    docker介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../docker/docker的安装.html">
+            
+                <a href="../docker/docker的安装.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    docker的安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../docker/docker的常用命令.html">
+            
+                <a href="../docker/docker的常用命令.html">
+            
+                    
+                        <b>1.2.2.</b>
+                    
+                    docker的常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../docker/dockerfile介绍.html">
+            
+                <a href="../docker/dockerfile介绍.html">
+            
+                    
+                        <b>1.2.3.</b>
+                    
+                    dockerfile介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../docker/dockerfile实战.html">
+            
+                <a href="../docker/dockerfile实战.html">
+            
+                    
+                        <b>1.2.4.</b>
+                    
+                    dockerfile实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../docker/dockerfile最佳实践.html">
+            
+                <a href="../docker/dockerfile最佳实践.html">
+            
+                    
+                        <b>1.2.5.</b>
+                    
+                    dockerfile最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../docker/私有镜像仓库介绍.html">
+            
+                <a href="../docker/私有镜像仓库介绍.html">
+            
+                    
+                        <b>1.2.6.</b>
+                    
+                    私有镜像仓库介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../docker/harbor中物理删除不要的镜像.html">
+            
+                <a href="../docker/harbor中物理删除不要的镜像.html">
+            
+                    
+                        <b>1.2.6.1.</b>
+                    
+                    harbor中物理删除不要的镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../docker/docker管理.html">
+            
+                <a href="../docker/docker管理.html">
+            
+                    
+                        <b>1.2.7.</b>
+                    
+                    docker管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../docker/使用docker的需要考虑的地方.html">
+            
+                <a href="../docker/使用docker的需要考虑的地方.html">
+            
+                    
+                        <b>1.2.8.</b>
+                    
+                    使用docker的需要考虑的地方
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../docker/docker网络.html">
+            
+                <a href="../docker/docker网络.html">
+            
+                    
+                        <b>1.2.9.</b>
+                    
+                    docker网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../arch/kubernetes介绍.html">
+            
+                <a href="../arch/kubernetes介绍.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    kubernetes介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../arch/kubernetes的设计理念.html">
+            
+                <a href="../arch/kubernetes的设计理念.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    kubernetes的设计理念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../arch/kubernetes的架构.html">
+            
+                <a href="../arch/kubernetes的架构.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    kubernetes的架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../arch/cni.html">
+            
+                <a href="../arch/cni.html">
+            
+                    
+                        <b>1.3.3.</b>
+                    
+                    cni
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../arch/etcd介绍.html">
+            
+                <a href="../arch/etcd介绍.html">
+            
+                    
+                        <b>1.3.4.</b>
+                    
+                    etcd介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../install/kubernetes的安装部署.html">
+            
+                <a href="../install/kubernetes的安装部署.html">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    kubernetes的安装部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../install/二进制部署.html">
+            
+                <a href="../install/二进制部署.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    二进制文件部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../install/二进制部署-1.初始化环境.html">
+            
+                <a href="../install/二进制部署-1.初始化环境.html">
+            
+                    
+                        <b>1.4.1.1.</b>
+                    
+                    1.初始化环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.2" data-path="../install/二进制部署-2.部署CA证书.html">
+            
+                <a href="../install/二进制部署-2.部署CA证书.html">
+            
+                    
+                        <b>1.4.1.2.</b>
+                    
+                    2.部署CA证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.3" data-path="../install/二进制部署-3.etcd集群搭建.html">
+            
+                <a href="../install/二进制部署-3.etcd集群搭建.html">
+            
+                    
+                        <b>1.4.1.3.</b>
+                    
+                    3.etcd集群搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.4" data-path="../install/二进制部署-4.master节点部署.html">
+            
+                <a href="../install/二进制部署-4.master节点部署.html">
+            
+                    
+                        <b>1.4.1.4.</b>
+                    
+                    4.master节点部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.5" data-path="../install/二进制部署-5.部署kubectl工具.html">
+            
+                <a href="../install/二进制部署-5.部署kubectl工具.html">
+            
+                    
+                        <b>1.4.1.5.</b>
+                    
+                    5.部署kubectl工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.6" data-path="../install/二进制部署-6.部署node节点.html">
+            
+                <a href="../install/二进制部署-6.部署node节点.html">
+            
+                    
+                        <b>1.4.1.6.</b>
+                    
+                    6.部署node节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.1.7" data-path="../install/二进制部署-7.配置flannel网络.html">
+            
+                <a href="../install/二进制部署-7.配置flannel网络.html">
+            
+                    
+                        <b>1.4.1.7.</b>
+                    
+                    7.配置flannel网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../install/命令行参考.html">
+            
+                <a href="../install/命令行参考.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    命令行参考
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../install/CA的基础概念.html">
+            
+                <a href="../install/CA的基础概念.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    CA的基础概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" >
+            
+                <span>
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    kubeadm方式部署
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../install/kubeadm安装k8s集群.html">
+            
+                <a href="../install/kubeadm安装k8s集群.html">
+            
+                    
+                        <b>1.4.4.1.</b>
+                    
+                    kubeadm安装k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../install/kubeadm-join的选项含义.html">
+            
+                <a href="../install/kubeadm-join的选项含义.html">
+            
+                    
+                        <b>1.4.4.2.</b>
+                    
+                    kubeadm-join的选项含义
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../addons/kubernetes-addons.html">
+            
+                <a href="../addons/kubernetes-addons.html">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    kubernetes-addons
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../addons/dashboard.html">
+            
+                <a href="../addons/dashboard.html">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    dashboard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../addons/harbor.html">
+            
+                <a href="../addons/harbor.html">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    harbor
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../kubernetes常用资源介绍.md">
+            
+                <span>
+            
+                    
+                        <b>1.6.</b>
+                    
+                    kubernetes常用资源介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="深入理解k8s的核--pod.md">
+            
+                <span>
+            
+                    
+                        <b>1.7.</b>
+                    
+                    深入理解k8s的核--pod
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="pod概述.html">
+            
+                <a href="pod概述.html">
+            
+                    
+                        <b>1.7.1.</b>
+                    
+                    pod概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="静态pod.html">
+            
+                <a href="静态pod.html">
+            
+                    
+                        <b>1.7.2.</b>
+                    
+                    静态pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pod-hook.html">
+            
+                <a href="pod-hook.html">
+            
+                    
+                        <b>1.7.3.</b>
+                    
+                    pod中的钩子
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="init-pod.html">
+            
+                <a href="init-pod.html">
+            
+                    
+                        <b>1.7.4.</b>
+                    
+                    init container
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="pod的健康检查.html">
+            
+                <a href="pod的健康检查.html">
+            
+                    
+                        <b>1.7.5.</b>
+                    
+                    pod的健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="pod中容器的启动顺序.html">
+            
+                <a href="pod中容器的启动顺序.html">
+            
+                    
+                        <b>1.7.6.</b>
+                    
+                    pod的启动顺序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="k8s中的limits.html">
+            
+                <a href="k8s中的limits.html">
+            
+                    
+                        <b>1.7.7.</b>
+                    
+                    k8s中的LimitRange
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="k8s中的resource-quotas.html">
+            
+                <a href="k8s中的resource-quotas.html">
+            
+                    
+                        <b>1.7.8.</b>
+                    
+                    k8s中的resource-quotas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.9" data-path="容器的资源使用限制.html">
+            
+                <a href="容器的资源使用限制.html">
+            
+                    
+                        <b>1.7.9.</b>
+                    
+                    pod的资源请求与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.10" data-path="pod的HPA特性.html">
+            
+                <a href="pod的HPA特性.html">
+            
+                    
+                        <b>1.7.10.</b>
+                    
+                    pod的HPA特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.11" data-path="容器安全.html">
+            
+                <a href="容器安全.html">
+            
+                    
+                        <b>1.7.11.</b>
+                    
+                    容器安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../controller/常用控制器介绍.md">
+            
+                <span>
+            
+                    
+                        <b>1.8.</b>
+                    
+                    常用控制器与资源对象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../controller/rc与rs.html">
+            
+                <a href="../controller/rc与rs.html">
+            
+                    
+                        <b>1.8.1.</b>
+                    
+                    使用rc与rs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../controller/使用deployment.html">
+            
+                <a href="../controller/使用deployment.html">
+            
+                    
+                        <b>1.8.2.</b>
+                    
+                    使用deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../controller/使用job.html">
+            
+                <a href="../controller/使用job.html">
+            
+                    
+                        <b>1.8.3.</b>
+                    
+                    使用job
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../controller/使用cronjob.html">
+            
+                <a href="../controller/使用cronjob.html">
+            
+                    
+                        <b>1.8.4.</b>
+                    
+                    使用crontab
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../service/服务暴露发现.html">
+            
+                <a href="../service/服务暴露发现.html">
+            
+                    
+                        <b>1.9.</b>
+                    
+                    服务介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../service/内部服务发现.html">
+            
+                <a href="../service/内部服务发现.html">
+            
+                    
+                        <b>1.9.1.</b>
+                    
+                    集群内部服务发现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../service/service的使用.html">
+            
+                <a href="../service/service的使用.html">
+            
+                    
+                        <b>1.9.2.</b>
+                    
+                    service的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../service/集群外部服务发现.html">
+            
+                <a href="../service/集群外部服务发现.html">
+            
+                    
+                        <b>1.9.3.</b>
+                    
+                    集群外部服务发现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../storage/存储介绍.html">
+            
+                <a href="../storage/存储介绍.html">
+            
+                    
+                        <b>1.10.</b>
+                    
+                    存储介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../storage/volumn.html">
+            
+                <a href="../storage/volumn.html">
+            
+                    
+                        <b>1.10.1.</b>
+                    
+                    volumn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../storage/pv、pvc、sc使用.html">
+            
+                <a href="../storage/pv、pvc、sc使用.html">
+            
+                    
+                        <b>1.10.2.</b>
+                    
+                    pv、pvc、sc
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../storage/pvpvcsc进一步说明.html">
+            
+                <a href="../storage/pvpvcsc进一步说明.html">
+            
+                    
+                        <b>1.10.3.</b>
+                    
+                    再说说 pv、pvc和storageclass
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="../storage/nfs-storageclass使用.html">
+            
+                <a href="../storage/nfs-storageclass使用.html">
+            
+                    
+                        <b>1.10.4.</b>
+                    
+                    基于nfs的storageclass的配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="../storage/在k8s中使用rbd.html">
+            
+                <a href="../storage/在k8s中使用rbd.html">
+            
+                    
+                        <b>1.10.5.</b>
+                    
+                    在k8s中使用ceph rbd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="../storage/configmap使用.html">
+            
+                <a href="../storage/configmap使用.html">
+            
+                    
+                        <b>1.10.6.</b>
+                    
+                    configmap使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="../storage/secret的使用.html">
+            
+                <a href="../storage/secret的使用.html">
+            
+                    
+                        <b>1.10.7.</b>
+                    
+                    secret使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="../storage/subpath的使用.html">
+            
+                <a href="../storage/subpath的使用.html">
+            
+                    
+                        <b>1.10.8.</b>
+                    
+                    subpath的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../常用控制器介绍-sts.md">
+            
+                <span>
+            
+                    
+                        <b>1.11.</b>
+                    
+                    常用控制器与资源对象-sts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../容器的调度.md">
+            
+                <span>
+            
+                    
+                        <b>1.12.</b>
+                    
+                    容器的调度
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../节点亲和性.md">
+            
+                <span>
+            
+                    
+                        <b>1.12.1.</b>
+                    
+                    节点亲和性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../pod的亲和性、反亲和、性污点、容忍.md">
+            
+                <span>
+            
+                    
+                        <b>1.12.2.</b>
+                    
+                    pod的亲和性、反亲和、性污点、容忍
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../network/k8s-网络.html">
+            
+                <a href="../network/k8s-网络.html">
+            
+                    
+                        <b>1.13.</b>
+                    
+                    k8s-网络
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../network/开启ipvs.html">
+            
+                <a href="../network/开启ipvs.html">
+            
+                    
+                        <b>1.13.1.</b>
+                    
+                    开启ipvs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" >
+            
+                <span>
+            
+                    
+                        <b>1.13.2.</b>
+                    
+                    [常见网络插件]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.2.1" data-path="../network/flannel.html">
+            
+                <a href="../network/flannel.html">
+            
+                    
+                        <b>1.13.2.1.</b>
+                    
+                    Flannel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.2" data-path="../network/weave.html">
+            
+                <a href="../network/weave.html">
+            
+                    
+                        <b>1.13.2.2.</b>
+                    
+                    Weave Net
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.3" data-path="../network/contiv.html">
+            
+                <a href="../network/contiv.html">
+            
+                    
+                        <b>1.13.2.3.</b>
+                    
+                    Contiv
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.4" data-path="../network/calico.html">
+            
+                <a href="../network/calico.html">
+            
+                    
+                        <b>1.13.2.4.</b>
+                    
+                    Calico
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.5" data-path="../network/ovn-kubernetes.html">
+            
+                <a href="../network/ovn-kubernetes.html">
+            
+                    
+                        <b>1.13.2.5.</b>
+                    
+                    OVN
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.6" data-path="../network/romana.html">
+            
+                <a href="../network/romana.html">
+            
+                    
+                        <b>1.13.2.6.</b>
+                    
+                    Romana
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2.7" data-path="../network/opencontrail.html">
+            
+                <a href="../network/opencontrail.html">
+            
+                    
+                        <b>1.13.2.7.</b>
+                    
+                    OpenContrail
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="../network/网络策略.html">
+            
+                <a href="../network/网络策略.html">
+            
+                    
+                        <b>1.13.3.</b>
+                    
+                    网络策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../security/k8s的安全.md">
+            
+                <span>
+            
+                    
+                        <b>1.14.</b>
+                    
+                    k8s的安全
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../security/k8s-认证.html">
+            
+                <a href="../security/k8s-认证.html">
+            
+                    
+                        <b>1.14.1.</b>
+                    
+                    k8s-认证
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1.1" data-path="../security/基本认证.html">
+            
+                <a href="../security/基本认证.html">
+            
+                    
+                        <b>1.14.1.1.</b>
+                    
+                    基本认证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.1.2" data-path="../security/基于token的认证.html">
+            
+                <a href="../security/基于token的认证.html">
+            
+                    
+                        <b>1.14.1.2.</b>
+                    
+                    基于token的认证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.1.3" data-path="../security/双向TLS认证.md">
+            
+                <span>
+            
+                    
+                        <b>1.14.1.3.</b>
+                    
+                    双向TLS认证
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../security/k8s-授权.html">
+            
+                <a href="../security/k8s-授权.html">
+            
+                    
+                        <b>1.14.2.</b>
+                    
+                    k8s-授权
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.2.1" data-path="../security/基于rbac的授权.html">
+            
+                <a href="../security/基于rbac的授权.html">
+            
+                    
+                        <b>1.14.2.1.</b>
+                    
+                    基于rbac的授权
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2.2" data-path="../security/基于node的授权.md">
+            
+                <span>
+            
+                    
+                        <b>1.14.2.2.</b>
+                    
+                    基于node的授权
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../security/k8s-准入控制.md">
+            
+                <span>
+            
+                    
+                        <b>1.14.3.</b>
+                    
+                    k8s-准入控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="../monitor/监控.md">
+            
+                <span>
+            
+                    
+                        <b>1.15.</b>
+                    
+                    监控
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="../monitor/监控概述.html">
+            
+                <a href="../monitor/监控概述.html">
+            
+                    
+                        <b>1.15.1.</b>
+                    
+                    监控概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="../monitor/日志收集框架.html">
+            
+                <a href="../monitor/日志收集框架.html">
+            
+                    
+                        <b>1.15.2.</b>
+                    
+                    日志收集框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="../monitor/k8s集成EFK作日志收集.html">
+            
+                <a href="../monitor/k8s集成EFK作日志收集.html">
+            
+                    
+                        <b>1.15.3.</b>
+                    
+                    k8s集成EFK作日志收集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="../monitor/prometheus.html">
+            
+                <a href="../monitor/prometheus.html">
+            
+                    
+                        <b>1.15.4.</b>
+                    
+                    prometheus
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" >
+            
+                <span>
+            
+                    
+                        <b>1.16.</b>
+                    
+                    service mesh
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="../devops/在k8s集群上玩转CICD.html">
+            
+                <a href="../devops/在k8s集群上玩转CICD.html">
+            
+                    
+                        <b>1.17.</b>
+                    
+                    在k8s集群上玩转CI/CD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.17.1" data-path="../devops/1.部署jenkins-master.html">
+            
+                <a href="../devops/1.部署jenkins-master.html">
+            
+                    
+                        <b>1.17.1.</b>
+                    
+                    1.部署jenkins-master
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.2" data-path="../devops/2.配置jenkins-master.html">
+            
+                <a href="../devops/2.配置jenkins-master.html">
+            
+                    
+                        <b>1.17.2.</b>
+                    
+                    2.配置jenkins-master
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.3" data-path="../devops/3.制作jenkins-slave.html">
+            
+                <a href="../devops/3.制作jenkins-slave.html">
+            
+                    
+                        <b>1.17.3.</b>
+                    
+                    3.制作jenkins-slave
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.4" data-path="../devops/4.创建pipeline项目.html">
+            
+                <a href="../devops/4.创建pipeline项目.html">
+            
+                    
+                        <b>1.17.4.</b>
+                    
+                    4.创建pipeline项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.5" data-path="../devops/5.编写jenkinsfile文件.html">
+            
+                <a href="../devops/5.编写jenkinsfile文件.html">
+            
+                    
+                        <b>1.17.5.</b>
+                    
+                    5.编写jenkinsfile文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.6" data-path="../devops/6.验证k8s-jenkinsfile.html">
+            
+                <a href="../devops/6.验证k8s-jenkinsfile.html">
+            
+                    
+                        <b>1.17.6.</b>
+                    
+                    6.验证k8s-jenkinsfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17.7" data-path="../devops/7.优化改进.html">
+            
+                <a href="../devops/7.优化改进.html">
+            
+                    
+                        <b>1.17.7.</b>
+                    
+                    7.优化改进
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="../helm/helm.html">
+            
+                <a href="../helm/helm.html">
+            
+                    
+                        <b>1.18.</b>
+                    
+                    helm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../helm/helm安装.html">
+            
+                <a href="../helm/helm安装.html">
+            
+                    
+                        <b>1.18.1.</b>
+                    
+                    helm安装及简单使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.2" data-path="../helm/helm-FAQ.html">
+            
+                <a href="../helm/helm-FAQ.html">
+            
+                    
+                        <b>1.18.2.</b>
+                    
+                    helm安装FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18.3" data-path="../helm/try-helmv3.html">
+            
+                <a href="../helm/try-helmv3.html">
+            
+                    
+                        <b>1.18.3.</b>
+                    
+                    helmV3版本试用及新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="../3rdui/rancher的使用.html">
+            
+                <a href="../3rdui/rancher的使用.html">
+            
+                    
+                        <b>1.19.</b>
+                    
+                    rancher的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="../kubeedge/kubeedge介绍.html">
+            
+                <a href="../kubeedge/kubeedge介绍.html">
+            
+                    
+                        <b>1.20.</b>
+                    
+                    kubeedge
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.20.1" data-path="../kubeedge/kubeedge介绍.html">
+            
+                <a href="../kubeedge/kubeedge介绍.html">
+            
+                    
+                        <b>1.20.1.</b>
+                    
+                    kubeedge介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20.2" data-path="../kubeedge/go环境配置.html">
+            
+                <a href="../kubeedge/go环境配置.html">
+            
+                    
+                        <b>1.20.2.</b>
+                    
+                    go环境配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+            
+                <a href="../kubeedge/配置kubeedge.html">
+            
+                    
+                        <b>1.20.3.</b>
+                    
+                    配置kubeedge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20.4" data-path="../install/kubeedge管理平台初始化环境安装步骤.html">
+            
+                <a href="../install/kubeedge管理平台初始化环境安装步骤.html">
+            
+                    
+                        <b>1.20.4.</b>
+                    
+                    kubeedge套装安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="../tips/k8s-tips.html">
+            
+                <a href="../tips/k8s-tips.html">
+            
+                    
+                        <b>1.21.</b>
+                    
+                    k8s-使用技巧
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.21.1" data-path="../tips/k8s上下文介绍.html">
+            
+                <a href="../tips/k8s上下文介绍.html">
+            
+                    
+                        <b>1.21.1.</b>
+                    
+                    k8s上下文介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21.2" data-path="../tips/kubectl-tips.html">
+            
+                <a href="../tips/kubectl-tips.html">
+            
+                    
+                        <b>1.21.2.</b>
+                    
+                    kubectl使用技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21.3" data-path="../tips/k8s查漏补缺.html">
+            
+                <a href="../tips/k8s查漏补缺.html">
+            
+                    
+                        <b>1.21.3.</b>
+                    
+                    k8s查漏补缺
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21.4" data-path="../tips/参考资料汇总.html">
+            
+                <a href="../tips/参考资料汇总.html">
+            
+                    
+                        <b>1.21.4.</b>
+                    
+                    参考资料汇总
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21.5" data-path="../tips/升级内核.html">
+            
+                <a href="../tips/升级内核.html">
+            
+                    
+                        <b>1.21.5.</b>
+                    
+                    centos7内核升级方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="../release/changelog.html">
+            
+                <a href="../release/changelog.html">
+            
+                    
+                        <b>1.22.</b>
+                    
+                    k8s版本更新说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.22.1" data-path="../release/1.7.html">
+            
+                <a href="../release/1.7.html">
+            
+                    
+                        <b>1.22.1.</b>
+                    
+                    k8s-1.7版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.2" data-path="../release/1.8.html">
+            
+                <a href="../release/1.8.html">
+            
+                    
+                        <b>1.22.2.</b>
+                    
+                    k8s-1.8版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.3" data-path="../release/1.9.html">
+            
+                <a href="../release/1.9.html">
+            
+                    
+                        <b>1.22.3.</b>
+                    
+                    k8s-1.9版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.4" data-path="../release/1.10.html">
+            
+                <a href="../release/1.10.html">
+            
+                    
+                        <b>1.22.4.</b>
+                    
+                    k8s-1.10版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.5" data-path="../release/1.11.html">
+            
+                <a href="../release/1.11.html">
+            
+                    
+                        <b>1.22.5.</b>
+                    
+                    k8s-1.11版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.6" data-path="../release/1.12.html">
+            
+                <a href="../release/1.12.html">
+            
+                    
+                        <b>1.22.6.</b>
+                    
+                    k8s-1.12版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22.7" data-path="../release/1.13.html">
+            
+                <a href="../release/1.13.html">
+            
+                    
+                        <b>1.22.7.</b>
+                    
+                    k8s-1.13版本更新日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >pod的HPA特性</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <!-- toc -->
+<ul>
+<li><a href="#%E4%B8%80%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7ab%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85">&#x4E00;&#x3001;&#x538B;&#x6D4B;&#x5DE5;&#x5177;ab&#x4ECB;&#x7ECD;&#x53CA;&#x5B89;&#x88C5;</a><ul>
+<li><a href="#1%E4%BB%8B%E7%BB%8D">1.&#x4ECB;&#x7ECD;</a></li>
+<li><a href="#2%E5%AE%89%E8%A3%85">2.&#x5B89;&#x88C5;</a></li>
+<li><a href="#3ab%E7%9A%84%E4%BD%BF%E7%94%A8">3.ab&#x7684;&#x4F7F;&#x7528;</a></li>
+<li><a href="#4%E7%A4%BA%E4%BE%8B">4.&#x793A;&#x4F8B;&#xFF1A;</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8Chpa%E4%BB%8B%E7%BB%8D">&#x4E8C;&#x3001;hpa&#x4ECB;&#x7ECD;</a></li>
+<li><a href="#%E4%B8%89%E5%9F%BA%E7%A1%80%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">&#x4E09;&#x3001;&#x57FA;&#x7840;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x914D;&#x7F6E;</a><ul>
+<li><a href="#1%E9%A6%96%E5%85%88%E5%9C%A8k8s%E4%B8%AD%E5%AE%89%E8%A3%85heapster">1.&#x9996;&#x5148;&#x5728;k8s&#x4E2D;&#x5B89;&#x88C5;heapster</a></li>
+<li><a href="#2%E5%88%9B%E5%BB%BAdeployment">2.&#x521B;&#x5EFA;deployment</a></li>
+<li><a href="#3%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%B9%B6%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1">3.&#x521B;&#x5EFA;&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x66B4;&#x9732;&#x670D;&#x52A1;</a></li>
+<li><a href="#4%E8%AE%BF%E9%97%AE%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B">4.&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B%E5%AF%B9cpu%E9%99%90%E5%88%B6%E7%9A%84hpa%E6%BC%94%E7%A4%BA">&#x56DB;&#x3001;&#x5BF9;CPU&#x9650;&#x5236;&#x7684;HPA&#x6F14;&#x793A;</a><ul>
+<li><a href="#1%E5%88%9B%E5%BB%BAhpa">1.&#x521B;&#x5EFA;hpa</a></li>
+<li><a href="#2%E4%BD%BF%E7%94%A8ab%E5%AF%B9pod%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95">2.&#x4F7F;&#x7528;ab&#x5BF9;pod&#x8FDB;&#x884C;&#x538B;&#x529B;&#x6D4B;&#x8BD5;</a></li>
+<li><a href="#3%E7%BB%A7%E7%BB%AD%E7%9B%91%E6%8E%A7hpa">3.&#x7EE7;&#x7EED;&#x76D1;&#x63A7;hpa</a></li>
+<li><a href="#4%E5%BD%93%E6%B5%8B%E8%AF%95%E5%AE%8C%E6%88%90%E5%90%8E">4.&#x5F53;&#x6D4B;&#x8BD5;&#x5B8C;&#x6210;&#x540E;</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h2 id="&#x4E00;&#x3001;&#x538B;&#x6D4B;&#x5DE5;&#x5177;ab&#x4ECB;&#x7ECD;&#x53CA;&#x5B89;&#x88C5;">&#x4E00;&#x3001;&#x538B;&#x6D4B;&#x5DE5;&#x5177;ab&#x4ECB;&#x7ECD;&#x53CA;&#x5B89;&#x88C5;</h2>
+<h3 id="1&#x4ECB;&#x7ECD;">1.&#x4ECB;&#x7ECD;</h3>
+<p>ab(apache benchmark) &#x2014;&#x2014; apache&#x81EA;&#x5E26;&#x7684;&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#x5DE5;&#x5177;&#xFF0C;&#x4E00;&#x822C;&#x628A;apache&#x538B;&#x529B;&#x6D4B;&#x8BD5;&#x79F0;&#x4E3A;AB&#x6D4B;&#x8BD5;&#x3002;</p>
+<blockquote>
+<p>ab is a tool for benchmarking your Apache Hypertext Transfer Protocol (HTTP) server. It is designed to give you an impression of how your current Apache installation performs. This especially shows you how many requests per second your Apache installation is capable of serving.</p>
+<p>&#x6587;&#x6863;&#x5730;&#x5740;&#xFF1A;<a href="http://httpd.apache.org/docs/2.4/programs/ab.html" target="_blank">http://httpd.apache.org/docs/2.4/programs/ab.html</a></p>
+</blockquote>
+<h3 id="2&#x5B89;&#x88C5;">2.&#x5B89;&#x88C5;</h3>
+<pre class="language-"><code>[root@k8s-master ~]# yum -y install httpd-tools
+[root@k8s-master ~]# ab -V
+This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+</code></pre><h3 id="3ab&#x7684;&#x4F7F;&#x7528;">3.ab&#x7684;&#x4F7F;&#x7528;</h3>
+<p>&#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;</p>
+<pre class="language-"><code>Usage: ab [options] [http[s]://]hostname[:port]/path
+Options are:
+    -n requests     Number of requests to perform
+    -c concurrency  Number of multiple requests to make at a time
+    -t timelimit    Seconds to max. to spend on benchmarking
+                    This implies -n 50000
+    -s timeout      Seconds to max. wait for each response
+                    Default is 30 seconds
+    -b windowsize   Size of TCP send/receive buffer, in bytes
+    -B address      Address to bind to when making outgoing connections
+    -p postfile     File containing data to POST. Remember also to set -T
+    -u putfile      File containing data to PUT. Remember also to set -T
+    -T content-type Content-type header to use for POST/PUT data, eg.
+                    &apos;application/x-www-form-urlencoded&apos;
+                    Default is &apos;text/plain&apos;
+    -v verbosity    How much troubleshooting info to print
+    -w              Print out results in HTML tables
+    -i              Use HEAD instead of GET
+    -x attributes   String to insert as table attributes
+    -y attributes   String to insert as tr attributes
+    -z attributes   String to insert as td or th attributes
+    -C attribute    Add cookie, eg. &apos;Apache=1234&apos;. (repeatable)
+    -H attribute    Add Arbitrary header line, eg. &apos;Accept-Encoding: gzip&apos;
+                    Inserted after all normal header lines. (repeatable)
+    -A attribute    Add Basic WWW Authentication, the attributes
+                    are a colon separated username and password.
+    -P attribute    Add Basic Proxy Authentication, the attributes
+                    are a colon separated username and password.
+    -X proxy:port   Proxyserver and port number to use
+    -V              Print version number and exit
+    -k              Use HTTP KeepAlive feature
+    -d              Do not show percentiles served table.
+    -S              Do not show confidence estimators and warnings.
+    -q              Do not show progress when doing more than 150 requests
+    -g filename     Output collected data to gnuplot format file.
+    -e filename     Output CSV file with percentages served
+    -r              Don&apos;t exit on socket receive errors.
+    -h              Display usage information (this message)
+    -Z ciphersuite  Specify SSL/TLS cipher suite (See openssl ciphers)
+    -f protocol     Specify SSL/TLS protocol
+                    (SSL3, TLS1, TLS1.1, TLS1.2 or ALL)
+</code></pre><p>&#x5E38;&#x7528;&#x53C2;&#x6570;</p>
+<ul>
+<li>-n &#xFF1A;&#x603B;&#x5171;&#x7684;&#x8BF7;&#x6C42;&#x6267;&#x884C;&#x6570;&#xFF0C;&#x7F3A;&#x7701;&#x662F;1&#xFF1B;</li>
+<li>-c&#xFF1A; &#x5E76;&#x53D1;&#x6570;&#xFF0C;&#x7F3A;&#x7701;&#x662F;1&#xFF1B;</li>
+<li>-t&#xFF1A;&#x6D4B;&#x8BD5;&#x6240;&#x8FDB;&#x884C;&#x7684;&#x603B;&#x65F6;&#x95F4;&#xFF0C;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x7F3A;&#x7701;50000s</li>
+<li>-p&#xFF1A;POST&#x65F6;&#x7684;&#x6570;&#x636E;&#x6587;&#x4EF6;</li>
+<li>-w: &#x4EE5;HTML&#x8868;&#x7684;&#x683C;&#x5F0F;&#x8F93;&#x51FA;&#x7ED3;&#x679C;</li>
+</ul>
+<h3 id="4&#x793A;&#x4F8B;&#xFF1A;">4.&#x793A;&#x4F8B;&#xFF1A;</h3>
+<pre class="language-"><code>ab -n 1000 -c 100 -w http://localhost/index.php &gt;&gt; /tmp/1.html
+</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x8868;&#x793A;100&#x5E76;&#x53D1;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5171;&#x6D4B;&#x8BD5;&#x8BBF;&#x95EE;index.php&#x811A;&#x672C;1000&#x6B21;&#xFF0C;&#x5E76;&#x5C06;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x5230;/tmp/1.html&#x6587;&#x4EF6;&#x4E2D;</p>
+<p>&#x5206;&#x6790;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#xFF0C;&#x53EF;&#x77E5;&#x5728;&#x8BE5;100&#x5E76;&#x53D1;&#x8BBF;&#x95EE;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5171;&#x6D4B;&#x8BD5;&#x8BBF;&#x95EE;1000&#x6B21;&#xFF0C;&#x5931;&#x8D25;&#x4E86;xxx&#x6B21;&#x3002;&#x8FDB;&#x800C;&#x53EF;&#x77E5;&#x8BE5;&#x811A;&#x672C;&#x5728;&#x6B64;&#x73AF;&#x5883;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;100&#x5E76;&#x53D1;&#x8BBF;&#x95EE;&#x7684;&#x8981;&#x6C42;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x8C03;&#x8282;&#x5E76;&#x53D1;&#x6570;&#x5E76;&#x91CD;&#x65B0;&#x68C0;&#x67E5;&#x5931;&#x8D25;&#x6B21;&#x6570;&#xFF0C;&#x53EF;&#x5F97;&#x51FA;&#x5728;&#x591A;&#x5C11;&#x5E76;&#x53D1;&#x4E0B;&#x7CFB;&#x7EDF;&#x53EF;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x7ED3;&#x679C;&#x8BE6;&#x89E3;&#xFF1A;</p>
+<pre class="language-"><code>Server Software:        Apache/2.4.18         &#x670D;&#x52A1;&#x5668;&#x8F6F;&#x4EF6;&#x7248;&#x672C;
+Server Hostname:        www.06a.com        &#x8BF7;&#x6C42;&#x7684;URL
+Server Port:            80                                 &#x8BF7;&#x6C42;&#x7684;&#x7AEF;&#x53E3;&#x53F7;
+Document Path:          /                                &#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8DEF;&#x5F84;
+Document Length:        19590 bytes            &#x9875;&#x9762;&#x957F;&#x5EA6;   &#x5355;&#x4F4D;&#x662F;&#x5B57;&#x8282;
+Concurrency Level:      200                          &#x5E76;&#x53D1;&#x6570;
+Time taken for tests:   124.509 seconds      &#x4E00;&#x5171;&#x4F7F;&#x7528;&#x4E86;124s      
+Complete requests:      1000                        &#x8BF7;&#x6C42;&#x7684;&#x6B21;&#x6570;
+Failed requests:        9                                   &#x5931;&#x8D25;&#x7684;&#x8BF7;&#x6C42;     
+   (Connect: 0, Receive: 0, Length: 9, Exceptions: 0)
+Total transferred:      19669661 bytes          &#x603B;&#x5171;&#x4F20;&#x8F93;&#x7684;&#x5B57;&#x8282;&#x6570;  http&#x5934;&#x4FE1;&#x606F;
+HTML transferred:       19472463 bytes       &#x5B9E;&#x9645;&#x9875;&#x9762;&#x4F20;&#x9012;&#x7684;&#x5B57;&#x8282;&#x6570;
+Requests per second:    8.03 [#/sec] (mean) &#x6BCF;&#x79D2;&#x591A;&#x5C11;&#x4E2A;&#x8BF7;&#x6C42;
+Time per request:       24901.805 [ms] (mean)  &#x5E73;&#x5747;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x7B49;&#x5F85;&#x591A;&#x957F;&#x65F6;&#x95F4;
+Time per request:       124.509 [ms] (mean, across all concurrent requests)   &#x670D;&#x52A1;&#x5668;&#x5E73;&#x5747;&#x7528;&#x591A;&#x957F;&#x65F6;&#x95F4;&#x5904;&#x7406;
+Transfer rate:          154.28 [Kbytes/sec] received  &#x6BCF;&#x79D2;&#x83B7;&#x53D6;&#x591A;&#x5C11;&#x6570;&#x636E;
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   3.0      0      62
+Processing:  4679 17276 7877.7  15587   64050
+Waiting:     4675 17273 7877.1  15586   64050
+Total:       4679 17277 7877.8  15588   64051
+Percentage of the requests served within a certain time (ms)
+  50%  15588    50%&#x7684;&#x7528;&#x6237;&#x7684;&#x8BF7;&#x6C42;15588ms&#x5185;&#x8FD4;&#x56DE;
+  66%  21097
+  75%  24071
+  80%  25294
+  90%  27939
+  95%  29550
+  98%  32122
+  99%  34885
+ 100%  64051 (longest request)
+</code></pre><h2 id="&#x4E8C;&#x3001;hpa&#x4ECB;&#x7ECD;">&#x4E8C;&#x3001;hpa&#x4ECB;&#x7ECD;</h2>
+<ul>
+<li>HPA&#x5168;&#x79F0;Horizontal Pod Autoscaling&#xFF0C;&#x5373;pod&#x7684;&#x6C34;&#x5E73;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x3002;<ul>
+<li>&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#x4E24;&#x79CD;&#xFF0C;&#x5176;&#x4E00;&#x4E3A;&#x6C34;&#x5E73;&#x6269;&#x5C55;&#xFF0C;&#x9488;&#x5BF9;&#x4E8E;&#x5B9E;&#x4F8B;&#x6570;&#x76EE;&#x7684;&#x589E;&#x51CF;&#xFF1B;&#x5176;&#x4E8C;&#x4E3A;&#x5782;&#x76F4;&#x6269;&#x5C55;&#xFF0C;&#x5373;&#x5355;&#x4E2A;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x589E;&#x51CF;&#x3002;HPA&#x5C5E;&#x4E8E;&#x524D;&#x8005;&#x3002;<ul>
+<li>HPA&#x662F;Kubernetes&#x4E2D;&#x5B9E;&#x73B0;POD&#x6C34;&#x5E73;&#x81EA;&#x52A8;&#x4F38;&#x7F29;&#x7684;&#x529F;&#x80FD;&#x3002;</li>
+</ul>
+</li>
+<li>&#x4E91;&#x8BA1;&#x7B97;&#x5177;&#x6709;&#x6C34;&#x5E73;&#x5F39;&#x6027;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x4E91;&#x8BA1;&#x7B97;&#x533A;&#x522B;&#x4E8E;&#x4F20;&#x7EDF;IT&#x6280;&#x672F;&#x67B6;&#x6784;&#x7684;&#x4E3B;&#x8981;&#x7279;&#x6027;&#x3002;&#x5BF9;&#x4E8E;Kubernetes&#x4E2D;&#x7684;POD&#x96C6;&#x7FA4;&#x6765;&#x8BF4;&#xFF0C;HPA&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5F88;&#x591A;&#x81EA;&#x52A8;&#x5316;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x5F53;POD&#x4E2D;&#x4E1A;&#x52A1;&#x8D1F;&#x8F7D;&#x4E0A;&#x5347;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x65B0;&#x7684;POD&#x6765;&#x4FDD;&#x8BC1;&#x4E1A;&#x52A1;&#x7CFB;&#x7EDF;&#x7A33;&#x5B9A;&#x8FD0;&#x884C;&#xFF0C;&#x5F53;POD&#x4E2D;&#x4E1A;&#x52A1;&#x8D1F;&#x8F7D;&#x4E0B;&#x964D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x9500;&#x6BC1;POD&#x6765;&#x63D0;&#x9AD8;&#x8D44;&#x6E90;&#x5229;&#x7528;&#x7387;&#x3002;</li>
+</ul>
+</li>
+<li>HPA&#x63A7;&#x5236;&#x5668;&#x9ED8;&#x8BA4;&#x6BCF;&#x9694;30&#x79D2;&#x5C31;&#x4F1A;&#x8FD0;&#x884C;&#x4E00;&#x6B21;&#x3002;<ul>
+<li>&#x5982;&#x679C;&#x8981;&#x4FEE;&#x6539;&#x95F4;&#x9694;&#x65F6;&#x95F4;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;horizontal-pod-autoscaler-sync-period&#x53C2;&#x6570;&#x3002;</li>
+</ul>
+</li>
+<li>HPA&#x7684;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;&#x662F;RC&#x3001;RS&#x6216;Deployment&#x5BF9;&#x5E94;&#x7684;Pod<ul>
+<li>&#x6839;&#x636E;&#x89C2;&#x5BDF;&#x5230;&#x7684;CPU&#x7B49;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x91CF;&#x4E0E;&#x7528;&#x6237;&#x7684;&#x671F;&#x671B;&#x503C;&#x8FDB;&#x884C;&#x6BD4;&#x5BF9;&#xFF0C;&#x505A;&#x51FA;&#x662F;&#x5426;&#x9700;&#x8981;&#x589E;&#x51CF;&#x5B9E;&#x4F8B;&#x6570;&#x91CF;&#x7684;&#x51B3;&#x7B56;&#x3002;</li>
+</ul>
+</li>
+<li>hpa&#x7684;&#x53D1;&#x5C55;&#x5386;&#x7A0B;<ul>
+<li>&#x5728;Kubernetes v1.1&#x4E2D;&#x9996;&#x6B21;&#x5F15;&#x5165;&#x4E86;hpa&#x7279;&#x6027;&#x3002;hpa&#x7B2C;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x57FA;&#x4E8E;&#x89C2;&#x5BDF;&#x5230;&#x7684;CPU&#x5229;&#x7528;&#x7387;&#xFF0C;&#x540E;&#x7EED;&#x7248;&#x672C;&#x652F;&#x6301;&#x57FA;&#x4E8E;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x3002;</li>
+<li>&#x5728;Kubernetes 1.6&#x4E2D;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;API&#x81EA;&#x5B9A;&#x4E49;&#x6307;&#x6807;API&#xFF0C;&#x5B83;&#x5141;&#x8BB8;HPA&#x8BBF;&#x95EE;&#x4EFB;&#x610F;&#x6307;&#x6807;&#x3002;</li>
+<li>Kubernetes 1.7&#x5F15;&#x5165;&#x4E86;&#x805A;&#x5408;&#x5C42;&#xFF0C;&#x5141;&#x8BB8;&#x7B2C;&#x4E09;&#x65B9;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x901A;&#x8FC7;&#x6CE8;&#x518C;&#x4E3A;API&#x9644;&#x52A0;&#x7EC4;&#x4EF6;&#x6765;&#x6269;&#x5C55;Kubernetes API&#x3002;&#x81EA;&#x5B9A;&#x4E49;&#x6307;&#x6807;API&#x4EE5;&#x53CA;&#x805A;&#x5408;&#x5C42;&#x4F7F;&#x5F97;&#x50CF;Prometheus&#x8FD9;&#x6837;&#x7684;&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#x53EF;&#x4EE5;&#x5411;HPA&#x63A7;&#x5236;&#x5668;&#x516C;&#x5F00;&#x7279;&#x5B9A;&#x4E8E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x6307;&#x6807;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<p>HPA&#x539F;&#x7406;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<img src="../images/screenshot_1539163356790.png" alt=""></p>
+<h2 id="&#x4E09;&#x3001;&#x57FA;&#x7840;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x914D;&#x7F6E;">&#x4E09;&#x3001;&#x57FA;&#x7840;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x914D;&#x7F6E;</h2>
+<h3 id="1&#x9996;&#x5148;&#x5728;k8s&#x4E2D;&#x5B89;&#x88C5;heapster">1.&#x9996;&#x5148;&#x5728;k8s&#x4E2D;&#x5B89;&#x88C5;heapster</h3>
+<h3 id="2&#x521B;&#x5EFA;deployment">2.&#x521B;&#x5EFA;deployment</h3>
+<pre class="language-"><code>[root@k8s-master ~]# kubectl run nginx --image=nginx --requests=cpu=100m
+deployment.apps/nginx created
+[root@k8s-master ~]# kubectl get pod
+[root@k8s-master ~]# kubectl get pod -owide
+NAME                     READY     STATUS    RESTARTS   AGE       IP          NODE        NOMINATED NODE
+nginx-5bc844797f-htssr   1/1       Running   0          57s       10.2.52.5   k8s-node3   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+</code></pre><h3 id="3&#x521B;&#x5EFA;&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x66B4;&#x9732;&#x670D;&#x52A1;">3.&#x521B;&#x5EFA;&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x66B4;&#x9732;&#x670D;&#x52A1;</h3>
+<pre class="language-"><code>[root@k8s-master ~]# kubectl expose deployment nginx --target-port=80 --port=80 --type=NodePort
+service/nginx exposed
+[root@k8s-master ~]# kubectl get svc,pod | grep nginx
+service/nginx        NodePort    10.1.73.58   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>        80:33625/TCP   7s
+pod/nginx-5bc844797f-htssr   1/1       Running   0          1m
+</code></pre><h3 id="4&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;">4.&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;</h3>
+<pre class="language-"><code>[root@k8s-master ~]# curl k8s-node3:33625
+<span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Welcome to nginx!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style language-css">
+    <span class="token selector">body</span> <span class="token punctuation">{</span>
+        <span class="token property">width</span><span class="token punctuation">:</span> 35em<span class="token punctuation">;</span>
+        <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+        <span class="token property">font-family</span><span class="token punctuation">:</span> Tahoma, Verdana, Arial, sans-serif<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Welcome to nginx!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>For online documentation and support please refer to
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://nginx.org/<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>nginx.org<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/&gt;</span></span>
+Commercial support is available at
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://nginx.com/<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>nginx.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span><span class="token punctuation">&gt;</span></span>Thank you for using nginx.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre><h2 id="&#x56DB;&#x3001;&#x5BF9;cpu&#x9650;&#x5236;&#x7684;hpa&#x6F14;&#x793A;">&#x56DB;&#x3001;&#x5BF9;CPU&#x9650;&#x5236;&#x7684;HPA&#x6F14;&#x793A;</h2>
+<h3 id="1&#x521B;&#x5EFA;hpa">1.&#x521B;&#x5EFA;hpa</h3>
+<p>&#x8BBE;&#x7F6E;&#x6700;&#x5C0F;replicas&#x4E3A;1&#xFF0C;&#x6700;&#x5927;&#x4E3A;10&#xFF0C;&#x8BBE;&#x7F6E;cpu&#x7684;&#x4F7F;&#x7528;&#x7387;&#x4E0D;&#x8D85;&#x8FC7;10%</p>
+<pre class="language-"><code>[root@k8s-master ~]#  kubectl autoscale deployment nginx --max=10 --min=1 --cpu-percent=10
+horizontalpodautoscaler.autoscaling/nginx autoscaled
+[root@k8s-master ~]# kubectl get hpa
+NAME      REFERENCE          TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+nginx     Deployment/nginx   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>unknown</span><span class="token punctuation">&gt;</span></span>/10%   1         10        0          4s
+</code></pre><p>&#x6CE8;&#x610F;<code>TARGETS</code>&#x8FD9;&#x4E00;&#x5217;&#x7684;&#x503C;&#x4E3A; <code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>unknown</span><span class="token punctuation">&gt;</span></span>/10%</code>&#xFF0C;troubleshooting&#x4E00;&#x4E0B;</p>
+<pre class="language-"><code>[root@k8s-master heapster]# kubectl describe hpa nginx
+Name:                                                  nginx
+Namespace:                                             default
+Labels:                                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+Annotations:                                           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+CreationTimestamp:                                     Wed, 10 Oct 2018 10:12:15 +0800
+Reference:                                             Deployment/nginx
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  0% (0) / 10%
+Min replicas:                                          1
+Max replicas:                                          10
+Deployment pods:                                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason            Message
+  ----            ------  ------            -------
+  AbleToScale     True    ReadyForNewScale  the last scale time was sufficiently old as to warrant a new scale
+  ScalingActive   True    ValidMetricFound  the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  True    TooFewReplicas    the desired replica count is increasing faster than the maximum scale rate
+Events:
+  Type     Reason                        Age                 From                       Message
+  ----     ------                        ----                ----                       -------
+  Warning  FailedComputeMetricsReplicas  29m (x13 over 35m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from r
+esource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)  Warning  FailedGetResourceMetric       6m (x61 over 35m)   horizontal-pod-autoscaler  unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server
+ could not find the requested resource (get pods.metrics.k8s.io)
+</code></pre><p>&#x53C2;&#x8003;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/issues/57673" target="_blank">https://github.com/kubernetes/kubernetes/issues/57673</a>
+&#x8FD9;&#x4E2A;&#x662F;&#x56E0;&#x4E3A;controller&#x6CA1;&#x6709;&#x52A0;&#x4E0A;<code>--horizontal-pod-autoscaler-use-rest-clients=false</code>&#x5BFC;&#x81F4;&#x7684;&#xFF0C;&#x7ED9;kube-controller-manager.service&#x52A0;&#x4E0A;&#x8FD9;&#x4E00;&#x4E2A;&#x9009;&#x9879;&#x540E;&#xFF0C;&#x91CD;&#x542F;&#x542F;&#x52A8;apiserver</p>
+<p>&#x518D;&#x6B21;&#x67E5;&#x8BE2;hpa&#xFF0C;&#x663E;&#x793A;&#x6B63;&#x5E38;&#x4E86;&#xFF1A;</p>
+<pre class="language-"><code>[root@k8s-master ~]# kubectl get hpa
+NAME      REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+nginx     Deployment/nginx   0%/10%    1         10        1          6h
+</code></pre><h3 id="2&#x4F7F;&#x7528;ab&#x5BF9;pod&#x8FDB;&#x884C;&#x538B;&#x529B;&#x6D4B;&#x8BD5;">2.&#x4F7F;&#x7528;ab&#x5BF9;pod&#x8FDB;&#x884C;&#x538B;&#x529B;&#x6D4B;&#x8BD5;</h3>
+<pre class="language-"><code>[root@k8s-master ~]#  ab -c 1000 -n 1000000 http://192.168.3.22:33625/
+This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.3.22 (be patient)
+...
+...
+</code></pre><h3 id="3&#x7EE7;&#x7EED;&#x76D1;&#x63A7;hpa">3.&#x7EE7;&#x7EED;&#x76D1;&#x63A7;hpa</h3>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5F53;cpu&#x7684;&#x538B;&#x529B;&#x8D85;&#x8FC7;10%&#x540E;&#xFF0C;&#x6BCF;&#x8FC7;3&#x5206;&#x949F;replicas&#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x6269;&#x5C55;&#x6765;&#x5206;&#x62C5;&#x538B;&#x529B;</p>
+<pre class="language-"><code>[root@k8s-master ~]# kubectl get hpa --watch
+NAME      REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+nginx     Deployment/nginx   0%/10%    1         10        1          6h
+nginx     Deployment/nginx   30%/10%   1         10        1         6h
+nginx     Deployment/nginx   30%/10%   1         10        3         6h
+nginx     Deployment/nginx   70%/10%   1         10        3         6h
+</code></pre><h3 id="4&#x5F53;&#x6D4B;&#x8BD5;&#x5B8C;&#x6210;&#x540E;">4.&#x5F53;&#x6D4B;&#x8BD5;&#x5B8C;&#x6210;&#x540E;</h3>
+<pre class="language-"><code>[root@k8s-master ~]#  ab -c 1000 -n 1000000 http://192.168.3.22:33625/
+This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.3.22 (be patient)
+Completed 100000 requests
+Completed 200000 requests
+Completed 300000 requests
+Completed 400000 requests
+Completed 500000 requests
+Completed 600000 requests
+Completed 700000 requests
+Completed 800000 requests
+Completed 900000 requests
+Completed 1000000 requests
+Finished 1000000 requests
+
+
+Server Software:        nginx/1.15.5
+Server Hostname:        192.168.3.22
+Server Port:            33625
+
+Document Path:          /
+Document Length:        612 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   992.860 seconds
+Complete requests:      1000000
+Failed requests:        0
+Write errors:           0
+Total transferred:      845000000 bytes
+HTML transferred:       612000000 bytes
+Requests per second:    1007.19 [#/sec] (mean)
+Time per request:       992.860 [ms] (mean)
+Time per request:       0.993 [ms] (mean, across all concurrent requests)
+Transfer rate:          831.13 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1  990 111.4   1003    3010
+Processing:     0    3  23.5      1    2883
+Waiting:        0    2  23.3      1    2883
+Total:          1  992 104.8   1004    4321
+
+Percentage of the requests served within a certain time (ms)
+  50%   1004
+  66%   1004
+  75%   1005
+  80%   1005
+  90%   1005
+  95%   1006
+  98%   1006
+  99%   1008
+ 100%   4321 (longest request)
+</code></pre><p>HPA&#x7684;&#x53D8;&#x5316;&#xFF1A;</p>
+<ol>
+<li>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5F53;cpu&#x7684;&#x538B;&#x529B;&#x8D85;&#x8FC7;10%&#x540E;&#xFF0C;&#x6BCF;&#x8FC7;3&#x5206;&#x949F;replicas&#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x6269;&#x5C55;&#x6765;&#x5206;&#x62C5;&#x538B;&#x529B;&#x3002;</li>
+<li>&#x5728;ab&#x6D4B;&#x8BD5;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;replicas&#x5DF2;&#x7ECF;&#x88AB;&#x6269;&#x5230;&#x6700;&#x5927;&#x7684;10&#x4E2A;&#xFF0C;&#x4F46;&#x662F;cpu&#x7684;&#x4F7F;&#x7528;&#x7387;&#x8FD8;&#x662F;&#x8D85;&#x8FC7;&#x4E86;10%&#xFF0C;&#x6240;&#x4EE5;replicas&#x7684;&#x6570;&#x91CF;&#x6CA1;&#x6709;&#x964D;&#x4E0B;&#x53BB;</li>
+<li>&#x5F53;ab&#x6D4B;&#x8BD5;&#x5B8C;&#x6210;&#x540E;&#xFF0C;cpu&#x7684;&#x4F7F;&#x7528;&#x7387;&#x5F00;&#x59CB;&#x4E0B;&#x964D;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;replcas&#x7684;&#x6570;&#x91CF;&#x4E5F;&#x6162;&#x6162;&#x4ECE;10&#x964D;&#x4E3A;7&#xFF0C;&#x6700;&#x540E;&#x964D;&#x4E3A;1&#x3002;<pre class="language-"><code>[root@k8s-master ~]# kubectl get hpa --watch
+NAME      REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+nginx     Deployment/nginx   0%/10%    1         10        1         6h
+nginx     Deployment/nginx   30%/10%   1         10        1         6h
+nginx     Deployment/nginx   30%/10%   1         10        3         6h
+nginx     Deployment/nginx   70%/10%   1         10        3         6h
+nginx     Deployment/nginx   70%/10%   1         10        3         6h
+nginx     Deployment/nginx   40%/10%   1         10        3         6h
+nginx     Deployment/nginx   40%/10%   1         10        3         6h
+nginx     Deployment/nginx   40%/10%   1         10        3         6h
+nginx     Deployment/nginx   40%/10%   1         10        6         6h
+nginx     Deployment/nginx   32%/10%   1         10        6         6h
+nginx     Deployment/nginx   32%/10%   1         10        6         6h
+nginx     Deployment/nginx   22%/10%   1         10        6         6h
+nginx     Deployment/nginx   22%/10%   1         10        6         6h
+nginx     Deployment/nginx   22%/10%   1         10        6         6h
+nginx     Deployment/nginx   22%/10%   1         10        10        6h
+nginx     Deployment/nginx   19%/10%   1         10        10        6h
+nginx     Deployment/nginx   19%/10%   1         10        10        6h
+nginx     Deployment/nginx   14%/10%   1         10        10        6h
+nginx     Deployment/nginx   14%/10%   1         10        10        6h
+nginx     Deployment/nginx   14%/10%   1         10        10        6h
+nginx     Deployment/nginx   14%/10%   1         10        10        6h
+nginx     Deployment/nginx   14%/10%   1         10        10        6h
+nginx     Deployment/nginx   7%/10%    1         10        10        6h
+nginx     Deployment/nginx   7%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        7         6h
+nginx     Deployment/nginx   0%/10%    1         10        1         6h
+nginx     Deployment/nginx   0%/10%    1         10        1         6h
+</code></pre></li>
+</ol>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
+2019-01-15 15:22:46
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="容器的资源使用限制.html" class="navigation navigation-prev " aria-label="Previous page: pod的资源请求与限制">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="容器安全.html" class="navigation navigation-next " aria-label="Next page: 容器安全">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"pod的HPA特性","level":"1.7.10","depth":2,"next":{"title":"容器安全","level":"1.7.11","depth":2,"path":"pod/容器安全.md","ref":"pod/容器安全.md","articles":[]},"previous":{"title":"pod的资源请求与限制","level":"1.7.9","depth":2,"path":"pod/容器的资源使用限制.md","ref":"pod/容器的资源使用限制.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"pod/pod的HPA特性.md","mtime":"2019-01-15T07:22:46.848Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
