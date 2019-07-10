@@ -103,6 +103,7 @@
 * [helm](helm/helm.md)
     * [helm安装及简单使用](helm/helm安装.md)
     * [helm安装FAQ](helm/helm-FAQ.md)
+	* [helmV3版本试用及新特性](helm/try-helmv3.md)
 * [rancher的使用](3rdui/rancher的使用.md)
 * [kubeedge](kubeedge/kubeedge介绍.md)
   - [kubeedge介绍](kubeedge/kubeedge介绍.md)

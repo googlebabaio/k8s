@@ -91,6 +91,24 @@ clusterrolebinding.rbac.authorization.k8s.io "tiller-cluster-rule" created
 # kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 deployment.extensions "tiller-deploy" patched
 ```
+### 仓库的添加与删除
+查看仓库
+```
+# helm repo list
+NAME    URL
+stable  https://kubernetes-charts.storage.googleapis.com
+local   http://127.0.0.1:8879/charts
+```
+
+删除仓库
+```
+helm repo remove stable
+```
+
+添加仓库
+```
+helm repo add ali-apphub https://apphub.aliyuncs.com
+```
 
 ### 搜索Helm应用
 ```
@@ -102,6 +120,12 @@ stable/jenkins	0.13.5       	2.73       	Open source continuous integration serv
 NAME  	URL
 stable	https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 local 	http://127.0.0.1:8879/charts
+```
+
+### 查看应用
+```
+helm inspect stable/jenkins
+helm inspect values stable/jenkins
 ```
 
 ### 安装应用
