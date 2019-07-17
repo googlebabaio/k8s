@@ -142,5 +142,20 @@ cd 对应的目录中
 helm install -n redis-sure -f values.yaml  .
 ```
 
+### 更新release
+```
+helm upgrade mysql -f mysql/values.yaml --set resources.requests.memory=1024Mi mysql
+```
+
+### 查看指定release的历史部署版本信息
+```
+helm hist mysql
+```
+
+### 版本回滚
+```
+helm rollback --debug mysql 1
+```
+
 ## 四、参考
 官方文档 https://docs.helm.sh/using_helm
