@@ -227,16 +227,127 @@ source /etc/profile
 > 说明：以上的环境配置只是为了编译二进制的edgecore，如果环境有限的话，可以直接去官网下载好二进制文件部署 https://github.com/kubeedge/kubeedge/releases
 
 ## 3.配置kubeedge边端
-获取源码
+### 获取指定的1.1版本的源码
+```
+git clone  --branch release-1.1 https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
+
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+```
+
+### 将云端的证书复制到相应的路径上
+```
+mkdir -p /etc/kubeedge
+
+scp -r 云端:/etc/kubeedge /etc/kubeedge
+```
 
 编译二进制文件
+```
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+make all WHAT=edgecore
+```
 
 run mqtt
-
+```
+mosquitto -d -p 1883
+```
 
 编辑配置文件
+```
+mkdir ~/cmd/conf
+cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/conf/* ~/cmd/conf
+vim ~/cmd/conf/edge.yaml
+```
+
+```
+mqtt:
+    server: tcp://127.0.0.1:1883 # external mqtt broker url.
+    internal-server: tcp://127.0.0.1:1884 # internal mqtt broker url.
+    mode: 0 # 0: internal mqtt broker enable only. 1: internal and external mqtt broker enable. 2: external mqtt broker
+enable only.
+    qos: 0 # 0: QOSAtMostOnce, 1: QOSAtLeastOnce, 2: QOSExactlyOnce.
+    retain: false # if the flag set true, server will store the message and can be delivered to future subscribers.
+    session-queue-size: 100 # A size of how many sessions will be handled. default to 100.
+
+edgehub:
+    websocket:
+        url: wss://0.0.0.0:10000/e632aba927ea4ac2b575ec1603d56f10/edge-node/events
+        certfile: /etc/kubeedge/certs/edge.crt
+        keyfile: /etc/kubeedge/certs/edge.key
+        handshake-timeout: 30 #second
+        write-deadline: 15 # second
+        read-deadline: 15 # second
+    quic:
+        url: 127.0.0.1:10001
+        cafile: /etc/kubeedge/ca/rootCA.crt
+        certfile: /etc/kubeedge/certs/edge.crt
+        keyfile: /etc/kubeedge/certs/edge.key
+        handshake-timeout: 30 #second
+        write-deadline: 15 # second
+        read-deadline: 15 # second
+    controller:
+        protocol: websocket # websocket, quic
+        heartbeat: 15  # second
+        project-id: e632aba927ea4ac2b575ec1603d56f10
+        node-id: edge-node
+
+edged:
+    register-node-namespace: default
+    hostname-override: edge-node
+    interface-name: eth0
+    edged-memory-capacity-bytes: 7852396000
+    node-status-update-frequency: 10 # second
+    device-plugin-enabled: false
+    gpu-plugin-enabled: false
+    image-gc-high-threshold: 80 # percent
+    image-gc-low-threshold: 40 # percent
+    maximum-dead-containers-per-container: 1
+    docker-address: unix:///var/run/docker.sock
+    runtime-type: docker
+    remote-runtime-endpoint: unix:///var/run/dockershim.sock
+    remote-image-endpoint: unix:///var/run/dockershim.sock
+    runtime-request-timeout: 2
+    podsandbox-image: kubeedge/pause:3.1 # kubeedge/pause:3.1 for x86 arch , kubeedge/pause-arm:3.1 for arm arch, kubeedge/pause-arm64 for arm64 arch
+    image-pull-progress-deadline: 60 # second
+    cgroup-driver: cgroupfs
+    node-ip: ""
+    cluster-dns: ""
+    cluster-domain: ""
+
+    mesh:
+        loadbalance:
+            strategy-name: RoundRobin
+```
+
 
 run起来
+```
+cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/edgecore ~/cmd/
+cd ~/cmd
+./edgecore
+# or
+nohup ./edgecore > edgecore.log 2>&1 &
+```
+
+如果客户端安装了systemd的，可以用systemd来作为守护进程
+```
+sudo ln build/tools/edge.service /etc/systemd/system/edge.service
+sudo systemctl daemon-reload
+sudo systemctl start edgecore
+sudo systemctl enable daemon-reload
+```
 
 # 测试
 如果一切顺利的话，这个时候在云端用`kubectl get node` 是能看到边缘节点已经`ready`起来了
+
+接下来只需要在云端部署一个应用，看边端是否能正常run起来即可
+
+```
+kubectl apply -f $GOPATH/src/github.com/kubeedge/kubeedge/build/deployment.yaml
+
+kubectl get deploy
+```
+
+来一个展示如图：
+
+![](assets/markdown-img-paste-20191014170746468.png)
