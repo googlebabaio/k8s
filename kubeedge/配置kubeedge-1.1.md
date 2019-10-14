@@ -258,7 +258,6 @@ cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/conf/* ~/cmd/conf
 vim ~/cmd/conf/edge.yaml
 ```
 
-```
 mqtt:
     server: tcp://127.0.0.1:1883 # external mqtt broker url.
     internal-server: tcp://127.0.0.1:1884 # internal mqtt broker url.
