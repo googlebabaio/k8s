@@ -177,7 +177,6 @@ kubectl apply -f ~/cmd/yaml/node.json
 
 ## 1.安装环境
 ```
-```
 yum install -y git
 
 mkdir /softdb
