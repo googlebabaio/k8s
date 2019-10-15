@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.md">
             
-                <a href="../kubeedge/配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2428,8 +2428,8 @@ spec:
               value: 192.168.3.6
             - name: NFS_PATH
               value: /nfsdisk
-          imagePullSecrets:
-          - name: harborsecret
+      imagePullSecrets:
+      - name: harborsecret
       volumes:
         - name: nfs-client-root
           nfs:
@@ -2539,7 +2539,7 @@ NAME                                                        CAPACITY   ACCESS MO
 persistentvolume/pvc-b51ca970-09b0-11e9-ada0-525400f9dfac   1Mi        RWX            Delete           Bound     default/test-claim   managed-nfs-storage             31s
 </code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5728;&#x521B;&#x5EFA;&#x4E86;&#x540D;&#x4E3A;<code>test-claim</code>&#x7684;PVC&#x540E;&#xFF0C;&#x52A8;&#x6001;&#x7684;&#x521B;&#x5EFA;&#x51FA;&#x4E86;&#x540D;&#x4E3A;<code>pvc-b51ca970-09b0-11e9-ada0-525400f9dfac</code>&#x7684;PV,&#x5B83;&#x4F7F;&#x7528;&#x7684;storageclass&#x6B63;&#x662F;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x7684;storageclass<code>managed-nfs-storage</code></p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-01-17 17:19:44
+2019-10-03 18:02:26
 </span></footer>
                                 
                                 </section>
@@ -2583,7 +2583,7 @@ persistentvolume/pvc-b51ca970-09b0-11e9-ada0-525400f9dfac   1Mi        RWX      
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"基于nfs的storageclass的配置","level":"1.10.4","depth":2,"next":{"title":"在k8s中使用ceph rbd","level":"1.10.5","depth":2,"path":"storage/在k8s中使用rbd.md","ref":"storage/在k8s中使用rbd.md","articles":[]},"previous":{"title":"再说说 pv、pvc和storageclass","level":"1.10.3","depth":2,"path":"storage/pvpvcsc进一步说明.md","ref":"storage/pvpvcsc进一步说明.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"storage/nfs-storageclass使用.md","mtime":"2019-01-17T09:19:44.599Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"基于nfs的storageclass的配置","level":"1.10.4","depth":2,"next":{"title":"在k8s中使用ceph rbd","level":"1.10.5","depth":2,"path":"storage/在k8s中使用rbd.md","ref":"storage/在k8s中使用rbd.md","articles":[]},"previous":{"title":"再说说 pv、pvc和storageclass","level":"1.10.3","depth":2,"path":"storage/pvpvcsc进一步说明.md","ref":"storage/pvpvcsc进一步说明.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"storage/nfs-storageclass使用.md","mtime":"2019-10-03T10:02:26.318Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
