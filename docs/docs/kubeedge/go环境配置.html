@@ -74,7 +74,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="配置kubeedge.html" />
+    <link rel="next" href="配置kubeedge.md" />
     
     
     <link rel="prev" href="kubeedge介绍.html" />
@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="配置kubeedge.md">
             
-                <a href="配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2220,13 +2220,16 @@
 cd /sure/goproject
 mkdir src pkg bin
 </code></pre><p>&#x4E0B;&#x8F7D;&#x89E3;&#x538B;</p>
-<pre class="language-"><code>wget https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz
-tar -C /usr/local -zxvf go1.12.4.linux-amd64.tar.gz
+<pre class="language-"><code>cd /softdb
+wget https://dl.google.com/go/go1.12.10.linux-amd64.tar.gz
+tar -C /usr/local -zxvf go1.12.10.linux-amd64.tar.gz
 </code></pre><p>&#x7F16;&#x8F91;&#x73AF;&#x5883;&#x53D8;&#x91CF;
 vim /etc/profile</p>
 <pre class="language-"><code>export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=/sure/goproject
+
+source /etc/profile
 </code></pre><h2 id="go&#x7684;&#x73AF;&#x5883;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;">go&#x7684;&#x73AF;&#x5883;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;</h2>
 <pre class="language-"><code>go_project     // go_project&#x4E3A;GOPATH&#x76EE;&#x5F55;
   -- bin
@@ -2254,8 +2257,10 @@ export GOPATH=/sure/goproject
 <pre class="language-"><code>git clone https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
 </code></pre><p>&#x6307;&#x5B9A;&#x7248;&#x672C;<code>v0.3.0-beta.0</code> &#x514B;&#x9686;</p>
 <pre class="language-"><code>git clone  --branch v0.3.0-beta.0 https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
+</code></pre><p>&#x6307;&#x5B9A;&#x7248;&#x672C;1.1</p>
+<pre class="language-"><code>git clone  --branch release-1.1 https://github.com/kubeedge/kubeedge.git $GOPATH/src/github.com/kubeedge/kubeedge
 </code></pre><footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-05-20 14:26:05
+2019-10-11 08:58:54
 </span></footer>
                                 
                                 </section>
@@ -2288,7 +2293,7 @@ export GOPATH=/sure/goproject
                 </a>
                 
                 
-                <a href="配置kubeedge.html" class="navigation navigation-next " aria-label="Next page: 配置kubeedge">
+                <a href="配置kubeedge.md" class="navigation navigation-next " aria-label="Next page: 配置kubeedge">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -2299,7 +2304,7 @@ export GOPATH=/sure/goproject
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"go环境配置","level":"1.20.2","depth":2,"next":{"title":"配置kubeedge","level":"1.20.3","depth":2,"path":"kubeedge/配置kubeedge.md","ref":"kubeedge/配置kubeedge.md","articles":[]},"previous":{"title":"kubeedge介绍","level":"1.20.1","depth":2,"path":"kubeedge/kubeedge介绍.md","ref":"kubeedge/kubeedge介绍.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"kubeedge/go环境配置.md","mtime":"2019-05-20T06:26:05.055Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"go环境配置","level":"1.20.2","depth":2,"next":{"title":"配置kubeedge","level":"1.20.3","depth":2,"path":"kubeedge/配置kubeedge.md","ref":"kubeedge/配置kubeedge.md","articles":[]},"previous":{"title":"kubeedge介绍","level":"1.20.1","depth":2,"path":"kubeedge/kubeedge介绍.md","ref":"kubeedge/kubeedge介绍.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"kubeedge/go环境配置.md","mtime":"2019-10-11T00:58:54.759Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.md">
             
-                <a href="../kubeedge/配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2233,27 +2233,27 @@
 /usr/share/openvswitch/scripts/ovn-ctl start_controller
 
 <span class="token comment"># start ovnkube</span>
-<span class="token function">nohup</span> <span class="token function">sudo</span> ovnkube -k8s-kubeconfig kubeconfig.yaml -net-controller \
- -loglevel<span class="token operator">=</span>4 \
- -k8s-apiserver<span class="token operator">=</span><span class="token string">&quot;http://<span class="token variable">$CENTRAL_IP</span>:8080&quot;</span> \
- -logfile<span class="token operator">=</span><span class="token string">&quot;/var/log/openvswitch/ovnkube.log&quot;</span> \
- -init-master<span class="token operator">=</span><span class="token variable">$NODE_NAME</span> -cluster-subnet<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$CLUSTER_IP_SUBNET</span>&quot;</span> \
- -service-cluster-ip-range<span class="token operator">=</span><span class="token variable">$SERVICE_IP_SUBNET</span> \
- -nodeport \
- -nb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6631&quot;</span> \
- -sb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6632&quot;</span> 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1 <span class="token operator">&amp;</span>
+<span class="token function">nohup</span> <span class="token function">sudo</span> ovnkube -k8s-kubeconfig kubeconfig.yaml -net-controller <span class="token punctuation">\</span>
+ -loglevel<span class="token operator">=</span><span class="token number">4</span> <span class="token punctuation">\</span>
+ -k8s-apiserver<span class="token operator">=</span><span class="token string">&quot;http://<span class="token variable">$CENTRAL_IP</span>:8080&quot;</span> <span class="token punctuation">\</span>
+ -logfile<span class="token operator">=</span><span class="token string">&quot;/var/log/openvswitch/ovnkube.log&quot;</span> <span class="token punctuation">\</span>
+ -init-master<span class="token operator">=</span><span class="token variable">$NODE_NAME</span> -cluster-subnet<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$CLUSTER_IP_SUBNET</span>&quot;</span> <span class="token punctuation">\</span>
+ -service-cluster-ip-range<span class="token operator">=</span><span class="token variable">$SERVICE_IP_SUBNET</span> <span class="token punctuation">\</span>
+ -nodeport <span class="token punctuation">\</span>
+ -nb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6631&quot;</span> <span class="token punctuation">\</span>
+ -sb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6632&quot;</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 </code></pre>
 <h3 id="&#x914D;&#x7F6E;node">&#x914D;&#x7F6E;Node</h3>
-<pre class="language-"><code class="lang-sh"><span class="token function">nohup</span> <span class="token function">sudo</span> ovnkube -k8s-kubeconfig kubeconfig.yaml -loglevel<span class="token operator">=</span>4 \
-    -logfile<span class="token operator">=</span><span class="token string">&quot;/var/log/openvswitch/ovnkube.log&quot;</span> \
-    -k8s-apiserver<span class="token operator">=</span><span class="token string">&quot;http://<span class="token variable">$CENTRAL_IP</span>:8080&quot;</span> \
-    -init-node<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$NODE_NAME</span>&quot;</span>  \
-    -nodeport \
-    -nb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6631&quot;</span> \
-    -sb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6632&quot;</span> -k8s-token<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$TOKEN</span>&quot;</span> \
-    -init-gateways \
-    -service-cluster-ip-range<span class="token operator">=</span><span class="token variable">$SERVICE_IP_SUBNET</span> \
-    -cluster-subnet<span class="token operator">=</span><span class="token variable">$CLUSTER_IP_SUBNET</span> 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1 <span class="token operator">&amp;</span>
+<pre class="language-"><code class="lang-sh"><span class="token function">nohup</span> <span class="token function">sudo</span> ovnkube -k8s-kubeconfig kubeconfig.yaml -loglevel<span class="token operator">=</span><span class="token number">4</span> <span class="token punctuation">\</span>
+    -logfile<span class="token operator">=</span><span class="token string">&quot;/var/log/openvswitch/ovnkube.log&quot;</span> <span class="token punctuation">\</span>
+    -k8s-apiserver<span class="token operator">=</span><span class="token string">&quot;http://<span class="token variable">$CENTRAL_IP</span>:8080&quot;</span> <span class="token punctuation">\</span>
+    -init-node<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$NODE_NAME</span>&quot;</span>  <span class="token punctuation">\</span>
+    -nodeport <span class="token punctuation">\</span>
+    -nb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6631&quot;</span> <span class="token punctuation">\</span>
+    -sb-address<span class="token operator">=</span><span class="token string">&quot;tcp://<span class="token variable">$CENTRAL_IP</span>:6632&quot;</span> -k8s-token<span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$TOKEN</span>&quot;</span> <span class="token punctuation">\</span>
+    -init-gateways <span class="token punctuation">\</span>
+    -service-cluster-ip-range<span class="token operator">=</span><span class="token variable">$SERVICE_IP_SUBNET</span> <span class="token punctuation">\</span>
+    -cluster-subnet<span class="token operator">=</span><span class="token variable">$CLUSTER_IP_SUBNET</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
 </code></pre>
 <h3 id="cni&#x63D2;&#x4EF6;&#x539F;&#x7406;">CNI&#x63D2;&#x4EF6;&#x539F;&#x7406;</h3>
 <h4 id="add&#x64CD;&#x4F5C;">ADD&#x64CD;&#x4F5C;</h4>
@@ -2262,10 +2262,10 @@
 <li>&#x5728;&#x5BB9;&#x5668;netns&#x4E2D;&#x914D;&#x7F6E;&#x63A5;&#x53E3;&#x548C;&#x8DEF;&#x7531;</li>
 <li>&#x6DFB;&#x52A0;ovs&#x7AEF;&#x53E3;</li>
 </ul>
-<pre class="language-"><code class="lang-sh">ovs-vsctl add-port br-int veth_outside \
-  --set interface veth_outside \
-    external_ids:attached_mac<span class="token operator">=</span>mac_address \
-    external_ids:iface-id<span class="token operator">=</span>namespace_pod \
+<pre class="language-"><code class="lang-sh">ovs-vsctl add-port br-int veth_outside <span class="token punctuation">\</span>
+  --set interface veth_outside <span class="token punctuation">\</span>
+    external_ids:attached_mac<span class="token operator">=</span>mac_address <span class="token punctuation">\</span>
+    external_ids:iface-id<span class="token operator">=</span>namespace_pod <span class="token punctuation">\</span>
     external_ids:ip_address<span class="token operator">=</span>ip_address
 </code></pre>
 <h4 id="del&#x64CD;&#x4F5C;">DEL&#x64CD;&#x4F5C;</h4>
@@ -2276,7 +2276,7 @@
 <h2 id="ovn-&#x5B89;&#x88C5;&#x65B9;&#x6CD5;">OVN &#x5B89;&#x88C5;&#x65B9;&#x6CD5;</h2>
 <p>&#x6240;&#x6709;&#x8282;&#x70B9;&#x914D;&#x7F6E;&#x5B89;&#x88C5;&#x6E90;&#x5E76;&#x5B89;&#x88C5;&#x516C;&#x5171;&#x4F9D;&#x8D56;</p>
 <pre class="language-"><code class="lang-sh"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> apt-transport-https
-<span class="token keyword">echo</span> <span class="token string">&quot;deb https://packages.wand.net.nz <span class="token variable"><span class="token variable">$(</span>lsb_release -sc<span class="token variable">)</span></span> main&quot;</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/wand.list
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;deb https://packages.wand.net.nz <span class="token variable"><span class="token variable">$(</span>lsb_release -sc<span class="token variable">)</span></span> main&quot;</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/wand.list
 <span class="token function">sudo</span> <span class="token function">curl</span> https://packages.wand.net.nz/keyring.gpg -o /etc/apt/trusted.gpg.d/wand.gpg
 <span class="token function">sudo</span> <span class="token function">apt-get</span> update
 
@@ -2299,7 +2299,7 @@
 <li><a href="https://github.com/openvswitch/ovn-kubernetes" target="_blank">https://github.com/openvswitch/ovn-kubernetes</a></li>
 </ul>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-03-05 14:10:33
+2019-10-03 17:30:35
 </span></footer>
                                 
                                 </section>
@@ -2343,7 +2343,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"OVN","level":"1.13.2.5","depth":3,"next":{"title":"Romana","level":"1.13.2.6","depth":3,"path":"network/romana.md","ref":"network/romana.md","articles":[]},"previous":{"title":"Calico","level":"1.13.2.4","depth":3,"path":"network/calico.md","ref":"network/calico.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/ovn-kubernetes.md","mtime":"2019-03-05T06:10:33.118Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"OVN","level":"1.13.2.5","depth":3,"next":{"title":"Romana","level":"1.13.2.6","depth":3,"path":"network/romana.md","ref":"network/romana.md","articles":[]},"previous":{"title":"Calico","level":"1.13.2.4","depth":3,"path":"network/calico.md","ref":"network/calico.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/ovn-kubernetes.md","mtime":"2019-10-03T09:30:35.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

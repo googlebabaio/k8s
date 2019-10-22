@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.md">
             
-                <a href="../kubeedge/配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2257,31 +2257,31 @@ kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/
 <p><img src="assets/markdown-img-paste-20190305140742361.png" alt=""></p>
 <pre class="language-"><code class="lang-sh"><span class="token comment"># Calico &#x76F8;&#x5173;&#x8FDB;&#x7A0B;</span>
 $ <span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> calico <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token function">grep</span>
-root      9012  8995  0 14:51 ?        00:00:00 /bin/sh -c /usr/local/bin/etcd --name<span class="token operator">=</span>calico --data-dir<span class="token operator">=</span>/var/etcd/calico-data --advertise-client-urls<span class="token operator">=</span>http://<span class="token variable">$CALICO_ETCD_IP</span>:6666 --listen-client-urls<span class="token operator">=</span>http://0.0.0.0:6666 --listen-peer-urls<span class="token operator">=</span>http://0.0.0.0:6667
-root      9038  9012  0 14:51 ?        00:00:01 /usr/local/bin/etcd --name<span class="token operator">=</span>calico --data-dir<span class="token operator">=</span>/var/etcd/calico-data --advertise-client-urls<span class="token operator">=</span>http://10.146.0.2:6666 --listen-client-urls<span class="token operator">=</span>http://0.0.0.0:6666 --listen-peer-urls<span class="token operator">=</span>http://0.0.0.0:6667
-root      9326  9325  0 14:51 ?        00:00:00 bird6 -R -s /var/run/calico/bird6.ctl -d -c /etc/calico/confd/config/bird6.cfg
-root      9327  9322  0 14:51 ?        00:00:00 confd -confdir<span class="token operator">=</span>/etc/calico/confd -interval<span class="token operator">=</span>5 -watch --log-level<span class="token operator">=</span>debug -node<span class="token operator">=</span>http://10.96.232.136:6666 -client-key<span class="token operator">=</span> -client-cert<span class="token operator">=</span> -client-ca-keys<span class="token operator">=</span>
-root      9328  9324  0 14:51 ?        00:00:00 bird -R -s /var/run/calico/bird.ctl -d -c /etc/calico/confd/config/bird.cfg
-root      9329  9323  1 14:51 ?        00:00:04 calico-felix
+root      <span class="token number">9012</span>  <span class="token number">8995</span>  <span class="token number">0</span> <span class="token number">14</span>:51 ?        00:00:00 /bin/sh -c /usr/local/bin/etcd --name<span class="token operator">=</span>calico --data-dir<span class="token operator">=</span>/var/etcd/calico-data --advertise-client-urls<span class="token operator">=</span>http://<span class="token variable">$CALICO_ETCD_IP</span>:6666 --listen-client-urls<span class="token operator">=</span>http://0.0.0.0:6666 --listen-peer-urls<span class="token operator">=</span>http://0.0.0.0:6667
+root      <span class="token number">9038</span>  <span class="token number">9012</span>  <span class="token number">0</span> <span class="token number">14</span>:51 ?        00:00:01 /usr/local/bin/etcd --name<span class="token operator">=</span>calico --data-dir<span class="token operator">=</span>/var/etcd/calico-data --advertise-client-urls<span class="token operator">=</span>http://10.146.0.2:6666 --listen-client-urls<span class="token operator">=</span>http://0.0.0.0:6666 --listen-peer-urls<span class="token operator">=</span>http://0.0.0.0:6667
+root      <span class="token number">9326</span>  <span class="token number">9325</span>  <span class="token number">0</span> <span class="token number">14</span>:51 ?        00:00:00 bird6 -R -s /var/run/calico/bird6.ctl -d -c /etc/calico/confd/config/bird6.cfg
+root      <span class="token number">9327</span>  <span class="token number">9322</span>  <span class="token number">0</span> <span class="token number">14</span>:51 ?        00:00:00 confd -confdir<span class="token operator">=</span>/etc/calico/confd -interval<span class="token operator">=</span><span class="token number">5</span> -watch --log-level<span class="token operator">=</span>debug -node<span class="token operator">=</span>http://10.96.232.136:6666 -client-key<span class="token operator">=</span> -client-cert<span class="token operator">=</span> -client-ca-keys<span class="token operator">=</span>
+root      <span class="token number">9328</span>  <span class="token number">9324</span>  <span class="token number">0</span> <span class="token number">14</span>:51 ?        00:00:00 bird -R -s /var/run/calico/bird.ctl -d -c /etc/calico/confd/config/bird.cfg
+root      <span class="token number">9329</span>  <span class="token number">9323</span>  <span class="token number">1</span> <span class="token number">14</span>:51 ?        00:00:04 calico-felix
 </code></pre>
 <pre class="language-"><code class="lang-sh"><span class="token comment"># CNI &#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#x914D;&#x7F6E;</span>
 $ <span class="token function">cat</span> /etc/cni/net.d/10-calico.conf
 <span class="token punctuation">{</span>
-    <span class="token string">&quot;name&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;k8s-pod-network&quot;</span>,
-    <span class="token string">&quot;cniVersion&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0.1.0&quot;</span>,
-    <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;calico&quot;</span>,
-    <span class="token string">&quot;etcd_endpoints&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;http://10.96.232.136:6666&quot;</span>,
-    <span class="token string">&quot;log_level&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;info&quot;</span>,
-    <span class="token string">&quot;ipam&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span>
-        <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;calico-ipam&quot;</span>
+    <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;k8s-pod-network&quot;</span>,
+    <span class="token string">&quot;cniVersion&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0.1.0&quot;</span>,
+    <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;calico&quot;</span>,
+    <span class="token string">&quot;etcd_endpoints&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;http://10.96.232.136:6666&quot;</span>,
+    <span class="token string">&quot;log_level&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;info&quot;</span>,
+    <span class="token string">&quot;ipam&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;calico-ipam&quot;</span>
     <span class="token punctuation">}</span>,
-    <span class="token string">&quot;policy&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span>
-        <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;k8s&quot;</span>,
-         <span class="token string">&quot;k8s_api_root&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;https://10.96.0.1:443&quot;</span>,
-         <span class="token string">&quot;k8s_auth_token&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;&lt;token&gt;&quot;</span>
+    <span class="token string">&quot;policy&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;k8s&quot;</span>,
+         <span class="token string">&quot;k8s_api_root&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;https://10.96.0.1:443&quot;</span>,
+         <span class="token string">&quot;k8s_auth_token&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&lt;token&gt;&quot;</span>
     <span class="token punctuation">}</span>,
-    <span class="token string">&quot;kubernetes&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span>
-        <span class="token string">&quot;kubeconfig&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;/etc/cni/net.d/calico-kubeconfig&quot;</span>
+    <span class="token string">&quot;kubernetes&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;kubeconfig&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/etc/cni/net.d/calico-kubeconfig&quot;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
@@ -2290,7 +2290,7 @@ $ <span class="token function">cat</span> /etc/cni/net.d/calico-kubeconfig
 apiVersion: v1
 kind: Config
 clusters:
-- name: local
+- name: <span class="token builtin class-name">local</span>
   cluster:
     insecure-skip-tls-verify: <span class="token boolean">true</span>
 users:
@@ -2298,7 +2298,7 @@ users:
 contexts:
 - name: calico-context
   context:
-    cluster: local
+    cluster: <span class="token builtin class-name">local</span>
     user: calico
 current-context: calico-context
 </code></pre>
@@ -2316,7 +2316,7 @@ current-context: calico-context
 <li><a href="http://blog.dataman-inc.com/shurenyun-docker-133/" target="_blank">http://blog.dataman-inc.com/shurenyun-docker-133/</a></li>
 </ul>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-03-05 14:09:12
+2019-10-03 17:30:35
 </span></footer>
                                 
                                 </section>
@@ -2360,7 +2360,7 @@ current-context: calico-context
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calico","level":"1.13.2.4","depth":3,"next":{"title":"OVN","level":"1.13.2.5","depth":3,"path":"network/ovn-kubernetes.md","ref":"network/ovn-kubernetes.md","articles":[]},"previous":{"title":"Contiv","level":"1.13.2.3","depth":3,"path":"network/contiv.md","ref":"network/contiv.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/calico.md","mtime":"2019-03-05T06:09:12.557Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calico","level":"1.13.2.4","depth":3,"next":{"title":"OVN","level":"1.13.2.5","depth":3,"path":"network/ovn-kubernetes.md","ref":"network/ovn-kubernetes.md","articles":[]},"previous":{"title":"Contiv","level":"1.13.2.3","depth":3,"path":"network/contiv.md","ref":"network/contiv.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/calico.md","mtime":"2019-10-03T09:30:35.853Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
