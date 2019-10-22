@@ -32,3 +32,20 @@ ETCDCTL_API=3 etcdctl --endpoints=https://192.168.3.6:2379,https://192.168.3.25:
 | a44716fc | 28376050 |       1106 |     3.7 MB |
 +----------+----------+------------+------------+
 ```
+
+## etcd 删除namespace
+```
+ETCDCTL_API=3 etcdctl --endpoints=https://192.168.3.15:2379 --cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt del /registry/namespaces/NAMESPACE_NAME_XXX
+```
+
+
+## 查看所有的key
+```
+#!/bin/bash
+# Get kubernetes keys from etcd
+export ETCDCTL_API=3
+keys=`etcdctl --endpoints=https://192.168.3.15:2379 --cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt get /registry --prefix -w json|python -m json.tool|grep key|cut -d ":" -f2|tr -d '"'|tr -d ","`
+for x in $keys;do
+  echo $x|base64 -d|sort
+done
+```

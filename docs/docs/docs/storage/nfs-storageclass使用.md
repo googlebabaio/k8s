@@ -242,8 +242,8 @@ spec:
               value: 192.168.3.6
             - name: NFS_PATH
               value: /nfsdisk
-          imagePullSecrets:
-          - name: harborsecret
+      imagePullSecrets:
+      - name: harborsecret
       volumes:
         - name: nfs-client-root
           nfs:

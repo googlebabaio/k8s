@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.md">
             
-                <a href="../kubeedge/配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2274,9 +2274,9 @@
 </ol>
 <p><img src="assets/markdown-img-paste-20190213172009785.png" alt=""></p>
 <p>&#x6240;&#x6709;CNI&#x63D2;&#x4EF6;&#x5747;&#x652F;&#x6301;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x548C;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x4F20;&#x5165;&#x53C2;&#x6570;&#xFF1A;</p>
-<pre class="language-"><code class="lang-sh">$ <span class="token keyword">echo</span> <span class="token string">&apos;{&quot;cniVersion&quot;: &quot;0.3.1&quot;,&quot;name&quot;: &quot;mynet&quot;,&quot;type&quot;: &quot;macvlan&quot;,&quot;bridge&quot;: &quot;cni0&quot;,&quot;isGateway&quot;: true,&quot;ipMasq&quot;: true,&quot;ipam&quot;: {&quot;type&quot;: &quot;host-local&quot;,&quot;subnet&quot;: &quot;10.244.1.0/24&quot;,&quot;routes&quot;: [{ &quot;dst&quot;: &quot;0.0.0.0/0&quot; }]}}&apos;</span> <span class="token operator">|</span> <span class="token function">sudo</span> CNI_COMMAND<span class="token operator">=</span>ADD CNI_NETNS<span class="token operator">=</span>/var/run/netns/a CNI_PATH<span class="token operator">=</span>./bin CNI_IFNAME<span class="token operator">=</span>eth0 CNI_CONTAINERID<span class="token operator">=</span>a CNI_VERSION<span class="token operator">=</span>0.3.1 ./bin/bridge
+<pre class="language-"><code class="lang-sh">$ <span class="token builtin class-name">echo</span> <span class="token string">&apos;{&quot;cniVersion&quot;: &quot;0.3.1&quot;,&quot;name&quot;: &quot;mynet&quot;,&quot;type&quot;: &quot;macvlan&quot;,&quot;bridge&quot;: &quot;cni0&quot;,&quot;isGateway&quot;: true,&quot;ipMasq&quot;: true,&quot;ipam&quot;: {&quot;type&quot;: &quot;host-local&quot;,&quot;subnet&quot;: &quot;10.244.1.0/24&quot;,&quot;routes&quot;: [{ &quot;dst&quot;: &quot;0.0.0.0/0&quot; }]}}&apos;</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token assign-left variable">CNI_COMMAND</span><span class="token operator">=</span>ADD <span class="token assign-left variable">CNI_NETNS</span><span class="token operator">=</span>/var/run/netns/a <span class="token assign-left variable">CNI_PATH</span><span class="token operator">=</span>./bin <span class="token assign-left variable">CNI_IFNAME</span><span class="token operator">=</span>eth0 <span class="token assign-left variable">CNI_CONTAINERID</span><span class="token operator">=</span>a <span class="token assign-left variable">CNI_VERSION</span><span class="token operator">=</span><span class="token number">0.3</span>.1 ./bin/bridge
 
-$ <span class="token keyword">echo</span> <span class="token string">&apos;{&quot;cniVersion&quot;: &quot;0.3.1&quot;,&quot;type&quot;:&quot;IGNORED&quot;, &quot;name&quot;: &quot;a&quot;,&quot;ipam&quot;: {&quot;type&quot;: &quot;host-local&quot;, &quot;subnet&quot;:&quot;10.1.2.3/24&quot;}}&apos;</span> <span class="token operator">|</span> <span class="token function">sudo</span> CNI_COMMAND<span class="token operator">=</span>ADD CNI_NETNS<span class="token operator">=</span>/var/run/netns/a CNI_PATH<span class="token operator">=</span>./bin CNI_IFNAME<span class="token operator">=</span>a CNI_CONTAINERID<span class="token operator">=</span>a CNI_VERSION<span class="token operator">=</span>0.3.1 ./bin/host-local
+$ <span class="token builtin class-name">echo</span> <span class="token string">&apos;{&quot;cniVersion&quot;: &quot;0.3.1&quot;,&quot;type&quot;:&quot;IGNORED&quot;, &quot;name&quot;: &quot;a&quot;,&quot;ipam&quot;: {&quot;type&quot;: &quot;host-local&quot;, &quot;subnet&quot;:&quot;10.1.2.3/24&quot;}}&apos;</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token assign-left variable">CNI_COMMAND</span><span class="token operator">=</span>ADD <span class="token assign-left variable">CNI_NETNS</span><span class="token operator">=</span>/var/run/netns/a <span class="token assign-left variable">CNI_PATH</span><span class="token operator">=</span>./bin <span class="token assign-left variable">CNI_IFNAME</span><span class="token operator">=</span>a <span class="token assign-left variable">CNI_CONTAINERID</span><span class="token operator">=</span>a <span class="token assign-left variable">CNI_VERSION</span><span class="token operator">=</span><span class="token number">0.3</span>.1 ./bin/host-local
 </code></pre>
 <p>&#x5E38;&#x89C1;&#x7684;CNI&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#x6709;</p>
 <p><img src="assets/markdown-img-paste-20190213172024515.png" alt=""></p>
@@ -2446,7 +2446,7 @@ default via 10.10.0.1 dev eth0
 <li>passthrough&#x6A21;&#x5F0F;&#xFF1A;&#x5185;&#x6838;&#x7684; MACVLAN &#x6570;&#x636E;&#x5904;&#x7406;&#x903B;&#x8F91;&#x88AB;&#x8DF3;&#x8FC7;&#xFF0C;&#x786C;&#x4EF6;&#x51B3;&#x5B9A;&#x6570;&#x636E;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF0C;&#x4ECE;&#x800C;&#x91CA;&#x653E;&#x4E86; Host CPU &#x8D44;&#x6E90;</li>
 </ul>
 <p>&#x521B;&#x5EFA;macvlan&#x7684;&#x7B80;&#x5355;&#x65B9;&#x6CD5;&#x4E3A;</p>
-<pre class="language-"><code class="lang-sh">ip <span class="token function">link</span> add <span class="token function">link</span> <span class="token operator">&lt;</span>master-dev<span class="token operator">&gt;</span> name macvtap0 <span class="token function">type</span> macvtap
+<pre class="language-"><code class="lang-sh"><span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> <span class="token function">link</span> <span class="token operator">&lt;</span>master-dev<span class="token operator">&gt;</span> name macvtap0 <span class="token builtin class-name">type</span> macvtap
 </code></pre>
 <p>cni&#x914D;&#x7F6E;&#x683C;&#x5F0F;&#x4E3A;</p>
 <pre class="language-"><code>{
@@ -2512,37 +2512,37 @@ default via 10.10.0.1 dev eth0
 <p>&#x9996;&#x5148;&#xFF0C;&#x914D;&#x7F6E; CNI &#x7F51;&#x7EDC;&#x4F7F;&#x7528; bridge+portmap &#x63D2;&#x4EF6;&#xFF1A;</p>
 <pre class="language-"><code class="lang-sh"><span class="token comment"># cat /root/mynet.conflist</span>
 <span class="token punctuation">{</span>
-  <span class="token string">&quot;name&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;mynet&quot;</span>,
-  <span class="token string">&quot;cniVersion&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0.3.0&quot;</span>,
-  <span class="token string">&quot;plugins&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+  <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;mynet&quot;</span>,
+  <span class="token string">&quot;cniVersion&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0.3.0&quot;</span>,
+  <span class="token string">&quot;plugins&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span>
-      <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;bridge&quot;</span>,
-      <span class="token string">&quot;bridge&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;mynet&quot;</span>,
-      <span class="token string">&quot;ipMasq&quot;</span><span class="token keyword">:</span> true,
-      <span class="token string">&quot;isGateway&quot;</span><span class="token keyword">:</span> true,
-      <span class="token string">&quot;ipam&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span>
-      <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;host-local&quot;</span>,
-      <span class="token string">&quot;subnet&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;10.244.10.0/24&quot;</span>,
-      <span class="token string">&quot;routes&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
-          <span class="token punctuation">{</span><span class="token string">&quot;dst&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0.0.0.0/0&quot;</span><span class="token punctuation">}</span>
+      <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;bridge&quot;</span>,
+      <span class="token string">&quot;bridge&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;mynet&quot;</span>,
+      <span class="token string">&quot;ipMasq&quot;</span><span class="token builtin class-name">:</span> true,
+      <span class="token string">&quot;isGateway&quot;</span><span class="token builtin class-name">:</span> true,
+      <span class="token string">&quot;ipam&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+      <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;host-local&quot;</span>,
+      <span class="token string">&quot;subnet&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;10.244.10.0/24&quot;</span>,
+      <span class="token string">&quot;routes&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span><span class="token string">&quot;dst&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0.0.0.0/0&quot;</span><span class="token punctuation">}</span>
       <span class="token punctuation">]</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>,
     <span class="token punctuation">{</span>
-       <span class="token string">&quot;type&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;portmap&quot;</span>,
-       <span class="token string">&quot;capabilities&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span><span class="token string">&quot;portMappings&quot;</span><span class="token keyword">:</span> true<span class="token punctuation">}</span>
+       <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;portmap&quot;</span>,
+       <span class="token string">&quot;capabilities&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token string">&quot;portMappings&quot;</span><span class="token builtin class-name">:</span> true<span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>&#x7136;&#x540E;&#x901A;&#x8FC7; <code>CAP_ARGS</code> &#x8BBE;&#x7F6E;&#x7AEF;&#x53E3;&#x6620;&#x5C04;&#x53C2;&#x6570;&#xFF1A;</p>
 <pre class="language-"><code class="lang-sh"><span class="token comment"># export CAP_ARGS=&apos;{</span>
-    <span class="token string">&quot;portMappings&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;portMappings&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;hostPort&quot;</span><span class="token keyword">:</span>      9090,
-            <span class="token string">&quot;containerPort&quot;</span><span class="token keyword">:</span> 80,
-            <span class="token string">&quot;protocol&quot;</span><span class="token keyword">:</span>      <span class="token string">&quot;tcp&quot;</span>,
-            <span class="token string">&quot;hostIP&quot;</span><span class="token keyword">:</span>        <span class="token string">&quot;127.0.0.1&quot;</span>
+            <span class="token string">&quot;hostPort&quot;</span><span class="token builtin class-name">:</span>      <span class="token number">9090</span>,
+            <span class="token string">&quot;containerPort&quot;</span><span class="token builtin class-name">:</span> <span class="token number">80</span>,
+            <span class="token string">&quot;protocol&quot;</span><span class="token builtin class-name">:</span>      <span class="token string">&quot;tcp&quot;</span>,
+            <span class="token string">&quot;hostIP&quot;</span><span class="token builtin class-name">:</span>        <span class="token string">&quot;127.0.0.1&quot;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>&apos;
@@ -2551,41 +2551,41 @@ default via 10.10.0.1 dev eth0
 <pre class="language-"><code class="lang-sh"><span class="token comment"># ip netns add test</span>
 <span class="token comment"># CNI_PATH=/opt/cni/bin NETCONFPATH=/root ./cnitool add mynet /var/run/netns/test</span>
 <span class="token punctuation">{</span>
-    <span class="token string">&quot;interfaces&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;interfaces&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;name&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;mynet&quot;</span>,
-            <span class="token string">&quot;mac&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0a:58:0a:f4:0a:01&quot;</span>
+            <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;mynet&quot;</span>,
+            <span class="token string">&quot;mac&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0a:58:0a:f4:0a:01&quot;</span>
         <span class="token punctuation">}</span>,
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;name&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;veth2cfb1d64&quot;</span>,
-            <span class="token string">&quot;mac&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;4a:dc:1f:b7:56:b1&quot;</span>
+            <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;veth2cfb1d64&quot;</span>,
+            <span class="token string">&quot;mac&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;4a:dc:1f:b7:56:b1&quot;</span>
         <span class="token punctuation">}</span>,
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;name&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;eth0&quot;</span>,
-            <span class="token string">&quot;mac&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0a:58:0a:f4:0a:07&quot;</span>,
-            <span class="token string">&quot;sandbox&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;/var/run/netns/test&quot;</span>
+            <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;eth0&quot;</span>,
+            <span class="token string">&quot;mac&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0a:58:0a:f4:0a:07&quot;</span>,
+            <span class="token string">&quot;sandbox&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/var/run/netns/test&quot;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>,
-    <span class="token string">&quot;ips&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;ips&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;version&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;4&quot;</span>,
-            <span class="token string">&quot;interface&quot;</span><span class="token keyword">:</span> 2,
-            <span class="token string">&quot;address&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;10.244.10.7/24&quot;</span>,
-            <span class="token string">&quot;gateway&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;10.244.10.1&quot;</span>
+            <span class="token string">&quot;version&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;4&quot;</span>,
+            <span class="token string">&quot;interface&quot;</span><span class="token builtin class-name">:</span> <span class="token number">2</span>,
+            <span class="token string">&quot;address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;10.244.10.7/24&quot;</span>,
+            <span class="token string">&quot;gateway&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;10.244.10.1&quot;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>,
-    <span class="token string">&quot;routes&quot;</span><span class="token keyword">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;routes&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
-            <span class="token string">&quot;dst&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;0.0.0.0/0&quot;</span>
+            <span class="token string">&quot;dst&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0.0.0.0/0&quot;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>,
-    <span class="token string">&quot;dns&quot;</span><span class="token keyword">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token string">&quot;dns&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
 <p>&#x53EF;&#x4EE5;&#x4ECE; iptables &#x89C4;&#x5219;&#x4E2D;&#x770B;&#x5230;&#x6DFB;&#x52A0;&#x7684;&#x89C4;&#x5219;&#xFF1A;</p>
 <pre class="language-"><code class="lang-sh"><span class="token comment"># iptables-save | grep 10.244.10.7</span>
--A CNI-DN-be1eedf7a76853f303ebd -d 127.0.0.1/32 -p tcp -m tcp --dport 9090 -j DNAT --to-destination 10.244.10.7:80
--A CNI-SN-be1eedf7a76853f303ebd -s 127.0.0.1/32 -d 10.244.10.7/32 -p tcp -m tcp --dport 80 -j MASQUERADE
+-A CNI-DN-be1eedf7a76853f303ebd -d <span class="token number">127.0</span>.0.1/32 -p tcp -m tcp --dport <span class="token number">9090</span> -j DNAT --to-destination <span class="token number">10.244</span>.10.7:80
+-A CNI-SN-be1eedf7a76853f303ebd -s <span class="token number">127.0</span>.0.1/32 -d <span class="token number">10.244</span>.10.7/32 -p tcp -m tcp --dport <span class="token number">80</span> -j MASQUERADE
 </code></pre>
 <p>&#x6700;&#x540E;&#xFF0C;&#x6E05;&#x7406;&#x7F51;&#x7EDC;&#x63A5;&#x53E3;&#xFF1A;</p>
 <pre class="language-"><code># CNI_PATH=/opt/cni/bin NETCONFPATH=/root ./cnitool del mynet /var/run/netns/test
@@ -2601,7 +2601,7 @@ default via 10.10.0.1 dev eth0
 <p><a href="https://github.com/Huawei-PaaS/CNI-Genie" target="_blank">CNI-Genie</a>&#x662F;&#x534E;&#x4E3A;PaaS&#x56E2;&#x961F;&#x63A8;&#x51FA;&#x7684;&#x540C;&#x65F6;&#x652F;&#x6301;&#x591A;&#x79CD;&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#xFF08;&#x652F;&#x6301;calico, canal, romana, weave&#x7B49;&#xFF09;&#x7684;CNI&#x63D2;&#x4EF6;&#x3002;</p>
 <p>&#x9879;&#x76EE;&#x4E3B;&#x9875;&#x4E3A;<a href="https://github.com/Huawei-PaaS/CNI-Genie" target="_blank">https://github.com/Huawei-PaaS/CNI-Genie</a>&#x3002;</p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-03-05 14:25:28
+2019-10-03 17:30:35
 </span></footer>
                                 
                                 </section>
@@ -2645,7 +2645,7 @@ default via 10.10.0.1 dev eth0
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"cni","level":"1.3.3","depth":2,"next":{"title":"etcd介绍","level":"1.3.4","depth":2,"path":"arch/etcd介绍.md","ref":"arch/etcd介绍.md","articles":[]},"previous":{"title":"kubernetes的架构","level":"1.3.2","depth":2,"path":"arch/kubernetes的架构.md","ref":"arch/kubernetes的架构.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"arch/cni.md","mtime":"2019-03-05T06:25:28.420Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"cni","level":"1.3.3","depth":2,"next":{"title":"etcd介绍","level":"1.3.4","depth":2,"path":"arch/etcd介绍.md","ref":"arch/etcd介绍.md","articles":[]},"previous":{"title":"kubernetes的架构","level":"1.3.2","depth":2,"path":"arch/kubernetes的架构.md","ref":"arch/kubernetes的架构.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"arch/cni.md","mtime":"2019-10-03T09:30:35.149Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

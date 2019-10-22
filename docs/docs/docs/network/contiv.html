@@ -1901,9 +1901,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.html">
+        <li class="chapter " data-level="1.20.3" data-path="../kubeedge/配置kubeedge.md">
             
-                <a href="../kubeedge/配置kubeedge.html">
+                <span>
             
                     
                         <b>1.20.3.</b>
@@ -2230,22 +2230,22 @@
 <p><img src="https://raw.githubusercontent.com/contiv/ofnet/master/docs/Architecture.jpg" alt=""></p>
 <h2 id="kubernetes&#x96C6;&#x6210;">Kubernetes&#x96C6;&#x6210;</h2>
 <p>Ansible&#x90E8;&#x7F72;&#x89C1;<a href="https://github.com/kubernetes/contrib/tree/master/ansible/roles/contiv" target="_blank">https://github.com/kubernetes/contrib/tree/master/ansible/roles/contiv</a>&#x3002;</p>
-<pre class="language-"><code class="lang-sh"><span class="token function">export</span> VERSION<span class="token operator">=</span>1.0.0-beta.3
+<pre class="language-"><code class="lang-sh"><span class="token builtin class-name">export</span> <span class="token assign-left variable">VERSION</span><span class="token operator">=</span><span class="token number">1.0</span>.0-beta.3
 <span class="token function">curl</span> -L -O https://github.com/contiv/install/releases/download/<span class="token variable">$VERSION</span>/contiv-<span class="token variable">$VERSION</span>.tgz
 <span class="token function">tar</span> xf contiv-<span class="token variable">$VERSION</span>.tgz
-<span class="token function">cd</span> ~/contiv/contiv-<span class="token variable">$VERSION</span>/install/k8s
-netctl --netmaster http://<span class="token variable">$netmaster</span>:9999 global <span class="token keyword">set</span> --fwd-mode routing
+<span class="token builtin class-name">cd</span> ~/contiv/contiv-<span class="token variable">$VERSION</span>/install/k8s
+netctl --netmaster http://<span class="token variable">$netmaster</span>:9999 global <span class="token builtin class-name">set</span> --fwd-mode routing
 
-<span class="token function">cd</span> ~/contiv/contiv-<span class="token variable">$VERSION</span>
-install/k8s/install.sh -n 10.87.49.77 -v b -w routing
+<span class="token builtin class-name">cd</span> ~/contiv/contiv-<span class="token variable">$VERSION</span>
+install/k8s/install.sh -n <span class="token number">10.87</span>.49.77 -v b -w routing
 
 <span class="token comment"># check contiv pods</span>
-<span class="token function">export</span> NETMASTER<span class="token operator">=</span>http://10.87.49.77:9999
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">NETMASTER</span><span class="token operator">=</span>http://10.87.49.77:9999
 netctl global info
 
 <span class="token comment"># create a network</span>
 <span class="token comment"># netctl network create --encap=vlan --pkt-tag=3280 --subnet=10.100.100.215-10.100.100.220/27 --gateway=10.100.100.193 vlan3280</span>
-netctl net create -t default --subnet<span class="token operator">=</span>20.1.1.0/24 default-net
+netctl net create -t default --subnet<span class="token operator">=</span><span class="token number">20.1</span>.1.0/24 default-net
 
 <span class="token comment">#  create BGP connections to each of the nodes</span>
 netctl bgp create devstack-77 --router-ip<span class="token operator">=</span><span class="token string">&quot;30.30.30.77/24&quot;</span> --as<span class="token operator">=</span><span class="token string">&quot;65000&quot;</span> --neighbor-as<span class="token operator">=</span><span class="token string">&quot;65000&quot;</span> --neighbor<span class="token operator">=</span><span class="token string">&quot;30.30.30.2&quot;</span>
@@ -2262,7 +2262,7 @@ netctl bgp create devstack-71 --router-ip<span class="token operator">=</span><s
 <li><a href="http://blog.michali.net/2017/03/20/kubernetes-and-contiv-on-bare-metal-with-l3bgp/" target="_blank">Kubernetes and Contiv on Bare-Metal with L3/BGP</a></li>
 </ul>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; suredandan 2018 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">UpdateTime: 
-2019-03-05 14:05:50
+2019-10-03 17:30:35
 </span></footer>
                                 
                                 </section>
@@ -2306,7 +2306,7 @@ netctl bgp create devstack-71 --router-ip<span class="token operator">=</span><s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Contiv","level":"1.13.2.3","depth":3,"next":{"title":"Calico","level":"1.13.2.4","depth":3,"path":"network/calico.md","ref":"network/calico.md","articles":[]},"previous":{"title":"Weave Net","level":"1.13.2.2","depth":3,"path":"network/weave.md","ref":"network/weave.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/contiv.md","mtime":"2019-03-05T06:05:50.460Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-10T07:05:48.604Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Contiv","level":"1.13.2.3","depth":3,"next":{"title":"Calico","level":"1.13.2.4","depth":3,"path":"network/calico.md","ref":"network/calico.md","articles":[]},"previous":{"title":"Weave Net","level":"1.13.2.2","depth":3,"path":"network/weave.md","ref":"network/weave.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","prism-themes","-highlight","codesnippet","splitter","simple-page-toc","page-toc-button","back-to-top-button","-lunr","-search","search-plus","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","theme-default","sitemap-general"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © suredandan 2018","modify_label":"UpdateTime: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-solarizedlight.css"]},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"codesnippet":{},"sitemap-general":{"prefix":"http://www.googlebaba.io/k8s/"},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"_CAPTION_"}},"theme":"default","author":"suredandan","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"K8s小百科","language":"zh-hans","gitbook":"*","description":"K8s小百科"},"file":{"path":"network/contiv.md","mtime":"2019-10-03T09:30:35.853Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-10-15T03:43:01.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

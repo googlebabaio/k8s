@@ -66,9 +66,11 @@ MQTT拥有14种不同的消息类型：
 - DISCONNECT：客户端终止连接前优雅地通知MQTT代理
 
 # MQTT的实现
-推荐两种：
-- mosquitto
-- EMQ
+
+
+推荐参考两种mqtt协议的实现：
+- [mosquitto](https://mosquitto.org/)
+- [EMQ](https://www.emqx.io/cn/)
 
 
 # 参考
