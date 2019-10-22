@@ -1,3 +1,6 @@
+<!--toc-->
+
+在k8s-1.16.1上安装部署helm-v2.14.3的时候，发现报错，查了下，问题是k8s新版本
 https://github.com/helm/helm/issues/6458
 
 
