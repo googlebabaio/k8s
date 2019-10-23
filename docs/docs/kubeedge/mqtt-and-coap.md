@@ -103,8 +103,14 @@ CoAP  | 低功耗  | UDP  |  数据采集/传感器 |  较低
 由于物联网架构下，感测节点本身多半采用MCU，且以电池供电，故这些新的M2M协定必须考量，在有限的硬件能力及功耗等条件下，使得M2M Traffic在进行网路传输时，有较高的Throughput、低延迟、低电力耗损，甚至提供不同的QoS (Quality of Service)。
 
 ## 目前各家提供连结物联网装置的云端资料服务平台
-AWS IoT( https://aws.amazon.com/tw/iot/)、Evrythng (https://evrythng.com/))、Xively( https://www.xively.com/ )、ThingSpeak( https:/ /thingspeak.com/ )、ThingWorx(https://www.thingworx.com/ )等及晶片厂提供的云平台，如联发科的MCS( https://mcs.mediatek.com/ )、ARM mbed Device Connector ( https://connector.mbed.com/ )等，都广泛支援CoAP及MQTT协定，故将选择此两种协定来进行说明与比较。
-![](assets/markdown-img-paste-2019091912544733.png)
+[AWS IoT]( https://aws.amazon.com/tw/iot/)、[Evrythng](https://evrythng.com/)、[Xively]( https://www.xively.com/ )、[ThingSpeak](https://thingspeak.com/)、[ThingWorx](https://www.thingworx.com/ )等及晶片厂提供的云平台，如联发科的[MCS]( https://mcs.mediatek.com/ )、[ARM mbed Device Connector]( https://connector.mbed.com/ )等，都广泛支援CoAP及MQTT协定，故将选择此两种协定来进行说明与比较。
+
+通信协议  | restful  | 传输层  | publish/subscribe  | request/Response  | 加密  |qos   | 封包标头  | 是否开源
+--|---|---|---|---|---|---|---|--
+CoAP  | &radic;  | UDP  | &radic;  |&radic;   | DTLS  | &radic;  | 4  |  libcoap
+MQTT  | &times;  | TCP  | &radic;  |  &times; | SSL  | &radic;  | 2  |  paho/mosquitto/mqtt.js/emq
+HTTP  | &radic;  | TCP  | &times;  | &radic;  | SSL  | &times; | ~  |
+
 
 然而CoAP Client要取得位于NAT后方的感测节点资料，则须要在路由器上，设上设定virtual server，或port forwarding之类才能使用，不然就必须另外有第三方伺服器存在，让感测节点先连出才行。
 

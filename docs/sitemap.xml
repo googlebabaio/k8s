@@ -117,4 +117,7 @@
 <url> <loc>http://www.googlebaba.io/k8s/release/1.11.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/release/1.12.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/release/1.13.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
+<url> <loc>http://www.googlebaba.io/k8s/release/1.14.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
+<url> <loc>http://www.googlebaba.io/k8s/release/1.15.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
+<url> <loc>http://www.googlebaba.io/k8s/release/1.16.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 </urlset>

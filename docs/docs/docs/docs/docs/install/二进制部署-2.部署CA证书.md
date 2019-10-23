@@ -1,0 +1,116 @@
+
+<!-- toc --> 
+
+* * * * *
+## 一、创建认证中心(CA)
+CFSSL可以创建一个获取和操作证书的内部认证中心。
+
+运行认证中心需要一个CA证书和相应的CA私钥。任何知道私钥的人都可以充当CA颁发证书。因此，私钥的保护至关重要。
+### 1.配置证书生成策略
+
+```
+# cat ca-config.json 
+{
+  "signing": {
+    "default": {
+      "expiry": "8760h"
+    },
+    "profiles": {
+      "kubernetes": {
+        "usages": [
+            "signing",
+            "key encipherment",
+            "server auth",
+            "client auth"
+        ],
+        "expiry": "8760h"
+      }
+    }
+  }
+}
+```
+这个策略，有一个默认的配置，和一个profile，可以设置多个profile，这里的profile是kubernetes，也可以是其他用途的比如说etcd等。
+* 默认策略，指定了证书的有效期是一年(8760h)
+* kubernetes策略，指定了证书的用途
+* signing, 表示该证书可用于签名其它证书；生成的 ca.pem 证书中 CA=TRUE
+* server auth：表示 client 可以用该 CA 对 server 提供的证书进行验证
+* client auth：表示 server 可以用该 CA 对 client 提供的证书进行验证
+
+### 2.创建用来生成 CA 证书签名请求（CSR）的 JSON 配置文件
+```
+# cat ca-csr.json 
+{
+  "CN": "kubernetes",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "BeiJing",
+      "L": "BeiJing",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+```
+* CN: Common Name，浏览器使用该字段验证网站是否合法，一般写的是域名。非常重要。浏览器使用该字段验证网站是否合法
+* C: Country， 国家
+* L: Locality，地区，城市
+* O: Organization Name，组织名称，公司名称
+* OU: Organization Unit Name，组织单位名称，公司部门
+* ST: State，州，省
+
+
+### 3.生成CA证书和私钥(root 证书和私钥)
+ca证书：ca.pem
+私钥：ca-key.pem
+初始化CA
+`cfssl gencert -initca ca-csr.json | cfssljson -bare ca`这个命令会生成运行CA所必需的文件ca-key.pem（私钥）和ca.pem（证书），还会生成ca.csr（证书签名请求），用于交叉签名或重新签名。
+```
+[root@master temp]#  cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+2018/09/20 09:11:13 [INFO] generating a new CA key and certificate from CSR
+2018/09/20 09:11:13 [INFO] generate received request
+2018/09/20 09:11:13 [INFO] received CSR
+2018/09/20 09:11:13 [INFO] generating key: rsa-2048
+2018/09/20 09:11:13 [INFO] encoded CSR
+2018/09/20 09:11:13 [INFO] signed certificate with serial number 699701764142099640624355744880845590731160955045
+[root@master temp]# ls -lrt
+total 20
+-rw-r--r-- 1 root root  290 Sep 19 09:43 ca-config.json
+-rw-r--r-- 1 root root  208 Sep 19 09:46 ca-csr.json
+-rw-r--r-- 1 root root 1359 Sep 20 09:11 ca.pem
+-rw------- 1 root root 1675 Sep 20 09:11 ca-key.pem
+-rw-r--r-- 1 root root 1001 Sep 20 09:11 ca.csr
+```
+
+> 注意：
+    使用现有的CA私钥，重新生成：
+    ```
+    cfssl gencert -initca -ca-key key.pem ca-csr.json | cfssljson -bare ca
+    ```
+    使用现有的CA私钥和CA证书，重新生成：
+    ```
+    cfssl gencert -renewca -ca cert.pem -ca-key key.pem
+    ```
+
+#### 3.1 查看cert(证书信息):
+```
+cfssl certinfo -cert ca.pem
+```
+
+#### 3.2 查看CSR(证书签名请求)信息：
+```
+ cfssl certinfo -csr ca.csr
+```
+
+### 4.分发证书
+```
+# cp ca.csr ca.pem ca-key.pem ca-config.json /etc/kubernetes/ssl
+
+SCP证书到 node1 和 node2 节点
+# scp ca.pem node1:/etc/kubernetes/ssl 
+# scp ca.pem node2:/etc/kubernetes/ssl
+```

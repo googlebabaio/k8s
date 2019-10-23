@@ -95,7 +95,6 @@
 <url> <loc>http://www.googlebaba.io/k8s/3rdui/rancher的使用.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/kubeedge/kubeedge介绍.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/kubeedge/go环境配置.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
-<url> <loc>http://www.googlebaba.io/k8s/kubeedge/配置kubeedge.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/install/kubeedge管理平台初始化环境安装步骤.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/tips/k8s-tips.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
 <url> <loc>http://www.googlebaba.io/k8s/tips/k8s上下文介绍.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> </url>
