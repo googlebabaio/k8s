@@ -82,3 +82,6 @@ rules:
 ![](assets/markdown-img-paste-20190515144938640.png)
 
 所以,应该是clusterrole的问题造成的
+
+
+https://songjiayang.gitbooks.io/prometheus/content/pushgateway/
