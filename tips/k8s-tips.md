@@ -17,6 +17,11 @@ ln -s /opt/kubectx/kubens /usr/local/bin/ns
 kubectl taint nodes master node-role.kubernetes.io/master-
 ```
 
+### 重新加上污点
+```
+kubectl taint nodes master node-role.kubernetes.io/master=:NoSchedule
+```
+
 ### 将svc的type类型从ClusterIP变为NodePort
 ```
 kubectl patch service istio-ingressgateway  -p '{"spec":{"type":"NodePort"}}' -n istio-system
