@@ -34,3 +34,7 @@ https://godoc.org/github.com/prometheus/client_golang/prometheus#NewMetricWithTi
 
 官网参考
 https://prometheus.io/docs/guides/go-application/
+
+
+gitbook
+https://www.kancloud.cn/cdh0805010118/prometheus/719342
