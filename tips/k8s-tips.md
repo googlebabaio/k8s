@@ -1,4 +1,4 @@
-<!-- toc -->
+  <!-- toc -->
 ## 命令补全
 ```
 yum install -y bash-completion
