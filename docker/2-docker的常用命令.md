@@ -1,5 +1,45 @@
 ![](assets/docker-commond.png)
 
+几个关键点：
+- 镜像
+- 容器
+- Dockerfile
+- 仓库
+
+# 镜像
+## 镜像的查看
+
+## 镜像的启动
+
+## 镜像的导入与导出
+
+## 镜像的inspect
+
+## 给镜像打tag
+
+## 镜像的删除
+
+# container
+“活着”的镜像。
+
+## container的启停
+
+## container的日志查看
+
+## container的状态查看
+
+docker ps
+
+docker ps -a
+
+## 修改container的内容-commit
+
+## container的暂停
+
+## container的删除
+
+
+
 tips:
 1.启动一个应用，后台运行,命名为`mydevportal`，端口映射为`9527`
 ```

@@ -1,6 +1,6 @@
 <!-- toc -->
 ## 有网络的条件下安装
->说明:环境为centos7.4
+>说明:环境为centos7.5
 
 ### 获取repo源(这个地方选用阿里的)
 ```
@@ -12,6 +12,8 @@ wget  https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 yum install docker-ce -y
 ```
+
+> centos上为ce， redhat上为ee
 
 ### 安装完成后启动
 ```
@@ -72,6 +74,23 @@ Live Restore Enabled: false
 Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
 ```
 
+### 修改docker默认的数据存放目录
+有一个点需要注意：
+每个跑docker的宿主机，又可能会因为docker 容器和镜像的越来越多而导致根目录被撑满，所以建议修改docker rootdir
+
+修改docker默认的数据存放目录步骤：
+```
+systemctl stop docker
+cd /var/lib
+cp -rf docker docker.bak
+cp -rf docker /xxx/
+rm -rf docker
+ln -s /xxx/docker docker
+systemctl start docker
+docker info
+```
+
+
 ## docker官方镜像仓库
 docker官方镜像仓库地址为:  https://hub.docker.com/
 
@@ -81,7 +100,7 @@ docker search centos
 ```
 
 >注意:
-docker中的centos --这种是没有内核的。
+docker中的centos --这种是没有内核的，这个也是docker镜像小的原因。
 有些时候可以用内核的特性是因为依赖于宿主机的内核的原因
 
 
