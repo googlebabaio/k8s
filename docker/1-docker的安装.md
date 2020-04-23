@@ -91,4 +91,4 @@ docker中的centos --这种是没有内核的。
 https://dev.aliyun.com/search.html
 点击“创建我的容器镜像”，创建完成后再镜像加速器就有相关的操作提示了。
 
-![](../images/screenshot_1532573959908.png)
+![](assets/screenshot_1532573959908.png)

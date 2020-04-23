@@ -4,7 +4,7 @@
 
 ## 物理删除harbor中不要的镜像
 
-![](../images/markdown-img-paste-20181211163140501.png)
+![](assets/harbor删除说明.png)
 在harbor的UI端删除镜像的操作是逻辑删除的,需要物理删除不要的镜像达到**释放空间**的目的,是需要将harbor停下来再删除的。
 步骤如下：
 ### 查看harbor相关镜像的名称
@@ -86,3 +86,5 @@ registry             /entrypoint.sh serve /etc/ ...   Up (health: starting)   50
 ```
 df -h /harbor的初始化目录
 ```
+
+## harbor配置charts

@@ -40,5 +40,3 @@ docker run -d --restart=on-failure:10 nginx
 ![](assets/markdown-img-paste-20191022164602881.png)
 
 ## 查看容器最后一次的启动时间
-
-![](assets/markdown-img-paste-2019102216461772.png)
