@@ -37,8 +37,9 @@ k8s对pv和pvc之间的交互的生命周期进行管理：
 ## 九个PV Plugins
 
 pv是以plugin的形式来提供支持的， 考虑到私有云的使用场景， 排除掉azure， aws，gce等公有云厂商绑定的plugin， 有9个插件值得关注。这些plugin所支持的accessmode是不同的。  分别是：
-```table
+
 存储Plugin   |   ReadWriteOnce   |   ReadOnlyMany   |   ReadWriteMany   |   备注
+--|---|---|---|--
 FC (Fibre Channel)   |   支持   |   支持   |   不支持   |
 NFS   |   支持   |   支持   |   支持   |
 iSCSI   |   支持   |   支持   |   不支持   |
@@ -48,7 +49,7 @@ Cinder (OpenStack block storage)   |   支持   |   不支持   |   不支持   
 Glusterfs   |   支持   |   支持   |   支持   |
 VsphereVolume   |   支持   |   不支持   |   不支持   |
 HostPath   |   支持   |   不支持   |   不支持   |   只支持单节点， 不支持跨节点
-```
+
 
 
 ## 三个重声明策略(reclaim policy)
