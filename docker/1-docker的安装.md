@@ -90,6 +90,9 @@ systemctl start docker
 docker info
 ```
 
+//TODO 另外可以参考这个：新的修改方法`--data-root`
+https://www.cnblogs.com/jinanxiaolaohu/p/8301786.html
+
 
 ## docker官方镜像仓库
 docker官方镜像仓库地址为:  https://hub.docker.com/
