@@ -64,6 +64,7 @@ grep -q "kata-runtime=" $file || sudo sed -i 's!^\(ExecStart=[^$].*$\)!\1 --add-
 
 ## 重启后查看docker的状态
 重启后，可以看到在`Runtimes`除了runc外多了一个kata-runtime
+
 ```
 [root@ccsk8s3 kata]# docker info
 Client:
@@ -238,8 +239,6 @@ LimitCORE=infinity
 
 [Install]
 WantedBy=multi-user.target
-
-
 ```
 
 systemctl enable containerd
@@ -288,7 +287,7 @@ containerd config default > /etc/containerd/config.toml
           SystemdCgroup = false
 ```
 
-> 需要注意一个pause的版本的地方哦！
+> 需要注意一个sandbox_image涉及到kubelet启动pause的版本的地方哦！
 
 ## 配置kubelet的启动项，让默认的docker.sock变成containerd.sock
 /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
@@ -296,6 +295,7 @@ containerd config default > /etc/containerd/config.toml
 添加：
 Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock"
 
+这个地方有个坑哦，在`10-kubeadm.conf`里面有两个地方有KUBELET_EXTRA_ARGS，所以注意看是否生效了的。
 
 ## 创建 runtimeclass
 
@@ -391,6 +391,7 @@ k8s.gcr.io/pause                      3.2                 80d28bedfe5de       68
 - https://lingxiankong.github.io/2018-07-20-katacontainer-docker-k8s.html
 
 - 打开新世界：https://containerd.io/docs/getting-started/
+- https://github.com/containerd/cri/blob/master/docs/config.md
 
 
 ```go
